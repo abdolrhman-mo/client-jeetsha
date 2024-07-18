@@ -15,6 +15,7 @@ import { cartItems } from '@/app/lib/placeholder-data'
 import Image from 'next/image'
 import Input from '@/app/ui/components/input'
 import { main_color } from '@/app/lib/colors'
+import Search from '../search'
 
 export default function Nav({
     onShowCart,
@@ -34,19 +35,33 @@ export default function Nav({
     let handleShowCart = () => {
         onShowCart()
     }
+    const [showSearch, setShowSearch] = useState(false)
+    let handleShowSearch = () => {
+        if (showSearch) {
+            setShowSearch(false)
+        } else {
+            setShowSearch(true)
+        }
+    }
 
     return (
         <nav className='shadow-sm fixed w-full z-30 bg-white'>
             <div 
                 className={clsx(
-                    // Layout
-                    'relative',
-                    'py-5 w-11/12 mx-auto flex justify-around',
-                    'items-center tracking-widest '
+                    // Layout & Sizing
+                    'relative flex justify-around',
+                    'py-5 w-11/12 mx-auto',
+                    'items-center tracking-widest',
+                    {
+                        'hidden': showSearch
+                    }
                 )}
             >
                 {/* desktop */}
-                <MagnifyingGlassIcon className='h-6 hidden md:block cursor-pointer' />
+                <MagnifyingGlassIcon 
+                    className='h-6 hidden md:block cursor-pointer'
+                    onClick={handleShowSearch} 
+                />
                 {/* mobile */}
                 <Bars3CenterLeftIcon className='h-6 md:hidden cursor-pointer' onClick={handleShowNav} />
 
@@ -71,7 +86,10 @@ export default function Nav({
                 </div>
 
                 {/* mobile */}
-                <MagnifyingGlassIcon className='h-6 cursor-pointer block md:hidden' />
+                <MagnifyingGlassIcon 
+                    className='h-6 cursor-pointer block md:hidden' 
+                    onClick={handleShowSearch}
+                />
                 {/* desktop */}
                 <UserIcon className='h-6 px-2 hidden md:block cursor-pointer' />
                 <ShoppingBagIcon 
@@ -82,25 +100,7 @@ export default function Nav({
                 />
 
                 {/* mobile NAV */}
-                <div 
-                    className={clsx(
-                        // Layout & Sizing
-                        'fixed inset-y-0 z-40 h-screen w-full',
-                        // Backgrounds & Effects
-                        'bg-black opacity-50',
-                        {
-                            'hidden': showNav === false && showCart === false
-                        }
-                    )}
-                    onClick={() => {
-                        if (showNav) {
-                            handleShowNav()
-                        } else {
-                            handleShowCart()
-                        }
-                    }}
-                ></div>
-                <div 
+                <div
                     className={clsx(
                         // Layout & Sizing
                         'fixed inset-x-0 inset-y-0 z-50 h-screen w-11/12 sm:w-96',
@@ -162,7 +162,7 @@ export default function Nav({
                             (cartItems.length === 0) ? (
                                 <p>Your cart is currently empty.</p>
                             ) : (
-                                cartItems.map(cartItem => 
+                                cartItems.map(cartItem =>
                                     <div className="grid grid-cols-3 gap-4">
                                         <Image
                                             src={cartItem.image_url}
@@ -253,6 +253,56 @@ export default function Nav({
                             check out
                         </Link>
                     </div>
+                </div>
+            </div>
+
+            {/* Background Shade */}
+            <div 
+                className={clsx(
+                    // Layout & Sizing
+                    'fixed inset-y-0 z-40 h-screen w-full',
+                    // Backgrounds & Effects
+                    'bg-black opacity-50',
+                    {
+                        'hidden': showNav === false && showCart === false && showSearch === false
+                    }
+                )}
+                onClick={() => {
+                    if (showNav) {
+                        handleShowNav()
+                    } else if (showCart) {
+                        handleShowCart()
+                    } 
+                    // else {
+                    //     handleShowSearch()
+                    // }
+                }}
+            ></div>
+
+            {/* Search Form */}
+            <div className={clsx(
+                // Layout & Sizing
+                'relative z-50 w-full',
+                // Background
+                'bg-white'
+            )}>
+                <div 
+                    className={clsx(
+                        // Layout & Sizing
+                        'block w-11/12',
+                        // Flex
+                        'flex justify-around items-center',
+                        // Spacing
+                        'py-5 mx-auto tracking-widest',
+                        {
+                            'hidden': showSearch === false
+                        }
+                    )}
+                    >
+                    <Search 
+                        placeholder='Search our store'
+                        onShowSearch={handleShowSearch} 
+                    />
                 </div>
             </div>
         </nav>

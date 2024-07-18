@@ -1,18 +1,54 @@
 'use client';
 
-import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
+import { XMarkIcon } from '@heroicons/react/20/solid';
+import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
+import clsx from 'clsx';
 
-export default function Search({ placeholder }: { placeholder: string }) {
+export default function Search({ 
+  placeholder,
+  onShowSearch,
+}: { 
+  placeholder: string
+  onShowSearch?: any 
+}) {
   return (
-    <div className="relative flex flex-1 flex-shrink-0">
-      <label htmlFor="search" className="sr-only">
+    <div className={clsx(
+        'relative grid grid-cols-12 w-full',
+        // Spacing
+        'py-2', 
+      )}
+    >
+      {/* <label htmlFor='search' className='sr-only'>
         Search
-      </label>
+      </label> */}
+      <MagnifyingGlassIcon 
+        className={clsx(
+          // Sizing
+          'h-6',
+          // Grid
+          'col-span-1',
+          'text-gray-500 peer-focus:text-gray-900',
+        )}
+      />
       <input
-        className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
+        className={clsx(
+          // Layout & Sizing
+          'peer block w-full',
+          // Grid
+          'col-span-10',
+          // Borders
+          'rounded-md border-none',
+          // Spacing
+          'py-0',
+          // Typography 
+          'text-sm placeholder:text-gray-500',
+        )}
         placeholder={placeholder}
       />
-      <MagnifyingGlassIcon className="absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
+      <XMarkIcon
+        className='h-6 col-span-1 cursor-pointer'
+        onClick={onShowSearch}
+      />
     </div>
   );
 }

@@ -4,17 +4,30 @@ import clsx from 'clsx'
 import { hasTag } from '@/app/lib/utils'
 
 export default function ProductsList({
-    tag
+    tag,
+    limit = 0,
 }: {
     tag: string
+    limit?: number
 }) {
-
+    if (limit === 0) {
+        limit = products.length
+    }
     let filtered_products: any = []
+    let i = 0
     products.map(product => {
-        if (hasTag(product.tags, tag)) {
+        if (hasTag(product.tags, tag) && i < limit) {
             filtered_products.push(product)
+            i++
         }
     })
+    i = 0
+    // if (limit) {
+    //     for (let i = 0; i < limit; i++) {
+
+    //     }
+    // }
+
     return (
         <div 
             className={clsx(

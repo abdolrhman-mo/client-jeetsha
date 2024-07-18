@@ -46,15 +46,15 @@ export default function Page() {
           <ViewAllLink url="/collections/all" />
 
           <h2 className='text-3xl text-center my-12'>TEES</h2>
-          <ProductsList tag='tee' />
+          <ProductsList tag='tee' limit={4} />
           <ViewAllLink url="/collections/tees" />
 
           <h2 className='text-3xl text-center my-12'>PANTS</h2>
-          <ProductsList tag='pants' />
+          <ProductsList tag='pants' limit={4} />
           <ViewAllLink url="/collections/tees" />
 
           <h2 className='text-3xl text-center my-12'>SHORTS</h2>
-          <ProductsList tag='shorts' />
+          <ProductsList tag='shorts' limit={4} />
           <ViewAllLink url="/collections/tees" />
         </div>
       </main>
