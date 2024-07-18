@@ -1,18 +1,33 @@
-export default function Input({ 
-    inputFor 
+import { main_color } from "@/app/lib/colors"
+import clsx from "clsx"
+
+export default function Input({
+    placeholder = '',
+    styles = '',
+    type = 'text',
+    // if it's submit button
+    value = '',
 }: {
-    inputFor: string;
+    placeholder?: string
+    styles?: string
+    type?: string
+    value?: string
 }) {
-    let input
-    if (inputFor === 'email' || inputFor === 'password') {
-        input = <input className="w-full" type={inputFor} name="" id="" />
+
+    if (type != 'submit') {
+        return <input
+            className={`rounded-lg placeholder:text-sm placeholder:capitalize text-sm ${styles}`}
+            type={type}
+            placeholder={placeholder}
+            value={value}
+        />
     } else {
-        input = <input className="w-full" type='text' name="" id="" />
+        return <input
+            className={`rounded-lg placeholder:text-sm text-sm capitalize font-semibold ` + `text-white bg-${main_color} cursor-pointer p-2 ${styles}`}
+            type={type}
+            placeholder={placeholder}
+            value={value}
+        />
     }
-    return (
-        <div className="space-y-2">
-            <p className="uppercase">{inputFor}</p>
-            {input}
-        </div>
-    )
+
 }

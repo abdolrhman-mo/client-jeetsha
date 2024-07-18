@@ -67,3 +67,15 @@ export const generatePagination = (currentPage: number, totalPages: number) => {
     totalPages,
   ];
 };
+
+
+// My Utils
+
+export function hasTag(tags: string[], searched_for: string) {
+  for (let i = 0; i < tags.length; i++) {
+      if (tags[i] === searched_for) {
+          return true
+      }
+  }
+  return false
+}

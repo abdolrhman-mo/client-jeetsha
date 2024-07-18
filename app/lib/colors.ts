@@ -1,0 +1,1 @@
+export const main_color: string = 'black'

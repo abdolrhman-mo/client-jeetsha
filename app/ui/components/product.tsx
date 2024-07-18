@@ -1,5 +1,6 @@
-import Link from "next/link";
-import Image from "next/image";
+import Link from 'next/link'
+import Image from 'next/image'
+import clsx from 'clsx'
 
 export default function Product({
     product
@@ -7,19 +8,38 @@ export default function Product({
     product: any
 }) {
     return (
-        <Link href={'/collections/tees/1'}>
-            <div className="h-5/6">
-                <Image
-                    className=""
-                    src={product.image_url} 
-                    alt="tee"
-                    width={300}
-                    height={300}
-                />
+        <Link
+            className='group' 
+            href={'/collections/tees/1'}
+        >
+            <div className='grid grid-rows-4 h-full gap-4'>
+                <div className='overflow-hidden row-span-3'>
+                    <Image
+                        className={clsx(
+                            // Sizing
+                            'h-full object-cover',
+                            // Transitions & Animations
+                            'transition-all duration-300 ease-in-out group-hover:h-[105%]',
+                        )}
+                        src={product.image_url} 
+                        alt='tee'
+                        width={500}
+                        height={500}
+                    />
+                </div>
+                <div className='row-span-1 text-center'>
+                    <h4 
+                        className='uppercase text-md tracking-widest'
+                    >
+                        {product.name}
+                    </h4>
+                    <p
+                        className='text-slate-600 text-sm'
+                    >
+                        {product.price} EGP
+                    </p>
+                </div>
             </div>
-            <h4 className="uppercase">{product.name}</h4>
-            <p>Leopard</p>
-            <p>{product.price}</p>
         </Link>
     )
 }

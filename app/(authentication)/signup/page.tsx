@@ -1,5 +1,5 @@
 import Link from "next/link"
-import Input from "@/app/ui/components/input"
+import Input from "@/app/ui/components/input-w-title"
 
 export default function Page() {
     return (
