@@ -109,7 +109,7 @@ export default function Page() {
                     />
                 </div>
 
-                <div className="">    
+                <div className="">
                     <H4 text='order summery' styles='lg:hidden' />
                     <OrderSummary />
                 </div>

@@ -190,13 +190,33 @@ export default function Nav({
                                             </div>
                                             <div className="flex justify-between">
                                                 <div className="border flex">
-                                                    <button>
+                                                    <button
+                                                        className={clsx(
+                                                            // Spacing
+                                                            'px-3 py-0.5',
+                                                            // Transition & Animations
+                                                            'transition-all duration-300 ease-in-out',
+                                                            'hover:bg-black hover:text-white',
+                                                        )}
+                                                    >
                                                         -
                                                     </button>
-                                                    <p>
+                                                    <p
+                                                        className={clsx(
+                                                            'py-1 px-2'
+                                                        )}
+                                                    >
                                                         {3}
                                                     </p>
-                                                    <button>
+                                                    <button
+                                                        className={clsx(
+                                                            // Spacing
+                                                            'px-3 py-0.5',
+                                                            // Transition & Animations
+                                                            'transition-all duration-300 ease-in-out',
+                                                            'hover:bg-black hover:text-white',
+                                                        )}
+                                                    >
                                                         +
                                                     </button>
                                                 </div>
