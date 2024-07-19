@@ -1,1 +1,1 @@
-export const main_color: string = 'black'
+export const mainColor: string = 'black'

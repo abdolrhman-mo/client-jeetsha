@@ -2,7 +2,8 @@
 
 import { XMarkIcon } from '@heroicons/react/20/solid';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
-import clsx from 'clsx';
+import clsx from 'clsx'
+import { useSearchParams, usePathname, useRouter } from 'next/navigation';
 
 export default function Search({ 
   placeholder,
@@ -11,6 +12,20 @@ export default function Search({
   placeholder: string
   onShowSearch?: any 
 }) {
+  const searchParams = useSearchParams()
+  const pathname = usePathname();
+  const { replace } = useRouter();
+
+  let handleSearch = (term: string) => {
+    const params = new URLSearchParams(searchParams)
+    if (term) {
+      params.set('query', term)
+    } else {
+      params.delete('query')
+    }
+    replace(`${pathname}?${params.toString()}`)
+  }
+
   return (
     <div className={clsx(
         'relative grid grid-cols-12 w-full',
@@ -43,7 +58,11 @@ export default function Search({
           // Typography 
           'text-sm placeholder:text-gray-500',
         )}
+        onChange={e => {
+          handleSearch(e.target.value)
+        }}
         placeholder={placeholder}
+        defaultValue={searchParams.get('query')?.toString()}
       />
       <XMarkIcon
         className='h-6 col-span-1 cursor-pointer'

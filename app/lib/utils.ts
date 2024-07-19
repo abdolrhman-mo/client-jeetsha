@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Revenue } from './definitions';
 
 export const formatCurrency = (amount: number) => {
@@ -71,11 +72,13 @@ export const generatePagination = (currentPage: number, totalPages: number) => {
 
 // My Utils
 
-export function hasTag(tags: string[], searched_for: string) {
+export function hasTag(tags: string[], searchedFor: string) {
   for (let i = 0; i < tags.length; i++) {
-      if (tags[i] === searched_for) {
+      if (tags[i] === searchedFor) {
           return true
       }
   }
   return false
 }
+
+

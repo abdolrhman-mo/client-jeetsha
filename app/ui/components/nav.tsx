@@ -14,34 +14,39 @@ import { useState } from 'react'
 import { cartItems } from '@/app/lib/placeholder-data'
 import Image from 'next/image'
 import Input from '@/app/ui/components/input'
-import { main_color } from '@/app/lib/colors'
+import { mainColor } from '@/app/lib/colors'
 import Search from '../search'
+import ProductsList from './products-list'
+import CTA from '@/app/ui/components/cta'
 
 export default function Nav({
+    showNav,
+    onShowNav,
+    showCart,
     onShowCart,
-    showCart
+    showSearch,
+    onShowSearch,
+    query,
+    currentPage,
 }: {
-    onShowCart?: any
+    showNav?: any
+    onShowNav?: any
     showCart?: any
+    onShowCart?: any
+    showSearch?: any
+    onShowSearch?: any
+    query?: string
+    currentPage?: number
 }) {
-    const [showNav, setShowNav] = useState(false)
+
     let handleShowNav = () => {
-        if (showNav) {
-            setShowNav(false)
-        } else {
-            setShowNav(true)
-        }
+        onShowNav()
     }
     let handleShowCart = () => {
         onShowCart()
     }
-    const [showSearch, setShowSearch] = useState(false)
     let handleShowSearch = () => {
-        if (showSearch) {
-            setShowSearch(false)
-        } else {
-            setShowSearch(true)
-        }
+        onShowSearch()
     }
 
     return (
@@ -125,13 +130,13 @@ export default function Nav({
                     <svg className='h-6' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><path d='M512 256C512 114.6 397.4 0 256 0S0 114.6 0 256C0 376 82.7 476.8 194.2 504.5V334.2H141.4V256h52.8V222.3c0-87.1 39.4-127.5 125-127.5c16.2 0 44.2 3.2 55.7 6.4V172c-6-.6-16.5-1-29.6-1c-42 0-58.2 15.9-58.2 57.2V256h83.6l-14.4 78.2H287V510.1C413.8 494.8 512 386.9 512 256h0z'/></svg>
                 </div>
 
-                {/* mobile CART */}
+                {/* CART */}
                 <div
                     className={clsx(
                         // Layout
                         'fixed top-0 right-0 z-50 ', 
                         // Sizing
-                        'h-screen w-11/12 sm:w-1/3',
+                        'h-screen w-11/12 md:w-1/3',
                         // Flex
                         'flex flex-col',
                         // Backgrounds 
@@ -144,9 +149,10 @@ export default function Nav({
                     )}
                 >
                     <div className={clsx(
-                            "flex justify-between py-4",
+                            // Flex
+                            "flex justify-between items-center",
                             // Spacing
-                            'px-4',
+                            'py-4 px-4',
                         )}
                     >
                         <h2 className='text-3xl'>CART</h2>
@@ -246,12 +252,7 @@ export default function Nav({
                             Shipping, taxes, and discount codes calculated at checkout.
                         </p>
                         {/* <Input styles='w-full' type='submit' value='check out' /> */}
-                        <Link
-                            className={`text-center inline-block w-full rounded-lg placeholder:text-sm text-sm capitalize font-semibold ` + `text-white bg-${main_color} cursor-pointer p-2`}
-                            href={'/checkout'}
-                        >
-                            check out
-                        </Link>
+                        <CTA text='checkout' href='/checkout' />
                     </div>
                 </div>
             </div>
@@ -273,11 +274,55 @@ export default function Nav({
                     } else if (showCart) {
                         handleShowCart()
                     } 
+                    else {
+                        handleShowSearch()
+                    }
+                }}
+            ></div>
+
+            <div 
+                className={clsx(
+                    // Layout & Sizing
+                    'fixed inset-y-0 z-40 overflow-y-scroll h-full md:h-3/4 w-full',
+                    // Spacing
+                    'py-12',
+                    // Backgrounds & Effects
+                    'bg-white',
+                    {
+                        'hidden': showSearch === false
+                    }
+                )}
+                onClick={() => {
+                    // if (showNav) {
+                    //     handleShowNav()
+                    // } else if (showCart) {
+                    //     handleShowCart()
+                    // } 
                     // else {
                     //     handleShowSearch()
                     // }
                 }}
-            ></div>
+            >
+                <div className="w-5/6 mx-auto pt-12">
+                    <ProductsList
+                        styles='grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-5 gap-y-12'
+                        productStyles='max-h-64'
+                        limit={8}
+                        search={true}
+                        query={query}
+                        currentPage={currentPage}
+                    />
+                    <br />
+                    <br />
+                    <div className="text-center">
+                        <CTA
+                            text={'view more'} 
+                            styles='max-w-fit' 
+                        />
+                    </div>
+                    <br />
+                </div>
+            </div>
 
             {/* Search Form */}
             <div className={clsx(

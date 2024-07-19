@@ -3,16 +3,18 @@ import Image from 'next/image'
 import clsx from 'clsx'
 
 export default function Product({
-    product
+    product,
+    styles
 }: {
     product: any
+    styles?: string
 }) {
     return (
         <Link
             className='group' 
             href={'/collections/tees/1'}
         >
-            <div className='grid grid-rows-4 h-full gap-4'>
+            <div className={`grid grid-rows-4 h-full gap-4 ${styles}`}>
                 <div className='overflow-hidden row-span-3'>
                     <Image
                         className={clsx(

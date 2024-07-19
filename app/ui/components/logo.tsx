@@ -9,7 +9,7 @@ export default function Logo({
     return (
         <Link 
             href="/"
-            className={`${lusitana.className} ${text_size} font-black`}
+            className={`${text_size} font-black`}
         >
             Leopard
         </Link>
