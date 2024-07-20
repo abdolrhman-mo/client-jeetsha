@@ -1,3 +1,5 @@
+'use client'
+
 import Link from 'next/link'
 import { poppins } from '@/app/ui/fonts'
 import Image from 'next/image'
@@ -5,6 +7,8 @@ import Nav from '@/app/ui/components/nav'
 import ProductsList from '@/app/ui/components/products-list'
 import ViewAllLink from '@/app/ui/components/view-all-link'
 import { useState } from 'react'
+import clsx from 'clsx'
+import CTA from './ui/components/cta'
 
 export default function Page({
   searchParams,
@@ -15,8 +19,59 @@ export default function Page({
   }
 }) {
   const query = searchParams?.query || ''
+  const currentPage = Number(searchParams?.page) || 1
+
   return (
     <main className={`${poppins.className} antialiased z-10`}>
+      {/* Background Shade
+      <div 
+        className={clsx(
+            // Layout & Sizing
+            'fixed inset-y-0 z-40 h-screen w-full',
+            // Backgrounds & Effects
+            'bg-black opacity-50',
+            {
+                'hidden': showNav === false && showCart === false && showSearch === false
+            }
+        )}
+        onClick={() => {
+            if (showNav) {
+                handleShowNav()
+            } else if (showCart) {
+                handleShowCart()
+            } 
+            else {
+                handleShowSearch()
+            }
+        }}
+      ></div> */}
+      {/* Nav Search Results */}
+      <div 
+        className={clsx(
+            // Layout & Sizing
+            'fixed z-40 top-20 overflow-y-scroll h-full md:h-3/4 w-full',
+            // Spacing
+            'py-12',
+            // Backgrounds & Effects
+            'bg-white',
+            {
+                'hidden': !query
+            }
+        )}
+      >
+        <div className="w-5/6 mx-auto pt-12">
+            <ProductsList
+              styles='grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-5 gap-y-12'
+              productStyles='max-h-64'
+              limit={5}
+              search={true}
+              query={query}
+              currentPage={currentPage}
+            />
+            <br />
+        </div>
+      </div>
+
       <div className="z-10">
         {/* Hero */}
         <div className="overflow-hidden h-screen flex items-start bg-white">

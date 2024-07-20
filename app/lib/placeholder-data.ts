@@ -70,7 +70,7 @@ const products = [
       large: 1,
       x_large: 0,
     },
-    image_url: '/imgs/pants/pants1.jpg',
+    image_url: '/imgs/pants/pants1.jpg', id: 1,
   },
   {
     name: 'black stitches cargo pants',
@@ -90,7 +90,7 @@ const products = [
       large: 1,
       x_large: 2,
     },
-    image_url: '/imgs/pants/pants2.jpg',
+    image_url: '/imgs/pants/pants2.jpg', id: 1,
   },
   {
     name: 'gray washed sweatpants',
@@ -110,7 +110,7 @@ const products = [
       large: 5,
       x_large: 3,
     },
-    image_url: '/imgs/pants/pants3.jpg',
+    image_url: '/imgs/pants/pants3.jpg', id: 1,
   },
   {
     name: 'acid washed carpenter jeans',
@@ -130,7 +130,7 @@ const products = [
       large: 1,
       x_large: 0,
     },
-    image_url: '/imgs/pants/pants4.jpg',
+    image_url: '/imgs/pants/pants4.jpg', id: 1,
   },
   {
     name: 'acid washed carpenter jeans',
@@ -150,7 +150,7 @@ const products = [
       large: 1,
       x_large: 0,
     },
-    image_url: '/imgs/pants/pants5.jpg',
+    image_url: '/imgs/pants/pants5.jpg', id: 1,
   },
   {
     name: 'acid washed carpenter jeans',
@@ -170,7 +170,7 @@ const products = [
       large: 1,
       x_large: 0,
     },
-    image_url: '/imgs/pants/pants6.jpg',
+    image_url: '/imgs/pants/pants6.jpg', id: 1,
   },
   {
     name: 'acid washed carpenter jeans',
@@ -190,7 +190,7 @@ const products = [
       large: 1,
       x_large: 0,
     },
-    image_url: '/imgs/pants/pants7.jpg',
+    image_url: '/imgs/pants/pants7.jpg', id: 1,
   },
   {
     name: 'acid washed carpenter jeans',
@@ -210,7 +210,7 @@ const products = [
       large: 1,
       x_large: 0,
     },
-    image_url: '/imgs/pants/pants8.jpg',
+    image_url: '/imgs/pants/pants8.jpg', id: 1,
   },
   {
     name: 'acid washed carpenter jeans',
@@ -230,7 +230,7 @@ const products = [
       large: 1,
       x_large: 0,
     },
-    image_url: '/imgs/pants/pants9.jpg',
+    image_url: '/imgs/pants/pants9.jpg', id: 1,
   },
   {
     name: 'acid washed carpenter jeans',
@@ -250,7 +250,7 @@ const products = [
       large: 1,
       x_large: 0,
     },
-    image_url: '/imgs/pants/pants10.jpg',
+    image_url: '/imgs/pants/pants10.jpg', id: 1,
   },
   {
     name: 'acid washed carpenter jeans',
@@ -270,7 +270,7 @@ const products = [
       large: 1,
       x_large: 0,
     },
-    image_url: '/imgs/pants/pants11.jpg',
+    image_url: '/imgs/pants/pants11.jpg', id: 1,
   },
 
 
@@ -291,7 +291,7 @@ const products = [
       large: 1,
       x_large: 3,
     },
-    image_url: '/imgs/tees/tee1.jpg',
+    image_url: '/imgs/tees/tee1.jpg', id: 1,
   },
   {
     name: 'violet jersey',
@@ -309,7 +309,7 @@ const products = [
       large: 1,
       x_large: 3,
     },
-    image_url: '/imgs/tees/tee2.jpg',
+    image_url: '/imgs/tees/tee2.jpg', id: 1,
   },
   {
     name: 'dung tee',
@@ -327,7 +327,7 @@ const products = [
       large: 1,
       x_large: 3,
     },
-    image_url: '/imgs/tees/tee3.jpg',
+    image_url: '/imgs/tees/tee3.jpg', id: 1,
   },
   {
     name: 'camo jersey',
@@ -345,7 +345,7 @@ const products = [
       large: 1,
       x_large: 3,
     },
-    image_url: '/imgs/tees/tee4.jpg',
+    image_url: '/imgs/tees/tee4.jpg', id: 1,
   },
   {
     name: 'camo jersey',
@@ -363,7 +363,7 @@ const products = [
       large: 1,
       x_large: 3,
     },
-    image_url: '/imgs/tees/tee5.jpg',
+    image_url: '/imgs/tees/tee5.jpg', id: 1,
   },
   {
     name: 'camo jersey',
@@ -381,7 +381,7 @@ const products = [
       large: 1,
       x_large: 3,
     },
-    image_url: '/imgs/tees/tee6.jpg',
+    image_url: '/imgs/tees/tee6.jpg', id: 1,
   },
   {
     name: 'camo jersey',
@@ -399,7 +399,7 @@ const products = [
       large: 1,
       x_large: 3,
     },
-    image_url: '/imgs/tees/tee7.jpg',
+    image_url: '/imgs/tees/tee7.jpg', id: 1,
   },
   {
     name: 'camo jersey',
@@ -417,7 +417,7 @@ const products = [
       large: 1,
       x_large: 3,
     },
-    image_url: '/imgs/tees/tee8.jpg',
+    image_url: '/imgs/tees/tee8.jpg', id: 1,
   },
   {
     name: 'camo jersey',
@@ -435,7 +435,7 @@ const products = [
       large: 1,
       x_large: 3,
     },
-    image_url: '/imgs/tees/tee9.jpg',
+    image_url: '/imgs/tees/tee9.jpg', id: 1,
   },
   {
     name: 'camo jersey',
@@ -453,7 +453,7 @@ const products = [
       large: 1,
       x_large: 3,
     },
-    image_url: '/imgs/tees/tee10.jpg',
+    image_url: '/imgs/tees/tee10.jpg', id: 1,
   },
 
 
@@ -492,7 +492,7 @@ const products = [
       large: 1,
       x_large: 3,
     },
-    image_url: '/imgs/shorts/shorts2.jpg',
+    image_url: '/imgs/shorts/shorts2.jpg', id: 1,
   },
   {
     name: 'green scarab basketball shorts',
@@ -510,7 +510,7 @@ const products = [
       large: 1,
       x_large: 3,
     },
-    image_url: '/imgs/shorts/shorts3.jpg',
+    image_url: '/imgs/shorts/shorts3.jpg', id: 1,
   },
   {
     name: 'green scarab basketball shorts',
@@ -528,7 +528,7 @@ const products = [
       large: 1,
       x_large: 3,
     },
-    image_url: '/imgs/shorts/shorts4.jpg',
+    image_url: '/imgs/shorts/shorts4.jpg', id: 1,
   },
   {
     name: 'green scarab basketball shorts',
@@ -546,7 +546,7 @@ const products = [
       large: 1,
       x_large: 3,
     },
-    image_url: '/imgs/shorts/shorts5.jpg',
+    image_url: '/imgs/shorts/shorts5.jpg', id: 1,
   },
   {
     name: 'green scarab basketball shorts',
@@ -564,7 +564,7 @@ const products = [
       large: 1,
       x_large: 3,
     },
-    image_url: '/imgs/shorts/shorts6.jpg',
+    image_url: '/imgs/shorts/shorts6.jpg', id: 1,
   },
   {
     name: 'green scarab basketball shorts',
@@ -582,7 +582,7 @@ const products = [
       large: 1,
       x_large: 3,
     },
-    image_url: '/imgs/shorts/shorts7.jpg',
+    image_url: '/imgs/shorts/shorts7.jpg', id: 1,
   },
   {
     name: 'green scarab basketball shorts',
@@ -600,7 +600,7 @@ const products = [
       large: 1,
       x_large: 3,
     },
-    image_url: '/imgs/shorts/shorts8.jpg',
+    image_url: '/imgs/shorts/shorts8.jpg', id: 1,
   },
   {
     name: 'green scarab basketball shorts',
@@ -618,7 +618,7 @@ const products = [
       large: 1,
       x_large: 3,
     },
-    image_url: '/imgs/shorts/shorts9.jpg',
+    image_url: '/imgs/shorts/shorts9.jpg', id: 1,
   },
   {
     name: 'green scarab basketball shorts',
@@ -636,7 +636,7 @@ const products = [
       large: 1,
       x_large: 3,
     },
-    image_url: '/imgs/shorts/shorts10.jpg',
+    image_url: '/imgs/shorts/shorts10.jpg', id: 1,
   },
   {
     name: 'green scarab basketball shorts',
@@ -654,7 +654,7 @@ const products = [
       large: 1,
       x_large: 3,
     },
-    image_url: '/imgs/shorts/shorts11.jpg',
+    image_url: '/imgs/shorts/shorts11.jpg', id: 1,
   },
   {
     name: 'green scarab basketball shorts',
@@ -672,7 +672,7 @@ const products = [
       large: 1,
       x_large: 3,
     },
-    image_url: '/imgs/shorts/shorts12.jpg',
+    image_url: '/imgs/shorts/shorts12.jpg', id: 1,
   },
   {
     name: 'green scarab basketball shorts',
@@ -690,9 +690,13 @@ const products = [
       large: 1,
       x_large: 3,
     },
-    image_url: '/imgs/shorts/shorts13.jpg',
+    image_url: '/imgs/shorts/shorts13.jpg', id: 1,
   },
 ]
+
+for (let i = 0; i < products.length; i++) {
+  products[i].id = i + 1
+}
 
 const cartItems = products.filter(product => 
   hasTag(product.tags, 'latest')

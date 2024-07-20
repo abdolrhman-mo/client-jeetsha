@@ -18,6 +18,7 @@ import { mainColor } from '@/app/lib/colors'
 import Search from '../search'
 import ProductsList from './products-list'
 import CTA from '@/app/ui/components/cta'
+import { usePathname, useSearchParams } from 'next/navigation'
 
 export default function Nav({
     showNav,
@@ -26,8 +27,6 @@ export default function Nav({
     onShowCart,
     showSearch,
     onShowSearch,
-    query,
-    currentPage,
 }: {
     showNav?: any
     onShowNav?: any
@@ -35,8 +34,6 @@ export default function Nav({
     onShowCart?: any
     showSearch?: any
     onShowSearch?: any
-    query?: string
-    currentPage?: number
 }) {
 
     let handleShowNav = () => {
@@ -48,6 +45,10 @@ export default function Nav({
     let handleShowSearch = () => {
         onShowSearch()
     }
+    // const pathname = usePathname()
+    // if (pathname === '/search') {
+    //     handleShowSearch()
+    // }
 
     return (
         <nav className='shadow-sm fixed w-full z-30 bg-white'>
@@ -257,15 +258,19 @@ export default function Nav({
                 </div>
             </div>
 
-            {/* Background Shade */}
-            <div 
+            {/* Background Shadow */}
+            <div
                 className={clsx(
                     // Layout & Sizing
                     'fixed inset-y-0 z-40 h-screen w-full',
                     // Backgrounds & Effects
                     'bg-black opacity-50',
                     {
-                        'hidden': showNav === false && showCart === false && showSearch === false
+                        'hidden': (
+                            showNav === false && 
+                            showCart === false && 
+                            showSearch === false
+                        )
                     }
                 )}
                 onClick={() => {
@@ -279,50 +284,6 @@ export default function Nav({
                     }
                 }}
             ></div>
-
-            <div 
-                className={clsx(
-                    // Layout & Sizing
-                    'fixed inset-y-0 z-40 overflow-y-scroll h-full md:h-3/4 w-full',
-                    // Spacing
-                    'py-12',
-                    // Backgrounds & Effects
-                    'bg-white',
-                    {
-                        'hidden': showSearch === false
-                    }
-                )}
-                onClick={() => {
-                    // if (showNav) {
-                    //     handleShowNav()
-                    // } else if (showCart) {
-                    //     handleShowCart()
-                    // } 
-                    // else {
-                    //     handleShowSearch()
-                    // }
-                }}
-            >
-                <div className="w-5/6 mx-auto pt-12">
-                    <ProductsList
-                        styles='grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-5 gap-y-12'
-                        productStyles='max-h-64'
-                        limit={8}
-                        search={true}
-                        query={query}
-                        currentPage={currentPage}
-                    />
-                    <br />
-                    <br />
-                    <div className="text-center">
-                        <CTA
-                            text={'view more'} 
-                            styles='max-w-fit' 
-                        />
-                    </div>
-                    <br />
-                </div>
-            </div>
 
             {/* Search Form */}
             <div className={clsx(

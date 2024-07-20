@@ -13,6 +13,13 @@ export default function Page({
     const query = searchParams?.query || ''
     const currentPage = Number(searchParams?.page) || 1
 
+    // try {   
+    //     document.querySelector('nav').click()
+    // } catch (error) {
+    //     console.log('fuckumean')
+    // }
+
+
     return (
         <>
             <div className="w-5/6 mx-auto pt-14">

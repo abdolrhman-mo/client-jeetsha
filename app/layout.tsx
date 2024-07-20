@@ -4,21 +4,13 @@ import '@/app/ui/global.css'
 import { useState } from 'react'
 import Nav from './ui/components/nav'
 import Footer from './ui/components/footer'
-import { useSearchParams } from 'next/navigation'
+import { usePathname, useSearchParams } from 'next/navigation'
 
 export default function RootLayout({
   children,
-  // searchParams,
 }: {
   children: React.ReactNode
-  // searchParams?: {
-  //   query?: string
-  //   page?: string
-  // }
 }) {
-  
-  const searchParams = useSearchParams()
-  const query = new URLSearchParams(searchParams)
 
   const [showCart, setShowCart] = useState(false)
   let handleShowCart = () => {
@@ -44,6 +36,10 @@ export default function RootLayout({
           setShowNav(true)
       }
   }
+  // const pathname = usePathname()
+  // if (pathname === '/search') {
+  //   setShowSearch(false)
+  // }
 
   return (
     <html lang="en">
@@ -57,11 +53,10 @@ export default function RootLayout({
           onShowCart={handleShowCart}
           showSearch={showSearch}
           onShowSearch={handleShowSearch}
-          query={query.toString()}
-          // currentPage={currentPage}
         />
-        <div className="h-12"></div>
-        {children}
+        <div className="pt-20">
+          {children}
+        </div>
         <Footer />
       </body>
     </html>

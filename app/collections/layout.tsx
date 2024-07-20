@@ -7,10 +7,8 @@ export default function Layout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-        <body className={`${poppins.className} antialiased`}>
-            {children}
-        </body>
-    </html>
+    <div className="w-5/6">
+      {children}
+    </div>
   );
 }

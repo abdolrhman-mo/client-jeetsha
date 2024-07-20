@@ -4,7 +4,7 @@ import clsx from 'clsx'
 
 export default function Product({
     product,
-    styles
+    styles,
 }: {
     product: any
     styles?: string
@@ -13,6 +13,7 @@ export default function Product({
         <Link
             className='group' 
             href={'/collections/tees/1'}
+            key={product.id}
         >
             <div className={`grid grid-rows-4 h-full gap-4 ${styles}`}>
                 <div className='overflow-hidden row-span-3'>

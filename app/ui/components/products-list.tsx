@@ -5,6 +5,7 @@ import { hasTag } from '@/app/lib/utils'
 import { useState } from 'react'
 import H5 from './h5'
 import H4 from './h4'
+import CTA from './cta'
 
 export default function ProductsList({
     styles = '',
@@ -55,26 +56,50 @@ export default function ProductsList({
     i = 0
 
     return (
-        <div 
-            className={clsx(
-                // Sizing
-                'w-11/12',
-                // Spacing
-                'mx-auto',
-                // Grid
-                'grid grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-4',
-                // Effects
-                'opacity-100',
-            ) + ` ${styles}`}
-        >
-            {query ? <H4 text={query} />: <p>empty</p>}
-            {filteredProducts.map((product: any) =>
-                <Product 
-                    product={product}
-                    styles={productStyles} 
-                />
-                // <p>{product}</p>
-            )}
-        </div>
+        <>
+            <div 
+                className={clsx(
+                    // Sizing
+                    'w-11/12',
+                    // Spacing
+                    'mx-auto',
+                    // Grid
+                    'grid grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-4',
+                    // Effects
+                    'opacity-100',
+                ) + ` ${styles}`}
+                >
+
+                {filteredProducts.map((product: any) =>
+                    <Product 
+                        product={product}
+                        styles={productStyles}
+                    />
+                )}
+            </div>
+            <br />
+            <br />
+            <div className="text-center">
+                {
+                    search ? (
+                        <>
+                            {
+                                filteredProducts.length > 0 ? (
+                                    <>
+                                            <CTA
+                                                text={'view more'}
+                                                href={`/search/?query=${query}`}
+                                                styles='max-w-fit' 
+                                                />
+                                    </>
+                                ) : (
+                                    <p>Try searching for something else.</p>
+                                )
+                            }
+                        </>
+                    ) : <></>
+                }
+            </div> 
+        </>
     )
 }
