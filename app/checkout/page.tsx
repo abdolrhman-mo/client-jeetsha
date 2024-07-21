@@ -6,15 +6,16 @@ import H5 from '@/app/ui/components/h5'
 import Input from '@/app/ui/components/input'
 import Select from '@/app/ui/components/select'
 import Radio from '@/app/ui/components/radio'
-import AddressForm from '@/app/ui/components/checkout/address-form'
-import OrderSummary from '@/app/ui/components/checkout/order-summary'
+import AddressForm from '@/app/ui/checkout/address-form'
+import OrderSummary from '@/app/ui/checkout/order-summary'
 import { ChevronDownIcon } from '@heroicons/react/24/outline'
 import { ChevronUpIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
 import { useState } from 'react'
 import { products } from '@/app/lib/placeholder-data'
 import Image from 'next/image'
-import Note from '@/app/ui/components/checkout/note'
+import Note from '@/app/ui/checkout/note'
+import MobileOrderSummary from '../ui/checkout/mobile-order-summary'
 
 export default function Page() {
     const [showSummary, setShowSummary] = useState(false)
@@ -27,54 +28,11 @@ export default function Page() {
     }
     return (
         <div className='text-sm'>
-            {/* mobile Order Summary */}
-            <div className='lg:hidden bg-slate-100 border'>
-                <div 
-                    className={clsx(
-                        {
-                            'w-5/6 mx-auto py-4 cursor-pointer': showSummary === false,
-                            'hidden': showSummary
-                        }
-                    )}
-                    onClick={handleShowSummary}
-                >
-                    Show order summary 
-                    <ChevronDownIcon
-                        className='h-4 inline-block mx-2'
-                    />
-                </div>
-                <div 
-                    className={clsx(
-                        {
-                            'w-5/6 mx-auto py-4 cursor-pointer': showSummary,
-                            'hidden': showSummary === false
-                        }
-                    )}
-                    onClick={handleShowSummary}
-                >
-                    Hide order summary
-                    <ChevronUpIcon
-                        className='h-4 inline-block mx-2'
-                    />
-                </div>
-            </div>
-            <div className="bg-slate-100">
-                <div
-                    className={clsx(
-                        'w-5/6 mx-auto overflow-hidden transition-all duration-700 ease-in-out',
-                        {
-                            'h-64 py-6': showSummary,
-                            'h-0 py-0': showSummary === false
-                        }
-                    )}
-                >
-                    <OrderSummary />
-                </div>
-            </div>
+            {/* Mobile Order Summary */}
+            <MobileOrderSummary showSummary={showSummary} onShowSummary={handleShowSummary} />
 
             <div className='text-sm w-5/6 mx-auto my-12 grid lg:grid-cols-2 gap-16'>
                 <div>
-                    
                     <AddressForm />
 
                     <H5 text='shipping method' styles='col-span-6' />
@@ -109,7 +67,7 @@ export default function Page() {
                     />
                 </div>
 
-                <div className="">
+                <div>
                     <H4 text='order summery' styles='lg:hidden' />
                     <OrderSummary />
                 </div>

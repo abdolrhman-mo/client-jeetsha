@@ -1,5 +1,5 @@
-import ProductsList from "../ui/components/products-list"
-import Search from "../ui/search"
+import ProductsList from "@/app/ui/components/products-list"
+import Search from "@/app/ui/search"
 import Table from '@/app/ui/invoices/table'
 
 export default function Page({

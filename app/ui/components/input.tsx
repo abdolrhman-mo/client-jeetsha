@@ -1,4 +1,4 @@
-import { main_color } from "@/app/lib/colors"
+import { mainColor } from "@/app/lib/colors"
 import clsx from "clsx"
 
 export default function Input({
@@ -6,28 +6,32 @@ export default function Input({
     styles = '',
     type = 'text',
     // if it's submit button
-    value = '',
+    value,
 }: {
     placeholder?: string
     styles?: string
     type?: string
     value?: string
 }) {
-
-    if (type != 'submit') {
-        return <input
-            className={`rounded-lg placeholder:text-sm placeholder:capitalize text-sm ${styles}`}
-            type={type}
-            placeholder={placeholder}
-            value={value}
-        />
-    } else {
-        return <input
-            className={`rounded-lg placeholder:text-sm text-sm capitalize font-semibold ` + `text-white bg-${main_color} cursor-pointer p-2 ${styles}`}
-            type={type}
-            placeholder={placeholder}
-            value={value}
-        />
+    let background = ''
+    if (type === 'submit') {
+        background =   `bg-${mainColor}`
     }
+    return <input
+        className={clsx(
+            // Spacing
+            'p-2',
+            // Typography
+            'text-sm placeholder:text-sm placeholder:capitalize',
+            // Border
+            'rounded-lg',
+            {
+                'cursor-pointer text-white capitalize font-semibold': type === 'submit'
+            },
+        ) + ` ${background} ${styles}`}
+        type={type}
+        placeholder={placeholder}
+        value={value}
+    />
 
 }

@@ -64,34 +64,31 @@ export default function ProductsList({
                     // Spacing
                     'mx-auto',
                     // Grid
-                    'grid grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-4',
+                    'grid grid-cols-2 lg:grid-cols-4 gap-x-3 md:gap-x-8 gap-y-4',
                     // Effects
                     'opacity-100',
                 ) + ` ${styles}`}
                 >
-
                 {filteredProducts.map((product: any) =>
-                    <Product 
+                    <Product
+                        key={product.id} 
                         product={product}
                         styles={productStyles}
                     />
                 )}
             </div>
-            <br />
-            <br />
+            
             <div className="text-center">
                 {
                     search ? (
                         <>
                             {
                                 filteredProducts.length > 0 ? (
-                                    <>
-                                            <CTA
-                                                text={'view more'}
-                                                href={`/search/?query=${query}`}
-                                                styles='max-w-fit' 
-                                                />
-                                    </>
+                                    <CTA
+                                        text={'view more'}
+                                        href={`/search/?query=${query}`}
+                                        styles='max-w-fit'
+                                    />
                                 ) : (
                                     <p>Try searching for something else.</p>
                                 )

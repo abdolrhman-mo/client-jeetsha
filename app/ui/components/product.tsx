@@ -15,8 +15,8 @@ export default function Product({
             href={'/collections/tees/1'}
             key={product.id}
         >
-            <div className={`grid grid-rows-4 h-full gap-4 ${styles}`}>
-                <div className='overflow-hidden row-span-3'>
+            <div className={`grid grid-rows-12 h-full gap-4 ${styles}`}>
+                <div className='overflow-hidden row-span-10'>
                     <Image
                         className={clsx(
                             // Sizing
@@ -30,7 +30,7 @@ export default function Product({
                         height={500}
                     />
                 </div>
-                <div className='row-span-1 text-center'>
+                <div className='row-span-2 text-center'>
                     <h4 
                         className='uppercase text-md tracking-widest'
                     >

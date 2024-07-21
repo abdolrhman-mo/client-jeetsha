@@ -14,9 +14,16 @@ export default function CTA({
     return (
         <Link
             className={clsx(
-                'text-center inline-block w-full rounded-lg', 
-                'placeholder:text-sm text-sm capitalize font-semibold',
-                'text-white cursor-pointer p-2',
+                // Layout & Sizing
+                'inline-block w-full',
+                // Spacing
+                'p-2',
+                // Typography
+                'text-center text-white placeholder:text-sm text-sm capitalize font-semibold',
+                // Border
+                'rounded-lg',
+                // Interactivity
+                'cursor-pointer',
             ) + ` bg-${mainColor}` + ` ${styles}`}
             href={href}
         >

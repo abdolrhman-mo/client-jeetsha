@@ -8,10 +8,10 @@ import { useDebouncedCallback } from 'use-debounce'
 
 export default function Search({ 
   placeholder,
-  onShowSearch,
+  onShowSearchBar,
 }: { 
   placeholder: string
-  onShowSearch?: any 
+  onShowSearchBar?: any 
 }) {
   const searchParams = useSearchParams()
   const pathname = usePathname();
@@ -67,7 +67,7 @@ export default function Search({
       />
       <XMarkIcon
         className='h-6 col-span-1 cursor-pointer'
-        onClick={onShowSearch}
+        onClick={onShowSearchBar}
       />
     </div>
   );
