@@ -1,0 +1,14 @@
+- orders over 2999
+- social media banner on top of nav
+- make hero section better
+- make product in products-list look better on hover
+nav bar za'a shemal shewaya
+cart point w the no of items in it
+
+
+animations
+search bar
+
+
+
+IDEA => group the body and when it's clicked change the styles of the rest of the components

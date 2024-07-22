@@ -11,7 +11,6 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-
   const [showCart, setShowCart] = useState(false)
   let handleShowCart = () => {
       if (showCart) {
@@ -20,6 +19,14 @@ export default function RootLayout({
           setShowCart(true)
       }
   }
+  // const [showCart, setShowCart] = useState(0)
+  // let handleShowCart = () => {
+  //     if (showCart === 0) {
+  //         setShowCart(100)
+  //     } else {
+  //         setShowCart(0)
+  //     }
+  // }
   const [showSearchBar, setshowSearchBar] = useState(false)
   let handleshowSearchBar = () => {
       if (showSearchBar) {

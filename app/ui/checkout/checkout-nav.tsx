@@ -14,7 +14,9 @@ export default function CheckoutNav() {
         <nav className="shadow-sm">
             <div className="py-4 w-9/12 mx-auto flex justify-between items-center tracking-widest ">
                 <Logo text_size='text-2xl' />
-                <ShoppingBagIcon className="h-6 px-2" />
+                <Link href={'/cart'}>
+                    <ShoppingBagIcon className="h-6 px-2" />
+                </Link>
             </div>
         </nav>
     )

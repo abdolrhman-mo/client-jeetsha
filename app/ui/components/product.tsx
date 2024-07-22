@@ -12,20 +12,20 @@ export default function Product({
     return (
         <Link
             className='group' 
-            href={'/collections/tees/1'}
+            href={`/product/${product.id}`}
             key={product.id}
         >
             <div className={`grid grid-rows-12 h-full gap-4 ${styles}`}>
-                <div className='overflow-hidden row-span-10'>
+                <div className='overflow-hidden row-span-10 flex items-center'>
                     <Image
                         className={clsx(
-                            // Sizing
-                            'h-full object-cover',
+                            // Layout & Sizing
+                            'object-cover h-full group-hover:h-[105%]',
                             // Transitions & Animations
-                            'transition-all duration-300 ease-in-out group-hover:h-[105%]',
+                            'transition-all duration-300 ease-in-out',
                         )}
                         src={product.image_url} 
-                        alt='tee'
+                        alt={product.name}
                         width={500}
                         height={500}
                     />

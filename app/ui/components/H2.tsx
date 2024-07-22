@@ -15,7 +15,7 @@ export default function H2({
                     // Spacing
                     'my-12',
                     // Typography
-                    'text-4xl font-semibold capitalize',
+                    'text-4xl font-medium uppercase',
                 ) + ` ${styles}`
             }
         >
