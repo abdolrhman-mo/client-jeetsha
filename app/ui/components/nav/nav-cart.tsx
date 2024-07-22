@@ -21,35 +21,6 @@ import CartItem from '@/app/ui/cart/cart-item'
 import CartItems from '../../cart/cart-items'
 import { motion, Variants } from 'framer-motion'
 
-const cart: Variants = {
-    show: {
-        width: '33%',
-        transition: {
-            duration: 0.2,
-            when: 'beforeChildren',
-            staggerChildren: 0.2,
-        }
-    },
-    hide: {
-        width: '0',
-        transition: {
-            duration: 0.2,
-            when: 'afterChildren',
-        }
-    }
-}
-
-const cartItem: Variants = {
-    show: {
-        opacity: 1,
-        y: 0,
-    },
-    hide: {
-        opacity: 0,
-        y: 25,
-    }
-}
-
 export default function NavCart({
     showCart,
     onShowCart,
@@ -57,15 +28,57 @@ export default function NavCart({
     showCart?: any
     onShowCart?: any
 }) {
-    let handleShowCart = () => {
-        onShowCart()
+    let cart: Variants = {
+        show: {
+            width: '33%',
+            transition: {
+                duration: 0.2,
+                when: 'beforeChildren',
+                staggerChildren: 0.2,
+            }
+        },
+        hide: {
+            width: '0',
+            transition: {
+                duration: 0.1,
+                when: 'afterChildren',
+            }
+        }
     }
+    
+    const cartItem: Variants = {
+        show: {
+            opacity: 1,
+            y: 0,
+        },
+        hide: {
+            opacity: 0,
+            y: 25,
+            transition: {
+                duration: 0.2
+            }
+        }
+    }
+
+    const isMobile = window.innerWidth < 768; //Add the width you want to check for here (now 768px)
+    if (isMobile) {
+        cart.show = {
+            width: '83%',
+            transition: {
+                duration: 0.2,
+                when: 'beforeChildren',
+                staggerChildren: 0.2,
+            }
+        }
+    }
+
     return (
         <motion.div
-            initial={false}
-            animate={showCart ? 'show' : 'hide'}
+            initial={ false }
+            animate={ showCart ? 'show' : 'hide' }
         >
-            <motion.div variants={cart}
+            <motion.div
+                variants={cart}
                 className={clsx(
                     // Layout
                     'fixed top-0 right-0 z-50 ', 
@@ -93,7 +106,7 @@ export default function NavCart({
                     )}
                 >
                     <h2 className='text-3xl'>CART</h2>
-                    <XMarkIcon className='h-6 cursor-pointer' onClick={handleShowCart} />
+                    <XMarkIcon className='h-6 cursor-pointer' onClick={onShowCart} />
                 </motion.div>
                 <motion.div
                     variants={cartItem} 

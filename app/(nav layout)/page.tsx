@@ -25,13 +25,14 @@ export default function Page({
       <NavSearchResults query={query} currentPage={currentPage} /> 
 
       <div className="z-10">
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0}}
           whileInView={{ opacity: 1 }}
-          // animate={{ x: 100 }}
+          transition={{ duration: 3 }}
+          viewport={{ once: true }}
         >
-          <Hero />
-        </motion.div>
+        </motion.div> */}
+        <Hero />
 
         <ProductGallery title='latest drop' tag='latest' />
         <ProductGallery title='tees' tag='tee' />

@@ -16,11 +16,16 @@ export default function Product({
             key={product.id}
         >
             <div className={`grid grid-rows-12 h-full gap-4 ${styles}`}>
-                <div className='overflow-hidden row-span-10 flex items-center'>
+                <div 
+                    className={clsx(
+                        'overflow-hidden row-span-6 sm:row-span-10', 
+                        'flex items-center'
+                    )}
+                >
                     <Image
                         className={clsx(
                             // Layout & Sizing
-                            'object-cover h-full group-hover:h-[105%]',
+                            'object-cover h-full max-h-60 sm:max-h-full group-hover:h-[105%]',
                             // Transitions & Animations
                             'transition-all duration-300 ease-in-out',
                         )}
@@ -30,7 +35,7 @@ export default function Product({
                         height={500}
                     />
                 </div>
-                <div className='row-span-2 text-center'>
+                <div className='row-span-6 sm:row-span-2 text-center'>
                     <h4 
                         className='uppercase text-md tracking-widest'
                     >
