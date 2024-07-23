@@ -4,7 +4,6 @@
 - make product in products-list look better on hover
 nav bar za'a shemal shewaya
 cart point w the no of items in it
-mobile nav styles
 when click on tees link from mobile nav. mobile nav doesn't dissapear
 
 animations

@@ -13,35 +13,15 @@ export default function RootLayout({
 }) {
   const [showCart, setShowCart] = useState(false)
   let handleShowCart = () => {
-      if (showCart) {
-          setShowCart(false)
-      } else {
-          setShowCart(true)
-      }
+      setShowCart(!showCart)
   }
-  // const [showCart, setShowCart] = useState(0)
-  // let handleShowCart = () => {
-  //     if (showCart === 0) {
-  //         setShowCart(100)
-  //     } else {
-  //         setShowCart(0)
-  //     }
-  // }
   const [showSearchBar, setshowSearchBar] = useState(false)
   let handleshowSearchBar = () => {
-      if (showSearchBar) {
-          setshowSearchBar(false)
-      } else {
-          setshowSearchBar(true)
-      }
+      setshowSearchBar(!showSearchBar)
   }
   const [showMobileNav, setshowMobileNav] = useState(false)
   let handleshowMobileNav = () => {
-      if (showMobileNav) {
-          setshowMobileNav(false)
-      } else {
-          setshowMobileNav(true)
-      }
+    setshowMobileNav(!showMobileNav)
   }
 
   return (

@@ -60,14 +60,16 @@ export default function NavCart({
         }
     }
 
-    const isMobile = window.innerWidth < 768; //Add the width you want to check for here (now 768px)
-    if (isMobile) {
-        cart.show = {
-            width: '83%',
-            transition: {
-                duration: 0.2,
-                when: 'beforeChildren',
-                staggerChildren: 0.2,
+    if (typeof window !== 'undefined') {
+        const isMobile = window.innerWidth < 768; //Add the width you want to check for here (now 768px)
+        if (isMobile) {
+            cart.show = {
+                width: '83%',
+                transition: {
+                    duration: 0.2,
+                    when: 'beforeChildren',
+                    staggerChildren: 0.2,
+                }
             }
         }
     }

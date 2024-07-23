@@ -23,6 +23,7 @@ import NavCart from './nav-cart'
 import NavSearchBar from './nav-search-bar'
 import BackgroundShadow from './background-shadow'
 import MobileNav from './mobile-nav'
+import { motion, Variants } from 'framer-motion'
 
 export default function Nav({
     showMobileNav,
@@ -40,6 +41,14 @@ export default function Nav({
     onShowCart?: any
     onShowSearchBar?: any
 }) {
+    const navItem = {
+        normal: {
+            borderBottom: 'none',
+        },
+        hover: {
+            borderBottom: '1px solid black',
+        }
+    }
 
     return (
         <nav className='shadow-sm fixed w-full z-30 bg-white'>
@@ -78,12 +87,12 @@ export default function Nav({
                             'md:max-lg:flex-col md:flex'
                         )}
                     >
-                        <li>
+                        <motion.li whileHover='hover' variants={navItem}>
                             <Link href='/collections/latest'>LATEST</Link>
-                        </li>
-                        <li>
+                        </motion.li>
+                        <motion.li whileHover='hover' variants={navItem}>
                             <Link href='/collections/tees'>TEES</Link>
-                        </li>
+                        </motion.li>
                     </ul>
                     <Logo text_size='text-4xl' />
                     <ul className={clsx(
@@ -94,12 +103,12 @@ export default function Nav({
                             'md:max-lg:flex-col md:flex'
                         )}
                     >
-                        <li>
+                        <motion.li whileHover='hover' variants={navItem}>
                             <Link href='/collections/pants'>PANTS</Link>
-                        </li>
-                        <li>
+                        </motion.li>
+                        <motion.li whileHover='hover' variants={navItem}>
                             <Link href='/collections/shorts'>SHORTS</Link>
-                        </li>
+                        </motion.li>
                     </ul>
                 </div>
 
