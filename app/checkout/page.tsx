@@ -1,21 +1,14 @@
 'use client'
 
-import { governorates } from '@/app/lib/governorates'
+import { useState } from 'react'
 import H4 from '@/app/ui/components/h4'
 import H5 from '@/app/ui/components/h5'
 import Input from '@/app/ui/components/input'
-import Select from '@/app/ui/components/select'
 import Radio from '@/app/ui/components/radio'
 import AddressForm from '@/app/ui/checkout/address-form'
 import OrderSummary from '@/app/ui/checkout/order-summary'
-import { ChevronDownIcon } from '@heroicons/react/24/outline'
-import { ChevronUpIcon } from '@heroicons/react/24/outline'
-import clsx from 'clsx'
-import { useState } from 'react'
-import { products } from '@/app/lib/placeholder-data'
-import Image from 'next/image'
 import Note from '@/app/ui/checkout/note'
-import MobileOrderSummary from '../ui/checkout/mobile-order-summary'
+import MobileOrderSummary from '@/app/ui/checkout/mobile-order-summary'
 
 export default function Page() {
     const [showSummary, setShowSummary] = useState(false)

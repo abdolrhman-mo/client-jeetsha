@@ -1,3 +1,5 @@
+'use client'
+
 import CartItems from "@/app/ui/cart/cart-items";
 import CTA from "@/app/ui/components/cta";
 import H2 from "@/app/ui/components/H2";

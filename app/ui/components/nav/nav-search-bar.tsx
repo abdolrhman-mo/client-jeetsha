@@ -1,13 +1,13 @@
 import clsx from "clsx"
 import Search from "@/app/ui/search"
 
-export default function NavSearchBar({
-    showSearchBar,
-    onShowSearchBar,
-}: {
-    showSearchBar?: any
-    onShowSearchBar?: any
-}) {
+import { useSelector, useDispatch, Provider } from 'react-redux'
+import { toggle, selectSearchBar } from '@/lib/features/nav/searchBarSlice'
+
+export default function NavSearchBar() {
+    const searchBar = useSelector(selectSearchBar)
+    const dispatch = useDispatch()
+
     return (
         <div className={clsx(
             // Layout & Sizing
@@ -24,13 +24,12 @@ export default function NavSearchBar({
                     // Spacing
                     'py-5 mx-auto tracking-widest',
                     {
-                        'hidden': showSearchBar === false
+                        'hidden': searchBar === false
                     }
                 )}
                 >
                 <Search 
                     placeholder='Search our store'
-                    onShowSearchBar={onShowSearchBar} 
                 />
             </div>
         </div>

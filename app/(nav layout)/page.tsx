@@ -22,7 +22,7 @@ export default function Page({
     <main className={`${poppins.className} antialiased z-10`}>
 
       {/* Nav Search Results */}
-      <NavSearchResults query={query} currentPage={currentPage} /> 
+      <NavSearchResults query={query} currentPage={currentPage} />
 
       <div className="z-10">
         <Hero />

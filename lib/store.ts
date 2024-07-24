@@ -1,8 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit'
+import counterReducer from '@/lib/features/counter/counterSlice'
+import searchBarReducer from '@/lib/features/nav/searchBarSlice'
 
 export const makeStore = () => {
     return configureStore({
-        reducer: {}
+        reducer: {
+            counter: counterReducer,
+            searchBar: searchBarReducer
+        }
     })
 }
 

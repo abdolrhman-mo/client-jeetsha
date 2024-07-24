@@ -1,3 +1,5 @@
+'use client'
+
 import Collection from "@/app/ui/collections/collection";
 
 export default function Page() {

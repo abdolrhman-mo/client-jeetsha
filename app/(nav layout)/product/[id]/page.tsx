@@ -1,19 +1,32 @@
+'use client'
+
 import { products } from "@/app/lib/placeholder-data"
 import CTA from "@/app/ui/components/cta"
 import H2 from "@/app/ui/components/H2"
-import H4 from "@/app/ui/components/h4"
+import NavSearchResults from "@/app/ui/components/nav/nav-search-results"
 import ProductsList from "@/app/ui/components/products-list"
 import SizeRadio from "@/app/ui/product/size-radio"
 import Image from "next/image"
 
 export default function Page({
-    params
+    params,
+    searchParams,
 }: {
     params: {id: number}
+    searchParams?: {
+        query?: string
+        page?: string
+    }
 }) {
     const product = products[(params.id) - 1]
+    const query = searchParams?.query || ''
+    const currentPage = Number(searchParams?.page) || 1
+
     return (
         <>
+            {/* Nav Search Results */}
+            <NavSearchResults query={query} currentPage={currentPage} />
+
             <div className="w-5/6 mx-auto pt-8 grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <div className="flex justify-center w-full">
                     <Image

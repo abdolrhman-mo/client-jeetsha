@@ -1,5 +1,9 @@
 import clsx from "clsx"
 import ProductsList from "@/app/ui/components/products-list"
+import { useState } from "react"
+
+import { useSelector, useDispatch } from "react-redux"
+import { selectSearchBar, toggle } from "@/lib/features/nav/searchBarSlice"
 
 export default function NavSearchResults({
     query,
@@ -8,6 +12,9 @@ export default function NavSearchResults({
     query: string
     currentPage: number
 }) {
+    const searchBar = useSelector(selectSearchBar)
+    const dispatch = useDispatch()
+
     return (
         <div
             className={clsx(
@@ -18,7 +25,7 @@ export default function NavSearchResults({
                 // Backgrounds & Effects
                 'bg-white',
                 {
-                    'hidden': !query
+                    'hidden': !searchBar
                 }
             )}
         >

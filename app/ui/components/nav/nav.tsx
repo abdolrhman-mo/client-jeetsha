@@ -6,40 +6,29 @@ import {
     UserIcon, 
     ShoppingBagIcon, 
     Bars3CenterLeftIcon,
-    XMarkIcon,
 } from '@heroicons/react/24/outline'
 import Logo from '@/app/ui/components/logo'
 import clsx from 'clsx'
-import { useState } from 'react'
-import { cartItems } from '@/app/lib/placeholder-data'
-import Image from 'next/image'
-import Input from '@/app/ui/components/input'
-import { mainColor } from '@/app/lib/colors'
-import Search from '../../search'
-import ProductsList from '../products-list'
-import CTA from '@/app/ui/components/cta'
-import { usePathname, useSearchParams } from 'next/navigation'
 import NavCart from './nav-cart'
 import NavSearchBar from './nav-search-bar'
 import BackgroundShadow from './background-shadow'
 import MobileNav from './mobile-nav'
 import { motion, Variants } from 'framer-motion'
 
+import { useSelector, useDispatch, Provider } from 'react-redux'
+import { toggle, selectSearchBar } from '@/lib/features/nav/searchBarSlice'
+
 export default function Nav({
     showMobileNav,
     showCart,
-    showSearchBar,
     
     onShowMobileNav,
     onShowCart,
-    onShowSearchBar,
 }: {
     showMobileNav?: any
     showCart?: any
-    showSearchBar?: any
     onShowMobileNav?: any
     onShowCart?: any
-    onShowSearchBar?: any
 }) {
     const navItem = {
         normal: {
@@ -49,6 +38,8 @@ export default function Nav({
             borderBottom: '1px solid black',
         }
     }
+    const searchBar = useSelector(selectSearchBar)
+    const dispatch = useDispatch()
 
     return (
         <nav className='shadow-sm fixed w-full z-30 bg-white'>
@@ -61,7 +52,7 @@ export default function Nav({
                     // Typography
                     'items-center tracking-widest',
                     {
-                        'hidden': showSearchBar
+                        'hidden': searchBar
                     }
                 )}
             >
@@ -70,7 +61,7 @@ export default function Nav({
                 {/* desktop */}
                 <MagnifyingGlassIcon 
                     className='h-6 hidden md:block cursor-pointer'
-                    onClick={onShowSearchBar} 
+                    onClick={() => dispatch(toggle())} 
                 />
                 {/* mobile */}
                 <Bars3CenterLeftIcon className='h-6 md:hidden cursor-pointer' onClick={onShowMobileNav} />
@@ -117,7 +108,7 @@ export default function Nav({
                 {/* mobile */}
                 <MagnifyingGlassIcon 
                     className='h-6 cursor-pointer block md:hidden' 
-                    onClick={onShowSearchBar}
+                    onClick={() => dispatch(toggle())}
                 />
                 {/* desktop */}
                 <ul className='flex'>
@@ -147,15 +138,13 @@ export default function Nav({
             <BackgroundShadow
                 showCart={showCart}
                 showMobileNav={showMobileNav}
-                showSearchBar={showSearchBar}
 
                 onShowCart={onShowCart}
                 onShowMobileNav={onShowMobileNav}
-                onShowSearchBar={onShowSearchBar}
             />
 
             {/* Search Bar */}
-            <NavSearchBar showSearchBar={showSearchBar} onShowSearchBar={onShowSearchBar} />
+            <NavSearchBar />
         </nav>
     )
 }

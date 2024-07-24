@@ -6,12 +6,13 @@ import clsx from 'clsx'
 import { useSearchParams, usePathname, useRouter } from 'next/navigation'
 import { useDebouncedCallback } from 'use-debounce'
 
+import { useSelector, useDispatch, Provider } from 'react-redux'
+import { toggle, selectSearchBar } from '@/lib/features/nav/searchBarSlice'
+
 export default function Search({ 
   placeholder,
-  onShowSearchBar,
 }: { 
   placeholder: string
-  onShowSearchBar?: any 
 }) {
   const searchParams = useSearchParams()
   const pathname = usePathname();
@@ -26,6 +27,8 @@ export default function Search({
     }
     replace(`${pathname}?${params.toString()}`)
   }, 300)
+  const searchBar = useSelector(selectSearchBar)
+  const dispatch = useDispatch()
 
   return (
     <div className={clsx(
@@ -67,7 +70,7 @@ export default function Search({
       />
       <XMarkIcon
         className='h-6 col-span-1 cursor-pointer'
-        onClick={onShowSearchBar}
+        onClick={() => dispatch(toggle())}
       />
     </div>
   );

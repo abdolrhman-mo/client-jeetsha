@@ -9,6 +9,6 @@ when click on tees link from mobile nav. mobile nav doesn't dissapear
 animations
 search bar
 
-
+i had to put 'use client' in all pages for redux to work w/out any errors
 
 IDEA => group the body and when it's clicked change the styles of the rest of the components

@@ -1,22 +1,21 @@
 import clsx from "clsx"
 import { motion, Variants } from "framer-motion"
 
+import { useSelector, useDispatch, Provider } from 'react-redux'
+import { toggle, selectSearchBar } from '@/lib/features/nav/searchBarSlice'
+
 export default function BackgroundShadow({
     showMobileNav,
     showCart,
-    showSearchBar,
 
     onShowMobileNav,
     onShowCart,
-    onShowSearchBar,
 }: {
     showMobileNav?: any
     showCart?: any
-    showSearchBar?: any
 
     onShowMobileNav?: any
     onShowCart?: any
-    onShowSearchBar?: any
 }) {
     const shadow: Variants = {
         show: {
@@ -33,11 +32,13 @@ export default function BackgroundShadow({
             }
         },
     }
+    const searchBar = useSelector(selectSearchBar)
+    const dispatch = useDispatch()
 
     return (
         <motion.div
             initial={false}
-            animate={(showMobileNav || showCart || showSearchBar) ? 'show' : 'hide'}
+            animate={(showMobileNav || showCart || searchBar) ? 'show' : 'hide'}
             variants={shadow}
             className={clsx(
                 // Layout & Sizing
@@ -60,7 +61,7 @@ export default function BackgroundShadow({
                     onShowCart()
                 } 
                 else {
-                    onShowSearchBar()
+                    dispatch(toggle())
                 }
             }}
         ></motion.div>

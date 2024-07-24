@@ -1,5 +1,4 @@
 import '@/app/ui/global.css'
-import { poppins } from '@/app/ui/fonts'
 
 export default function Layout({
   children,

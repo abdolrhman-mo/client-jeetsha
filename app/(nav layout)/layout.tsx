@@ -4,7 +4,9 @@ import '@/app/ui/global.css'
 import { useState } from 'react'
 import Nav from '@/app/ui/components/nav/nav'
 import Footer from '@/app/ui/components/footer'
-import { usePathname, useSearchParams } from 'next/navigation'
+
+import { useSelector } from 'react-redux'
+import { selectSearchBar } from '@/lib/features/nav/searchBarSlice'
 
 export default function RootLayout({
   children,
@@ -15,26 +17,21 @@ export default function RootLayout({
   let handleShowCart = () => {
       setShowCart(!showCart)
   }
-  const [showSearchBar, setshowSearchBar] = useState(false)
-  let handleshowSearchBar = () => {
-      setshowSearchBar(!showSearchBar)
-  }
   const [showMobileNav, setshowMobileNav] = useState(false)
   let handleshowMobileNav = () => {
     setshowMobileNav(!showMobileNav)
   }
+  const searchBar = useSelector(selectSearchBar)
 
   return (
       <body className={
-        (showCart || showSearchBar || showMobileNav) ? 'overflow-hidden' : ''
+        (showCart || searchBar || showMobileNav) ? 'overflow-hidden' : ''
       }>
         <Nav
           showMobileNav={showMobileNav}
           onShowMobileNav={handleshowMobileNav}
           showCart={showCart}
           onShowCart={handleShowCart}
-          showSearchBar={showSearchBar}
-          onShowSearchBar={handleshowSearchBar}
         />
         <div className="pt-20">
           {children}
