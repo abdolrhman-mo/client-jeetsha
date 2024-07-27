@@ -1,22 +1,34 @@
 import Link from "next/link"
 import { mainColor } from "@/app/lib/colors"
 import clsx from "clsx"
+import { toggleSearchBar } from "@/lib/features/nav/searchBarSlice"
+import { useDispatch } from "react-redux"
 
 export default function CTA({
     text,
     href = '',
     theme = 'dark',
     styles = '',
+    navSearch = false,
 }: {
     text: string
     href?: string
     theme?: 'light' | 'dark'
     styles?: string
+    navSearch?: boolean
 }) {
     let bgColor: string = 'white'
     if (theme === 'dark') {
         bgColor = mainColor
     }
+
+    const dispatch = useDispatch()
+    let handleClick = () => {
+        if (navSearch) {
+            dispatch(toggleSearchBar())
+        }
+    }
+
     return (
         <Link
             className={clsx(
@@ -36,6 +48,7 @@ export default function CTA({
                 },
             ) + ` bg-${bgColor}` + ` ${styles}`}
             href={href}
+            onClick={handleClick}
         >
             {text}
         </Link>

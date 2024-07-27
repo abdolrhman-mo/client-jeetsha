@@ -2,29 +2,33 @@ import Link from 'next/link'
 import Image from 'next/image'
 import clsx from 'clsx'
 import { motion, Variants } from 'framer-motion'
-import { useState } from 'react'
+
+import { useSelector, useDispatch } from 'react-redux'
+import { selectSearchBar, toggleSearchBar } from '@/lib/features/nav/searchBarSlice'
 
 export default function Product({
     product,
     styles,
+    navSearch,
 }: {
     product: any
     styles?: string
+    navSearch?: boolean
 }) {
-    // const container = {
-    //     normal: {
-    //         height: '100%',
-    //     },
-    //     hovered: {
-    //         height: '105%',
-    //     }
-    // }
     const image = {
         normal: {
             height: '100%',
         },
         hovered: {
             height: '105%',
+        }
+    }
+    
+    const searchBar = useSelector(selectSearchBar)
+    const dispatch = useDispatch()
+    let handleClick = () => {
+        if (navSearch) {
+            dispatch(toggleSearchBar())
         }
     }
 
@@ -37,7 +41,8 @@ export default function Product({
                 className='group' 
                 href={`/product/${product.id}`}
                 key={product.id}
-                >
+                onClick={handleClick}
+            >
                 <div className={`grid grid-rows-12 h-full gap-4 ${styles}`}>
                     <div
                         className={clsx(

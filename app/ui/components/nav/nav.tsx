@@ -15,19 +15,15 @@ import BackgroundShadow from './background-shadow'
 import MobileNav from './mobile-nav'
 import { motion, Variants } from 'framer-motion'
 
-import { useSelector, useDispatch, Provider } from 'react-redux'
-import { toggle, selectSearchBar } from '@/lib/features/nav/searchBarSlice'
+import { useSelector, useDispatch } from 'react-redux'
+import { toggleSearchBar, selectSearchBar } from '@/lib/features/nav/searchBarSlice'
+import { toggleMobileNav, selectMobileNav } from '@/lib/features/nav/mobileNavSlice'
 
 export default function Nav({
-    showMobileNav,
     showCart,
-    
-    onShowMobileNav,
     onShowCart,
 }: {
-    showMobileNav?: any
     showCart?: any
-    onShowMobileNav?: any
     onShowCart?: any
 }) {
     const navItem = {
@@ -39,6 +35,7 @@ export default function Nav({
         }
     }
     const searchBar = useSelector(selectSearchBar)
+    const mobileNav = useSelector(selectMobileNav)
     const dispatch = useDispatch()
 
     return (
@@ -61,10 +58,10 @@ export default function Nav({
                 {/* desktop */}
                 <MagnifyingGlassIcon 
                     className='h-6 hidden md:block cursor-pointer'
-                    onClick={() => dispatch(toggle())} 
+                    onClick={() => dispatch(toggleSearchBar())} 
                 />
                 {/* mobile */}
-                <Bars3CenterLeftIcon className='h-6 md:hidden cursor-pointer' onClick={onShowMobileNav} />
+                <Bars3CenterLeftIcon className='h-6 md:hidden cursor-pointer' onClick={() => dispatch(toggleMobileNav())} />
 
                 <div 
                     className='w-1/2 mx-auto flex justify-center md:justify-between'
@@ -108,7 +105,7 @@ export default function Nav({
                 {/* mobile */}
                 <MagnifyingGlassIcon 
                     className='h-6 cursor-pointer block md:hidden' 
-                    onClick={() => dispatch(toggle())}
+                    onClick={() => dispatch(toggleSearchBar())}
                 />
                 {/* desktop */}
                 <ul className='flex'>
@@ -128,7 +125,7 @@ export default function Nav({
                 </ul>
 
                 {/* mobile NAV */}
-                <MobileNav showMobileNav={showMobileNav} onShowMobileNav={onShowMobileNav} />
+                <MobileNav />
 
                 {/* CART */}
                 <NavCart showCart={showCart} onShowCart={onShowCart} />
@@ -137,10 +134,7 @@ export default function Nav({
             {/* Background Shadow */}
             <BackgroundShadow
                 showCart={showCart}
-                showMobileNav={showMobileNav}
-
                 onShowCart={onShowCart}
-                onShowMobileNav={onShowMobileNav}
             />
 
             {/* Search Bar */}

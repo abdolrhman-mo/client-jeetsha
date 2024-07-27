@@ -5,9 +5,5 @@ export default function Layout({
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <div className="w-5/6 mx-auto">
-      {children}
-    </div>
-  );
+  return children
 }

@@ -13,6 +13,7 @@ export default function ProductsList({
     tag = 'all',
     limit = 0,
     search = false,
+    navSearch = false,
     query,
     currentPage,
 }: {
@@ -21,6 +22,7 @@ export default function ProductsList({
     tag?: string
     limit?: number
     search?: boolean
+    navSearch?: boolean
     query?: string
     currentPage?: number
 }) {
@@ -74,29 +76,31 @@ export default function ProductsList({
                         key={product.id} 
                         product={product}
                         styles={productStyles}
+                        navSearch={navSearch}
                     />
                 )}
             </div>
             
-            <div className="text-center">
+            <div className="text-center pt-28">
                 {
-                    search ? (
+                    navSearch ? (
                         <>
                             {
                                 filteredProducts.length > 0 ? (
                                     <CTA
                                         text={'view more'}
                                         href={`/search/?query=${query}`}
-                                        styles='max-w-fit'
+                                        styles='max-w-fit block'
+                                        navSearch={true}
                                     />
                                 ) : (
-                                    <p>Try searching for something else.</p>
+                                    <p>Try searching for something.</p>
                                 )
                             }
                         </>
                     ) : <></>
                 }
-            </div> 
+            </div>
         </>
     )
 }

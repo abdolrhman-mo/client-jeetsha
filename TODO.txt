@@ -4,11 +4,15 @@
 - make product in products-list look better on hover
 nav bar za'a shemal shewaya
 cart point w the no of items in it
-when click on tees link from mobile nav. mobile nav doesn't dissapear
-
-animations
-search bar
-
 i had to put 'use client' in all pages for redux to work w/out any errors
+make h2 in mobile screen smaller and padding
+checkout page in mobile
+hero in mobile
+padding is huge in mobile
+focus on details in mobileee
 
-IDEA => group the body and when it's clicked change the styles of the rest of the components
+test libray
+redux forms
+
+
+when click on tees link from mobile nav. mobile nav doesn't dissapear

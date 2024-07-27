@@ -12,14 +12,14 @@ const searchBarSlice = createSlice({
     name: 'searchBar',
     initialState,
     reducers: {
-        toggle: state => {
+        toggleSearchBar: state => {
             state.value = !state.value
         }
     }
 })
 
 
-export const { toggle } = searchBarSlice.actions
+export const { toggleSearchBar } = searchBarSlice.actions
 
 export const selectSearchBar = (state: any) => state.searchBar.value
 

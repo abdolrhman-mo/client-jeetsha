@@ -5,7 +5,6 @@ import Hero from '@/app/ui/home/hero'
 import ProductGallery from '@/app/ui/home/product-gallery'
 import NavSearchResults from '@/app/ui/components/nav/nav-search-results'
 import ShopByCategory from '@/app/ui/home/shop-by-category'
-import { motion } from "framer-motion"
 
 export default function Page({
   searchParams,

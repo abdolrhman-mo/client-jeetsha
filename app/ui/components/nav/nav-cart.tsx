@@ -107,7 +107,9 @@ export default function NavCart({
                         'py-4 px-4',
                     )}
                 >
-                    <h2 className='text-3xl'>CART</h2>
+                    <Link href={'/cart'} onClick={onShowCart}>
+                        <h2 className='text-3xl'>CART</h2>
+                    </Link>
                     <XMarkIcon className='h-6 cursor-pointer' onClick={onShowCart} />
                 </motion.div>
                 <motion.div
