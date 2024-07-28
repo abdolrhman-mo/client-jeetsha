@@ -1,5 +1,4 @@
 import Link from "next/link"
-import { lusitana } from "@/app/ui/fonts"
 
 export default function Logo({
     text_size = 'text-4xl'

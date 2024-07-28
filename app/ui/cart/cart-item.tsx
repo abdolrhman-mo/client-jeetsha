@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import Image from "next/image";
-import CTA from "../components/cta";
+import CTA from "@/app/ui/components/cta";
 
 export default function CartItem({
     cartItem

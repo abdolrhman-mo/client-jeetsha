@@ -1,12 +1,11 @@
 import clsx from "clsx"
 import Search from "@/app/ui/search"
 
-import { useSelector, useDispatch, Provider } from 'react-redux'
-import { toggle, selectSearchBar } from '@/lib/features/nav/searchBarSlice'
+import { useSelector } from 'react-redux'
+import { selectSearchBar } from '@/lib/features/nav/searchBarSlice'
 
 export default function NavSearchBar() {
     const searchBar = useSelector(selectSearchBar)
-    const dispatch = useDispatch()
 
     return (
         <div className={clsx(

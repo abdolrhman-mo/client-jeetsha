@@ -1,11 +1,8 @@
-import Product from '@/app/ui/components/product'
-import { products } from '@/app/lib/placeholder-data'
-import clsx from 'clsx'
 import { hasTag } from '@/app/lib/utils'
-import { useState } from 'react'
-import H5 from './h5'
-import H4 from './h4'
-import CTA from './cta'
+import clsx from 'clsx'
+import { products } from '@/app/lib/placeholder-data'
+import Product from '@/app/ui/components/product'
+import CTA from '@/app/ui/components/cta'
 
 export default function ProductsList({
     styles = '',

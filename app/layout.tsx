@@ -1,7 +1,7 @@
 'use client'
 
 import '@/app/ui/global.css'
-import StoreProvider from './StoreProvider'
+import StoreProvider from '@/app/StoreProvider'
 
 export default function RootLayout({
   children,

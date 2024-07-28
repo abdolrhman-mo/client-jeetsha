@@ -3,7 +3,6 @@ import { motion } from "framer-motion"
 import { useDispatch } from "react-redux"
 import { toggleMobileNav } from "@/lib/features/nav/mobileNavSlice"
 import { XMarkIcon } from "@heroicons/react/24/outline"
-import mobileNav from "./mobile-nav"
 
 export default function MobileNavItem({
     text,

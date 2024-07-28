@@ -1,11 +1,9 @@
 import clsx from "clsx"
-import { XMarkIcon } from "@heroicons/react/24/outline"
-import Link from "next/link"
-import { motion, Variants } from 'framer-motion'
-import MobileNavItem from "./mobile-nav-item"
+import { motion } from 'framer-motion'
+import MobileNavItem from "@/app/ui/components/nav/mobile-nav-item"
 
 import { useSelector } from "react-redux"
-import { selectMobileNav, toggleMobileNav } from "@/lib/features/nav/mobileNavSlice"
+import { selectMobileNav } from "@/lib/features/nav/mobileNavSlice"
 
 export default function() {
     const mobileNavVariants = {

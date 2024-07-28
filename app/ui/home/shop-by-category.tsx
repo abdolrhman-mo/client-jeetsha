@@ -1,6 +1,6 @@
-import H2 from "../components/H2";
-import ShopByCategoryItem from "./shop-by-category-item";
-import { delay, motion, Variants } from 'framer-motion'
+import H2 from "@/app/ui/components/H2";
+import ShopByCategoryItem from "@/app/ui/home/shop-by-category-item";
+import { motion } from 'framer-motion'
 
 export default function ShopByCategory() {
     return (

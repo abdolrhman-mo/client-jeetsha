@@ -1,6 +1,3 @@
-import Nav from "@/app/ui/components/nav/nav"
-import { poppins } from "@/app/ui/fonts";
-
 export default function Layout({
   children,
 }: {

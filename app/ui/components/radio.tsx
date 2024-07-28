@@ -1,5 +1,3 @@
-import H5 from "./h5"
-
 export default function Radio({
     name,
     options,

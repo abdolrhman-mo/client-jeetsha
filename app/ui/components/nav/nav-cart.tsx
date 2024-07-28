@@ -1,24 +1,10 @@
 import Link from 'next/link'
-import { 
-    MagnifyingGlassIcon, 
-    UserIcon, 
-    ShoppingBagIcon, 
-    Bars3CenterLeftIcon,
+import {
     XMarkIcon,
 } from '@heroicons/react/24/outline'
-import Logo from '@/app/ui/components/logo'
 import clsx from 'clsx'
-import { useState } from 'react'
-import { cartItems } from '@/app/lib/placeholder-data'
-import Image from 'next/image'
-import Input from '@/app/ui/components/input'
-import { mainColor } from '@/app/lib/colors'
-import Search from '@/app/ui/search'
-import ProductsList from '@/app/ui/components/products-list'
 import CTA from '@/app/ui/components/cta'
-import { usePathname, useSearchParams } from 'next/navigation'
-import CartItem from '@/app/ui/cart/cart-item'
-import CartItems from '../../cart/cart-items'
+import CartItems from '@/app/ui/cart/cart-items'
 import { motion, Variants } from 'framer-motion'
 
 export default function NavCart({

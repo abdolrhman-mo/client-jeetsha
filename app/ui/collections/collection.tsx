@@ -1,5 +1,5 @@
-import H2 from "../components/H2";
-import ProductsList from "../components/products-list";
+import H2 from "@/app/ui/components/H2";
+import ProductsList from "@/app/ui/components/products-list";
 
 export default function Collection({
     title,

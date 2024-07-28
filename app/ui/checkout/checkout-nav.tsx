@@ -1,12 +1,5 @@
 import Link from "next/link"
-import { lusitana } from "@/app/ui/fonts"
-import { 
-    MagnifyingGlassIcon, 
-    UserIcon, 
-    ShoppingBagIcon, 
-    Bars3CenterLeftIcon,
-    XMarkIcon,
-} from "@heroicons/react/24/outline"
+import { ShoppingBagIcon } from "@heroicons/react/24/outline"
 import Logo from "@/app/ui/components/logo"
 
 export default function CheckoutNav() {

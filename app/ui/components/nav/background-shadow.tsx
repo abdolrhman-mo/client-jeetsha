@@ -1,7 +1,7 @@
 import clsx from "clsx"
 import { motion, Variants } from "framer-motion"
 
-import { useSelector, useDispatch, Provider } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { toggleSearchBar, selectSearchBar } from '@/lib/features/nav/searchBarSlice'
 import { selectMobileNav, toggleMobileNav } from "@/lib/features/nav/mobileNavSlice"
 
@@ -16,9 +16,6 @@ export default function BackgroundShadow({
         show: {
             display: 'block',
             opacity: .5,
-            // transition: {
-                
-            // },
         },
         hide: {
             opacity: 0,
@@ -42,13 +39,6 @@ export default function BackgroundShadow({
                 // Backgrounds & Effects
                 'bg-black opacity-50',
                 'hidden',
-                // {
-                //     'hidden': (
-                //         showMobileNav === false && 
-                //         showCart === false && 
-                //         showSearchBar === false
-                //     )
-                // }
             )}
             onClick={() => {
                 if (mobileNav) {

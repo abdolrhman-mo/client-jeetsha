@@ -1,9 +1,7 @@
 import { governorates } from '@/app/lib/governorates'
 import H4 from '@/app/ui/components/h4'
-import H5 from '@/app/ui/components/h5'
 import Input from '@/app/ui/components/input'
 import Select from '@/app/ui/components/select'
-import Radio from '@/app/ui/components/radio'
 
 let governorates_names_en: string[] = []
 

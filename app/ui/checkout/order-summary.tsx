@@ -1,18 +1,9 @@
 'use client'
 
-import { governorates } from '@/app/lib/governorates'
-import H4 from '@/app/ui/components/h4'
-import H5 from '@/app/ui/components/h5'
-import Input from '@/app/ui/components/input'
-import Select from '@/app/ui/components/select'
-import Radio from '@/app/ui/components/radio'
-import { ChevronDownIcon } from '@heroicons/react/24/outline'
-import { ChevronUpIcon } from '@heroicons/react/24/outline'
-import clsx from 'clsx'
-import { useState } from 'react'
 import { products } from '@/app/lib/placeholder-data'
 import Image from 'next/image'
-
+import H5 from '@/app/ui/components/h5'
+import Input from '@/app/ui/components/input'
 
 export default function OrderSummary() {
     return (

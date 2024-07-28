@@ -1,7 +1,7 @@
 import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/24/outline";
 import OrderSummary from "@/app/ui/checkout/order-summary";
 import clsx from "clsx";
-import { motion, Variants } from "framer-motion"
+import { motion } from "framer-motion"
 
 export default function MobileOrderSummary({
     showSummary,

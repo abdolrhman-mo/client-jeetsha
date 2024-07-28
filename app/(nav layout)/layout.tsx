@@ -7,6 +7,7 @@ import Footer from '@/app/ui/components/footer'
 
 import { useSelector } from 'react-redux'
 import { selectSearchBar } from '@/lib/features/nav/searchBarSlice'
+import { selectMobileNav } from '@/lib/features/nav/mobileNavSlice'
 
 export default function RootLayout({
   children,
@@ -17,19 +18,14 @@ export default function RootLayout({
   let handleShowCart = () => {
       setShowCart(!showCart)
   }
-  const [showMobileNav, setshowMobileNav] = useState(false)
-  let handleshowMobileNav = () => {
-    setshowMobileNav(!showMobileNav)
-  }
   const searchBar = useSelector(selectSearchBar)
+  const mobileNav = useSelector(selectMobileNav)
 
   return (
       <body className={
-        (showCart || searchBar || showMobileNav) ? 'overflow-hidden' : ''
+        (showCart || searchBar || mobileNav) ? 'overflow-hidden' : ''
       }>
         <Nav
-          showMobileNav={showMobileNav}
-          onShowMobileNav={handleshowMobileNav}
           showCart={showCart}
           onShowCart={handleShowCart}
         />
