@@ -14,7 +14,7 @@ export default function Page({
 }) {
     const query = searchParams?.query || ''
     const currentPage = Number(searchParams?.page) || 1
-    
+
     return (
         <>
             <NavSearchResults query={query} currentPage={currentPage} />

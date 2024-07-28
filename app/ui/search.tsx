@@ -8,6 +8,8 @@ import { useDebouncedCallback } from 'use-debounce'
 
 import { useDispatch } from 'react-redux'
 import { toggleSearchBar } from '@/lib/features/nav/searchBarSlice'
+import { Suspense } from 'react';
+import { NavSearchResultsSkeleton } from './skeletons';
 
 export default function Search({ 
   placeholder,
@@ -30,47 +32,47 @@ export default function Search({
   const dispatch = useDispatch()
 
   return (
-    <div className={clsx(
+    <Suspense fallback={<NavSearchResultsSkeleton />}>
+      <div className={clsx(
         'relative grid grid-cols-12 w-full',
         // Spacing
         'py-2', 
       )}
-    >
-      {/* <label htmlFor='search' className='sr-only'>
-        Search
-      </label> */}
-      <MagnifyingGlassIcon 
-        className={clsx(
-          // Sizing
-          'h-6',
-          // Grid
-          'col-span-1',
-          'text-gray-500 peer-focus:text-gray-900',
-        )}
-      />
-      <input
-        className={clsx(
-          // Layout & Sizing
-          'peer block w-full',
-          // Grid
-          'col-span-10',
-          // Borders
-          'rounded-md border-none',
-          // Spacing
-          'py-0',
-          // Typography 
-          'text-sm placeholder:text-gray-500',
-        )}
-        onChange={e => {
-          handleSearch(e.target.value)
-        }}
-        placeholder={placeholder}
-        defaultValue={searchParams.get('query')?.toString()}
-      />
-      <XMarkIcon
-        className='h-6 col-span-1 cursor-pointer'
-        onClick={() => dispatch(toggleSearchBar())}
-      />
-    </div>
+      >
+        <MagnifyingGlassIcon 
+          className={clsx(
+            // Sizing
+            'h-6',
+            // Grid
+            'col-span-1',
+            // Typography
+            'text-gray-500 peer-focus:text-gray-900',
+          )}
+          />
+        <input
+          className={clsx(
+            // Layout & Sizing
+            'peer block w-full',
+            // Grid
+            'col-span-10',
+            // Borders
+            'rounded-md border-none',
+            // Spacing
+            'py-0',
+            // Typography 
+            'text-sm placeholder:text-gray-500',
+          )}
+          onChange={e => {
+            handleSearch(e.target.value)
+          }}
+          placeholder={placeholder}
+          defaultValue={searchParams.get('query')?.toString()}
+          />
+        <XMarkIcon
+          className='h-6 col-span-1 cursor-pointer'
+          onClick={() => dispatch(toggleSearchBar())}
+          />
+      </div>
+    </Suspense>
   );
 }
