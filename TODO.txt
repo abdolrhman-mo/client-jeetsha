@@ -13,6 +13,3 @@ focus on details in mobileee
 
 
 redux forms
-
-
-when click on tees link from mobile nav. mobile nav doesn't dissapear

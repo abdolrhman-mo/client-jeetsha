@@ -1,12 +1,12 @@
 'use client'
 
+import Image from "next/image"
 import { products } from "@/app/lib/placeholder-data"
 import CTA from "@/app/ui/components/cta"
 import H2 from "@/app/ui/components/H2"
 import NavSearchResults from "@/app/ui/components/nav/nav-search-results"
 import ProductsList from "@/app/ui/components/products-list"
 import SizeRadio from "@/app/ui/product/size-radio"
-import Image from "next/image"
 
 export default function Page({
     params,

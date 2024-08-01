@@ -1,8 +1,11 @@
+'use client'
+
 import clsx from "clsx"
 import Search from "@/app/ui/search"
 
 import { useSelector } from 'react-redux'
 import { selectSearchBar } from '@/lib/features/nav/searchBarSlice'
+import { Suspense } from "react"
 
 export default function NavSearchBar() {
     const searchBar = useSelector(selectSearchBar)
@@ -27,9 +30,11 @@ export default function NavSearchBar() {
                     }
                 )}
                 >
-                <Search 
-                    placeholder='Search our store'
-                />
+                <Suspense>
+                    <Search
+                        placeholder='Search our store'
+                    />
+                </Suspense>
             </div>
         </div>
     )
