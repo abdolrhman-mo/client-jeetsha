@@ -11,7 +11,7 @@ hero in mobile
 padding is huge in mobile
 focus on details in mobileee
 
-test libray
+
 redux forms
 
 
