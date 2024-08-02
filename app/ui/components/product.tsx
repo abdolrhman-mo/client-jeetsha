@@ -68,7 +68,7 @@ export default function Product({
                             /> 
                         </motion.div>
                     </div>
-                    <div className='row-span-5 sm:row-span-2 text-center grid grid-rows-3'>
+                    <div className='row-span-5 sm:row-span-2 text-center'>
                         <h4
                             className='uppercase text-md tracking-widest row-span-2'
                             >
