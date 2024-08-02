@@ -50,7 +50,7 @@ export default function NavCart({
         const isMobile = window.innerWidth < 768; //Add the width you want to check for here (now 768px)
         if (isMobile) {
             cart.show = {
-                width: '83%',
+                width: '95%',
                 transition: {
                     duration: 0.2,
                     when: 'beforeChildren',
@@ -71,7 +71,7 @@ export default function NavCart({
                     // Layout
                     'fixed top-0 right-0 z-50 ', 
                     // Sizing
-                    'h-screen w-11/12 md:w-1/3',
+                    'h-screen',
                     // Flex
                     'flex flex-col',
                     // Backgrounds 
@@ -113,7 +113,7 @@ export default function NavCart({
                     className={clsx(
                         "space-y-5 py-5",
                         // Spacing
-                        'px-4',
+                        'px-4 pb-28',
                     )}
                 >
                     <div className="flex justify-between">

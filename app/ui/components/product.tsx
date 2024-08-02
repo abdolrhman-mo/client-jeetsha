@@ -46,7 +46,7 @@ export default function Product({
                 <div className={`grid grid-rows-12 h-full gap-4 ${styles}`}>
                     <div
                         className={clsx(
-                            'overflow-hidden row-span-6 sm:row-span-10', 
+                            'overflow-hidden row-span-7 sm:row-span-10', 
                             'flex items-center'
                         )}
                     >
@@ -68,14 +68,14 @@ export default function Product({
                             /> 
                         </motion.div>
                     </div>
-                    <div className='row-span-6 sm:row-span-2 text-center'>
-                        <h4 
-                            className='uppercase text-md tracking-widest'
+                    <div className='row-span-5 sm:row-span-2 text-center grid grid-rows-3'>
+                        <h4
+                            className='uppercase text-md tracking-widest row-span-2'
                             >
                             {product.name}
                         </h4>
                         <p
-                            className='text-slate-600 text-sm'
+                            className='text-slate-600 text-sm row-span-1'
                             >
                             {product.price} EGP
                         </p>

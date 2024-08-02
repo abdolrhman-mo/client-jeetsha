@@ -78,10 +78,9 @@ export default function ProductsList({
                 )}
             </div>
             
-            <div className="text-center pt-28">
                 {
                     navSearch ? (
-                        <>
+                        <div className="text-center pt-28">
                             {
                                 filteredProducts.length > 0 ? (
                                     <CTA
@@ -94,10 +93,9 @@ export default function ProductsList({
                                     <p>Try searching for something.</p>
                                 )
                             }
-                        </>
+                        </div>
                     ) : <></>
                 }
-            </div>
         </>
     )
 }
