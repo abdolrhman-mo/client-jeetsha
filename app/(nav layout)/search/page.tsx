@@ -1,9 +1,10 @@
 'use client'
 
+import { fetchProducts } from "@/app/lib/server/fetchProducts"
 import ProductsList from "@/app/ui/components/products-list"
 import Search from "@/app/ui/search"
 
-export default function Page({
+export default async function Page({
     searchParams,
 }: {
     searchParams?: {
@@ -19,7 +20,7 @@ export default function Page({
     // } catch (error) {
     //     console.log('fuckumean')
     // }
-
+    const products = await fetchProducts()
 
     return (
         <>
@@ -27,6 +28,7 @@ export default function Page({
                 <Search placeholder="Search our store" />
 
                 <ProductsList
+                    products={products}
                     styles="py-12"
                     limit={8}
                     search={true}

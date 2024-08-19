@@ -1,3 +1,5 @@
+'use client'
+
 import H2 from "@/app/ui/components/H2";
 import ShopByCategoryItem from "@/app/ui/home/shop-by-category-item";
 import { motion } from 'framer-motion'

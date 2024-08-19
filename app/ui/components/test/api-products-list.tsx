@@ -1,10 +1,13 @@
+'use client'
+
 import { hasTag } from '@/app/lib/utils'
 import clsx from 'clsx'
 import Product from '@/app/ui/components/product'
 import CTA from '@/app/ui/components/cta'
 
-export default function ProductsList({
-    products = [],
+
+export default function ApiProductsList({
+    products = {},
     styles = '',
     productStyles = '',
     tag = 'all',
@@ -14,7 +17,7 @@ export default function ProductsList({
     query,
     currentPage,
 }: {
-    products?: any[]
+    products?: any
     styles?: string
     productStyles?: string
     tag?: string
@@ -47,7 +50,6 @@ export default function ProductsList({
     let i = 0
     searchedProducts.map((product: any) => {
         if (hasTag(product.tags, tag) || tag === 'all') {
-        // if (product.tag === tag || tag === 'all') {
             if (i < limit) {
                 filteredProducts.push(product)
                 i++
@@ -69,36 +71,40 @@ export default function ProductsList({
                     // Effects
                     'opacity-100',
                 ) + ` ${styles}`}
-            >
+                >
                 {filteredProducts.map((product: any) =>
                     <Product
-                        key={product.id}
+                        key={product.id} 
                         product={product}
                         styles={productStyles}
                         navSearch={navSearch}
                     />
                 )}
+                {/* {products.map((product: any, i: number) =>
+                    <Product key={i} product={product} />
+                    // <p>{product.name}</p>
+                    // <Product product={{ name: 'name', price: 100, id: 1}} />
+                )} */}
             </div>
             
-            {/* If it's a searching product list */}
-                {
-                    navSearch ? (
-                        <div className="text-center pt-28">
-                            {
-                                filteredProducts.length > 0 ? (
-                                    <CTA
-                                        text={'view more'}
-                                        href={`/search/?query=${query}`}
-                                        styles='max-w-fit block'
-                                        navSearch={true}
-                                    />
-                                ) : (
-                                    <p>Try searching for something.</p>
-                                )
-                            }
-                        </div>
-                    ) : <></>
-                }
+            {
+                navSearch ? (
+                    <div className="text-center pt-28">
+                        {
+                            filteredProducts.length > 0 ? (
+                                <CTA
+                                    text={'view more'}
+                                    href={`/search/?query=${query}`}
+                                    styles='max-w-fit block'
+                                    navSearch={true}
+                                />
+                            ) : (
+                                <p>Try searching for something.</p>
+                            )
+                        }
+                    </div>
+                ) : <></>
+            }
         </>
     )
 }

@@ -1,3 +1,5 @@
+'use client'
+
 import Link from "next/link"
 import { mainColor } from "@/app/lib/colors"
 import clsx from "clsx"

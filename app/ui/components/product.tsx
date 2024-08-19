@@ -1,3 +1,5 @@
+'use client'
+
 import Link from 'next/link'
 import Image from 'next/image'
 import clsx from 'clsx'
@@ -32,6 +34,9 @@ export default function Product({
         }
     }
 
+    // let imageUrl = '/imgs/pants/pants1.jpg'
+    console.log(`image url: ${product.image}`)
+
     return (
         <motion.div
             animate={'normal'}
@@ -61,7 +66,7 @@ export default function Product({
                                     // Transitions & Animations
                                     'transition-all duration-300 ease-in-out',
                                 )}
-                                src={product.image_url} 
+                                src={product.image} 
                                 alt={product.name}
                                 width={500}
                                 height={500}
@@ -76,7 +81,7 @@ export default function Product({
                         </h4>
                         <p
                             className='text-slate-600 text-sm row-span-1'
-                            >
+                        >
                             {product.price} EGP
                         </p>
                     </div>

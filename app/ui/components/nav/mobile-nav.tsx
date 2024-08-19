@@ -5,7 +5,12 @@ import MobileNavItem from "@/app/ui/components/nav/mobile-nav-item"
 import { useSelector } from "react-redux"
 import { selectMobileNav } from "@/lib/features/nav/mobileNavSlice"
 
-export default function() {
+export default function({
+    loggedIn,
+}: {
+    loggedIn: boolean
+}) {
+
     const mobileNavVariants = {
         show: {
             width: '80%',
@@ -57,7 +62,7 @@ export default function() {
                 <MobileNavItem href='/collections/tees' text="tees" />
                 <MobileNavItem href='/collections/pants' text="pants" />
                 <MobileNavItem href='/collections/shorst' text="shorts" />
-                <MobileNavItem href='/login' text="login" />
+                {loggedIn ? <MobileNavItem href='/account' text="profile" /> : <MobileNavItem href='/login' text="login" />}
                 <MobileNavItem social={true} />
             </div>
         </motion.div>

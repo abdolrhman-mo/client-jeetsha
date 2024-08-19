@@ -1,3 +1,5 @@
+'use client'
+
 import clsx from "clsx"
 import ProductsList from "@/app/ui/components/products-list"
 
@@ -7,9 +9,11 @@ import { selectSearchBar } from "@/lib/features/nav/searchBarSlice"
 export default function NavSearchResults({
     query,
     currentPage,
+    products = [],
 }: {
     query: string
     currentPage: number
+    products?: any[]
 }) {
     const searchBar = useSelector(selectSearchBar)
 
@@ -34,6 +38,7 @@ export default function NavSearchResults({
                     navSearch={true}
                     query={query}
                     currentPage={currentPage}
+                    products={products}
                 />
                 <br />
             </div>

@@ -3,16 +3,18 @@ import Image from "next/image";
 import CTA from "@/app/ui/components/cta";
 import Link from "next/link";
 
-export default function CartItem({
+export default function OrderItem({
     cartItem,
+    state,
 }: {
     cartItem: any
+    state: 'pending' | 'delivered'
 }) {
     return (
         <div className="grid grid-cols-2 gap-3 text-sm">
-            <div className="flex items-center">
+            <div className="flex items-center bg-slate-400 rounded">
                 <Image
-                    className="max-h-56 object-contain"
+                    className="max-h-24 object-contain"
                     src={cartItem.image}
                     width={500}
                     height={500}
@@ -37,17 +39,6 @@ export default function CartItem({
                 </div>
                 <div className="flex justify-between">
                     <div className="border flex h-fit">
-                        <button
-                            className={clsx(
-                                // Spacing
-                                'px-1.5 h-fit md:px-3 md:py-0.5',
-                                // Transition & Animations
-                                'transition-all duration-300 ease-in-out',
-                                'hover:bg-black hover:text-white',
-                            )}
-                            >
-                            -
-                        </button>
                         <p
                             className={clsx(
                                 'h-fit md:px-2'
@@ -55,17 +46,6 @@ export default function CartItem({
                         >
                             {1}
                         </p>
-                        <button
-                            className={clsx(
-                                // Spacing
-                                'px-1.5 h-fit md:px-3 md:py-0.5',
-                                // Transition & Animations
-                                'transition-all duration-300 ease-in-out',
-                                'hover:bg-black hover:text-white',
-                            )}
-                        >
-                            +
-                        </button>
                     </div>
                     <p dir="rtl">
                         {cartItem.price} EGP
@@ -79,18 +59,18 @@ export default function CartItem({
                         'py-1 px-4',
                         // Typography
                         'text-center placeholder:text-sm text-sm uppercase font-medium',
+                        'text-white border-none hover:opacity-85 text-xs lowercase',
                         // Transitions
                         'transition-all duration-300 ease-in-out',
                         // Interactivity
                         'cursor-pointer',
-                        // Typography
-                        'text-white border-none hover:opacity-85 text-xs lowercase',
                         // Background
-                        'bg-red-400'
+                        'bg-red-400',
+                        'rounded',
                     )}
                     href='/#'
                 >
-                    remove
+                    {state === 'pending' ? 'move to delivered' : 'move back to pending'}
                 </Link>
             </div>
         </div>

@@ -1,5 +1,6 @@
 'use client'
 
+import { cartItems } from "@/app/lib/placeholder-data";
 import CartItems from "@/app/ui/cart/cart-items";
 import CTA from "@/app/ui/components/cta";
 import H2 from "@/app/ui/components/H2";
@@ -31,7 +32,7 @@ export default function Page({
                     </Link>
                 </div>
                 <div className="space-y-8">
-                    <CartItems />
+                    <CartItems items={cartItems} />
                 </div>
                 <div className="text-center">
                     <CTA text='CHECK OUT' href="/checkout" styles="max-w-48" />

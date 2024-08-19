@@ -11,7 +11,7 @@ import { toggleSearchBar } from '@/lib/features/nav/searchBarSlice'
 import { Suspense } from 'react';
 import { NavSearchResultsSkeleton } from './skeletons';
 
-export default function Search({ 
+export default function Search({
   placeholder,
 }: { 
   placeholder: string

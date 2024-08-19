@@ -18,6 +18,7 @@ import { motion, Variants } from 'framer-motion'
 import { useSelector, useDispatch } from 'react-redux'
 import { toggleSearchBar, selectSearchBar } from '@/lib/features/nav/searchBarSlice'
 import { toggleMobileNav, selectMobileNav } from '@/lib/features/nav/mobileNavSlice'
+import { useState } from 'react'
 
 export default function Nav({
     showCart,
@@ -26,6 +27,16 @@ export default function Nav({
     showCart?: any
     onShowCart?: any
 }) {
+    const [loggedIn, setLoggedIn] = useState(false)
+
+    let handleProfileLink = () => {
+        if (localStorage.getItem('authToken')) {
+            setLoggedIn(true)
+        } else {
+            setLoggedIn(false)
+        }
+    }
+
     const navItem = {
         normal: {
             borderBottom: 'none',
@@ -61,7 +72,14 @@ export default function Nav({
                     onClick={() => dispatch(toggleSearchBar())} 
                 />
                 {/* mobile */}
-                <Bars3CenterLeftIcon className='h-6 md:hidden cursor-pointer' onClick={() => dispatch(toggleMobileNav())} />
+                <Bars3CenterLeftIcon className='h-6 md:hidden cursor-pointer' onClick={() => {
+                    dispatch(toggleMobileNav())
+                    if (localStorage.getItem('authToken')) {
+                        setLoggedIn(true)
+                    } else {
+                        setLoggedIn(false)
+                    }
+                }} />
 
                 <div 
                     className='w-1/2 mx-auto flex justify-center md:justify-between'
@@ -110,7 +128,7 @@ export default function Nav({
                 {/* desktop */}
                 <ul className='flex'>
                     <li>
-                        <Link href={'/login'}>
+                        <Link onClick={handleProfileLink} href={loggedIn ? '/account' : '/login'}>
                             <UserIcon className='h-6 px-2 hidden md:block cursor-pointer' />
                         </Link>
                     </li>
@@ -125,7 +143,7 @@ export default function Nav({
                 </ul>
 
                 {/* mobile NAV */}
-                <MobileNav />
+                <MobileNav loggedIn={loggedIn} />
 
                 {/* CART */}
                 <NavCart showCart={showCart} onShowCart={onShowCart} />

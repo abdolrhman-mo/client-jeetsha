@@ -6,6 +6,7 @@ import clsx from 'clsx'
 import CTA from '@/app/ui/components/cta'
 import CartItems from '@/app/ui/cart/cart-items'
 import { motion, Variants } from 'framer-motion'
+import { cartItems } from '@/app/lib/placeholder-data'
 
 export default function NavCart({
     showCart,
@@ -106,7 +107,7 @@ export default function NavCart({
                         'px-4',
                     )}
                 >
-                    <CartItems />
+                    <CartItems items={cartItems} />
                 </motion.div>
                 <motion.div
                     variants={cartItem} 

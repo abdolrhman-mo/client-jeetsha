@@ -1,15 +1,18 @@
-import { cartItems } from "@/app/lib/placeholder-data"
 import CartItem from "@/app/ui/cart/cart-item"
 
-export default function CartItems() {
+export default function CartItems({
+    items,
+}: {
+    items: any
+}) {
     return (
         <>
             {
-                (cartItems.length === 0) ? (
+                (items.length === 0) ? (
                     <p>Your cart is currently empty.</p>
                 ) : (
-                    cartItems.map(cartItem =>
-                        <CartItem key={cartItem.id} cartItem={cartItem} />
+                    items.map((item: any) =>
+                        <CartItem key={item.id} cartItem={item} />
                     )
                 )
             }
