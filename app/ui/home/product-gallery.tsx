@@ -1,7 +1,5 @@
-import ProductsList from "@/app/ui/components/products-list"
-import CTA from "@/app/ui/components/cta"
-
-import { fetchProducts } from "@/app/lib/server/fetchProducts"
+import ProductsList from "@/app/ui/products/products-list"
+import CustomLink from "../common/custom-link"
 
 export default async function ProductGallery({
     title,
@@ -18,12 +16,13 @@ export default async function ProductGallery({
             <ProductsList products={products} tag={tag} limit={100} />
             <div className="text-center w-5/6 mx-auto">
                 <div className="w-fit mx-auto">
-                    <CTA 
-                        text="view all" 
+                    <CustomLink
+                        className="text-lg"
                         href={`/collections/${tag}`} 
                         theme="light" 
-                        styles="text-lg"
-                    />
+                    >
+                        view all
+                    </CustomLink>
                 </div>
             </div>
         </div>

@@ -1,7 +1,7 @@
 import { governorates } from '@/app/lib/governorates'
-import H4 from '@/app/ui/components/h4'
-import Input from '@/app/ui/components/input'
-import Select from '@/app/ui/components/select'
+import Input from '@/app/ui/forms/input'
+import Select from '@/app/ui/forms/select'
+import Heading from '../common/heading'
 
 let governorates_names_en: string[] = []
 
@@ -16,30 +16,30 @@ export default function AddressForm({
 }) {
     return (
         <div className={`grid gap-2 md:grid-cols-6 ${styles}`}>
-            <H4 text='Contact' styles='col-span-6' />
+            <Heading level={4} className='col-span-6'>contact</Heading>
             <Input 
                 type='email'
                 placeholder='Email'
-                styles='col-span-6'
+                className='col-span-6'
             />
 
-            <H4 text='Delivery' styles='col-span-6' />
+            <Heading level={4} className='col-span-6'>delivery</Heading>
             <Select options={['egypt']} styles='col-span-6' />
-            <Input placeholder='First name' styles='col-span-6 md:col-span-3' />
-            <Input placeholder='Second name' styles='col-span-6 md:col-span-3' />
-            <Input placeholder='address' styles='col-span-6' />
+            <Input placeholder='First name' className='col-span-6 md:col-span-3' />
+            <Input placeholder='Second name' className='col-span-6 md:col-span-3' />
+            <Input placeholder='address' className='col-span-6' />
 
-            <Input placeholder='City' styles='col-span-6 md:col-span-2' />
+            <Input placeholder='City' className='col-span-6 md:col-span-2' />
             <Select options={governorates_names_en} styles='col-span-6 md:col-span-2' />
             <Input 
                 placeholder='Postal code (optional)' 
-                styles='col-span-6 md:col-span-2'
+                className='col-span-6 md:col-span-2'
             />
             
             <Input 
                 placeholder='Phone' 
                 type='tel' 
-                styles='col-span-6' 
+                className='col-span-6' 
             />
         </div>
     )

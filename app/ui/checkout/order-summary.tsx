@@ -1,51 +1,68 @@
 'use client'
 
-import { products } from '@/app/lib/placeholder-data'
-import Image from 'next/image'
-import H5 from '@/app/ui/components/h5'
-import Input from '@/app/ui/components/input'
+import Input from '@/app/ui/forms/input'
+import ProductsList from '../products/checkout/products-list'
+import { useEffect, useState } from 'react'
+import Heading from '../common/heading'
+import { isAuth } from '@/app/lib/services/auth'
+import { fetchProductsAPI } from '@/app/lib/services/productsService'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootState } from '@/lib/store'
+import { addItem } from '@/lib/features/cart/cartSlice'
+import { fetchCartItemsAPI } from '@/app/lib/services/cartService'
 
 export default function OrderSummary() {
+    const dispatch = useDispatch()
+    // const [cartItems, setCartItems] = useState<any[]>([])
+    const cartItems = useSelector((state: RootState) => state.cart.items)
+    const [totalPrice, setTotalPrice] = useState(0)
+
+    useEffect(() => {
+        const fetchData = async () => {
+            if (isAuth()) {
+                if (cartItems.length === 0) {
+                    const fetchedItems = await fetchCartItemsAPI()
+                    if (fetchedItems.length !== 0) {
+                        fetchedItems.map((item: any) => {
+                            dispatch(addItem(item))
+                        })
+                    }
+                }
+            } else {
+                const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]')
+                
+                cartItems.map((item: any) => {
+                    dispatch(addItem(item))
+                })   
+            }
+            let total: number = 0
+            cartItems.map((item: any) => {
+                total += Number(item.price)
+            })
+            setTotalPrice(total)
+        }
+        fetchData()
+    }, [])
+
     return (
         <div className='grid grid-cols-6 gap-y-4 gap-x-2'>
-            <div className="col-span-6 grid grid-cols-6">
-                <div className="col-span-4 grid grid-cols-6 gap-4">
-                    <div 
-                        className="col-span-2 bg-slate-200 border rounded-md overflow-hidden flex justify-center"
-                    >
-                        <Image
-                            className=''
-                            src={products[11].image_url}
-                            alt={products[11].name}
-                            width={50}
-                            height={50}
-                        />
-                    </div>
-                    <div className="col-span-4 flex justify-center flex-col">
-                        <p className='capitalize text-sm'>{products[11].name}</p>
-                        <p className='text-gray-500 text-xs'>Small</p>
-                    </div>
-                </div>
-                <div className="col-span-2 flex justify-end items-center">
-                    1,600.00 EGP
-                </div>
-            </div>
+            <ProductsList cartItems={cartItems} />
 
-            <Input placeholder='discount code' styles='col-span-5' />
-            <Input type='submit' value='Apply' styles='col-span-1' />
+            <Input placeholder='discount code' className='col-span-5' />
+            <Input type='submit' value='Apply' className='col-span-1' />
 
             <div className="col-span-6">
                 <div className="flex justify-between">
                     <p className=''>Subtotal</p>
-                    <p className=''>1,600.00 EGP</p>
+                    <p className=''>{totalPrice} EGP</p>
                 </div>
                 <div className="flex justify-between">
                     <p className=''>Shipping</p>
                     <p className=''>60.00 EGP</p>
                 </div> 
                 <div className="flex justify-between">
-                    <H5 text='total' styles='' />
-                    <H5 text='1,660.00 EGP' styles='' />
+                    <Heading level={5}>total</Heading>
+                    <Heading level={5}>{`${totalPrice + 60} EGP`}</Heading>
                 </div> 
             </div>
         </div>

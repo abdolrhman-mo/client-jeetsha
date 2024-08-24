@@ -1,13 +1,14 @@
 'use client'
 
-import H4 from "@/app/ui/components/h4"
-import { useState } from "react"
-import { useSelector } from "react-redux"
-import { RootState } from "@/lib/store"
+import Heading from "@/app/ui/common/heading"
+import Input from "@/app/ui/forms/input"
+import ProductsList from "@/app/ui/products/dashboard/products-list"
+import { useEffect, useState } from "react"
+import { fetchProductsAPI } from "@/app/lib/services/productsService"
 
 export default function Page() {
   // const token = useSelector((state: RootState) => state.user.token)
-  const token = localStorage.getItem('authToken')
+  // const token = localStorage.getItem('authToken')
 
   const [name, setName] = useState('')
   const [price, setPrice] = useState('')
@@ -19,14 +20,15 @@ export default function Page() {
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       if (event.target.files && event.target.files.length > 0) {
         setImage(event.target.files[0])
+        // console.log(event.target.files[0].name)
       }
   }
   
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
-    // const token = localStorage.getItem('authToken')
-    console.log(token)
+    const token = localStorage.getItem('authToken')
+    console.log('token', token) // the token is undefined
 
     if (!name || !price || !description || !image) {
       setMessage('Please fill all fields.')
@@ -40,11 +42,14 @@ export default function Page() {
     formData.append('image', image)
   
     try {
-      console.log(token)
+      if (!token) {
+        console.log('no token found')
+      }
       const response = await fetch('http://localhost:8000/products/', {
         method: 'POST',
         headers: {
             // 'Content-Type': 'application/json',
+            // 'Content-Type': '',
             'Authorization': `Token ${token}`,
         },
         body: formData,
@@ -65,64 +70,91 @@ export default function Page() {
     }
   }
 
+  const [products, setProducts] = useState([])
+  useEffect(() => {
+    const getProducts = async () => {
+      try {
+        const p = await fetchProductsAPI()
+        setProducts(p)
+      } catch (error) {
+        console.error('Failed to fetch products:', error)
+      }
+    }
+    getProducts()
+  }, [])
+
   return (
       <>
-          <H4 text="add product" />
-          <form onSubmit={handleSubmit} encType="multipart/form-data">
-              <div>
-                  <label htmlFor="name">Name:</label>
-                  <input
-                      type="text"
-                      id="name"
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
-                      required
-                  />
+        <div className="text-center">
+          <Heading level={4}>add product</Heading>
+        </div>
+        <form className="w-fit" onSubmit={handleSubmit} encType="multipart/form-data">
+          <Input 
+            label={'name'} 
+            type={'text'} 
+            value={name} 
+            onChange={(e: any) => setName(e.target.value)}
+            required={true}
+          />
+          <Input 
+            label={'price'} 
+            type={'text'} 
+            value={price} 
+            onChange={(e: any) => setPrice(e.target.value)}
+            required={true}
+          />
+          <Input
+            label={'description'} 
+            type={'textarea'} 
+            value={description} 
+            onChange={(e: any) => setDescription(e.target.value)}
+            required={true}
+          />
+          {/* <div>
+              <label htmlFor="image">Image:</label>
+              <input
+                  type="file"
+                  id="image"
+                  accept="image/*"
+                  onChange={handleFileChange}
+                  required
+              />
+          </div> */}
+          <Input 
+            label={'image'}
+            type={'file'}
+            onChange={handleFileChange}
+            required={true}
+          />
+          <Input type="submit" value="upload product" />
+        </form>
+
+        {message && <p>{message}</p>}
+
+        <div>
+          <br />
+          <br />
+          <div className="text-center">
+            <br />
+            <Heading level={4}>all products</Heading>
+            {/* <div className="grid grid-cols-4 bg-white rounded px-4 py-1">
+              <div className="col-span-1">
+                <Search placeholder="Search" />
               </div>
-
-              <div>
-                  <label htmlFor="price">Price:</label>
-                  <input
-                      type="number"
-                      id="price"
-                      value={price}
-                      onChange={(e) => setPrice(e.target.value)}
-                      required
-                  />
+              <div className="col-span-3">
+                <Button theme="light">
+                  <AdjustmentsHorizontalIcon className="h-5 inline-block pr-2" />
+                  Filters
+                </Button>
+                <Dropdown />
               </div>
-
-              <div>
-                  <label htmlFor="description">Description:</label>
-                  <textarea
-                      id="description"
-                      value={description}
-                      onChange={(e) => setDescription(e.target.value)}
-                      required
-                  />
-              </div>
-
-              <div>
-                  <label htmlFor="image">Image:</label>
-                  <input
-                      type="file"
-                      id="image"
-                      accept="image/*"
-                      onChange={handleFileChange}
-                      required
-                  />
-              </div>
-
-              <button type="submit">Upload Product</button>
-          </form>
-
-          {message && <p>{message}</p>}
-
-          <div>
-              <br />
-              <br />
-              <H4 text="all products" />
-              
+            </div> */}
+            <br />
           </div>
+          <ProductsList products={products} />
+          <br />
+          <br />
+        </div>
       </>
   )
 }

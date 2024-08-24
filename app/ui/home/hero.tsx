@@ -1,8 +1,6 @@
-import Image from "next/image"
-import CTA from "../components/cta"
-import H4 from "../components/h4"
-import H2 from "../components/H2"
 import clsx from "clsx"
+import CustomLink from "../common/custom-link"
+import Heading from "../common/heading"
 
 export default function Hero() {
     return (
@@ -28,9 +26,9 @@ export default function Hero() {
                     alt="Screenshots of the dashboard project showing desktop version"
                 /> */}
                 <div className="z-20 absolute top-3/4 left-1/2 -translate-x-1/2">
-                    <H2 text="new collection" styles="text-white mb-4 text-center" />
+                    <Heading level={2} className="text-white text-center">new collection</Heading>
                     <div className="w-fit mx-auto">
-                        <CTA text="view all" href="/collections/latest" theme="light" styles="hover:border-white" />
+                        <CustomLink theme='light' href='/collections/latest'>view all</CustomLink>
                     </div>
                 </div>
             </div>

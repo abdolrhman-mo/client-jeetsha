@@ -1,8 +1,8 @@
 'use client'
 
-import H2 from "@/app/ui/components/H2";
-import ShopByCategoryItem from "@/app/ui/home/shop-by-category-item";
+import ShopByCategoryItem from "@/app/ui/home/shop-by-category-item"
 import { motion } from 'framer-motion'
+import Heading from "../common/heading"
 
 export default function ShopByCategory() {
     return (
@@ -14,7 +14,7 @@ export default function ShopByCategory() {
             className="w-5/6 m-auto"
         >
             <div className="text-center">
-                <H2 text="shop by category" />
+                <Heading level={2}>shop by category</Heading>
             </div>
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
                 <ShopByCategoryItem imgSrc='/imgs/tees/tee2.jpg' href="collections/latest" text="new arrivals" />

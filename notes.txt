@@ -1,0 +1,12 @@
+Pages
+1- Home Page
+2- Product Listing Pages(latest, tees, pants, shorts)
+3- Product Details Page
+4- Cart Page
+5- Checkout Page
+6- Order Confirmation Page(after you already purchased)
+
+
+TODO:
+- delete cartItem from database before deleting it from redux state
+- if item is sold out

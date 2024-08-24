@@ -3,6 +3,11 @@ import counterReducer from '@/lib/features/counter/counterSlice'
 import searchBarReducer from '@/lib/features/nav/searchBarSlice'
 import mobileNavReducer from '@/lib/features/nav/mobileNavSlice'
 import userReducer from '@/lib/features/user/userSlice'
+import cartReducer from '@/lib/features/cart/cartSlice'
+import navCartReducer from '@/lib/features/nav/navCartSlice'
+import { useDispatch } from 'react-redux'
+
+export const useAppDispatch = () => useDispatch<AppDispatch>()
 
 export const makeStore = () => {
     return configureStore({
@@ -10,7 +15,9 @@ export const makeStore = () => {
             counter: counterReducer,
             searchBar: searchBarReducer,
             mobileNav: mobileNavReducer,
+            navCart: navCartReducer,
             user: userReducer,
+            cart: cartReducer,
         },
         devTools: process.env.NODE_ENV !== 'production',
     })

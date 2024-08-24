@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { ShoppingBagIcon } from "@heroicons/react/24/outline"
-import Logo from "@/app/ui/components/logo"
+import Logo from "@/app/ui/common/logo"
 
 export default function CheckoutNav() {
     return (

@@ -1,7 +1,6 @@
-import clsx from "clsx";
-import Image from "next/image";
-import CTA from "@/app/ui/components/cta";
-import Link from "next/link";
+import clsx from "clsx"
+import Image from "next/image"
+import Link from "next/link"
 
 export default function OrderItem({
     cartItem,

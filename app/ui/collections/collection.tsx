@@ -1,19 +1,22 @@
-import H2 from "@/app/ui/components/H2";
-import ProductsList from "@/app/ui/components/products-list";
+import ProductsList from "@/app/ui/products/products-list"
+import Heading from "../common/heading"
+import { fetchProductsAPI } from "@/app/lib/services/productsService"
 
-export default function Collection({
+export default async function Collection({
     title,
     tag,
 }: {
     title: string
     tag: string
 }) {
+    const products = await fetchProductsAPI()
+
     return (
         <div className="pt-12">
             <div className="text-center">
-                <H2 text={title} />
+                <Heading level={2}>{title}</Heading>
             </div>
-            <ProductsList tag={tag} />
+            <ProductsList products={products} tag={tag} />
         </div>
     )
 }
