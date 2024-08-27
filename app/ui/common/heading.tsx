@@ -14,11 +14,11 @@ const Heading: React.FC<HeadingProps> = ({
   return (
     <Tag
       className={`text-gray-900 font-semibold capitalize ${
-        level === 1 ? 'text-4xl mb-4' :
-        level === 2 ? 'text-3xl mb-3' :
-        level === 3 ? 'text-2xl mb-2' :
-        level === 4 ? 'text-xl mb-2' :
-        level === 5 ? 'text-lg mb-2' : 
+        level === 1 ? 'text-4xl my-4' :
+        level === 2 ? 'text-3xl my-4' :
+        level === 3 ? 'text-2xl my-4' :
+        level === 4 ? 'text-xl my-4' :
+        level === 5 ? 'text-lg my-4' : 
         'text-base'
       } ${className}`}
     >

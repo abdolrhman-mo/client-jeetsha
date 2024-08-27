@@ -14,6 +14,17 @@ export default function SideBar() {
     const [pathname, setPathname] = useState('/dashboard')
     const [nestedPathname, setNestedPathname] = useState('')
 
+    useEffect(() => {
+        const pathname = localStorage.getItem('pathname')
+        const nestedPathname = localStorage.getItem('nestedPathname')
+        if (pathname) {
+            setPathname(pathname || '')
+        }
+        if (nestedPathname) {
+            setNestedPathname(nestedPathname || '')
+        }
+    }, [])
+
     // Define the links and their paths
     const navLinks = [
         { 
@@ -24,24 +35,24 @@ export default function SideBar() {
             name: 'orders', 
             path: 'orders',
         },
-        // {
-        //     name: 'products', 
-        //     path: 'products',
-        //     nestedLinks: [
-        //         {
-        //             name: 'collections',
-        //             path: 'collections',
-        //         },
-        //         {
-        //             name: 'inventory',
-        //             path: 'inventory',
-        //         },
-        //         {
-        //             name: 'purchase orders',
-        //             path: 'purchase-orders',
-        //         },
-        //     ],
-        // },
+        {
+            name: 'products', 
+            path: 'products',
+            nestedLinks: [
+                // {
+                //     name: 'collections',
+                //     path: 'collections',
+                // },
+                {
+                    name: 'inventory',
+                    path: 'inventory',
+                },
+                // {
+                //     name: 'purchase orders',
+                //     path: 'purchase-orders',
+                // },
+            ],
+        },
         // { 
         //     name: 'customers', 
         //     path: 'customers',
@@ -69,6 +80,8 @@ export default function SideBar() {
                             onClick={() => {
                                 setPathname(link.path) 
                                 setNestedPathname('')
+                                localStorage.setItem('pathname', link.path)
+                                localStorage.setItem('nestedPathname', '')
                             }} 
                             key={link.path} 
                             href={`/dashboard/${link.path}`}
@@ -87,6 +100,7 @@ export default function SideBar() {
                                 <Link
                                     onClick={() => {
                                         setNestedPathname(nestedLink.path)
+                                        localStorage.setItem('nestedPathname', nestedLink.path)
                                     }} 
                                     href={`/dashboard/${link.path}/${nestedLink.path}`}>
                                     <p className={clsx(

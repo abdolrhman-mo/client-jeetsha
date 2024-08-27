@@ -1,5 +1,6 @@
 'use client'
 
+import CustomLink from '@/app/ui/common/custom-link';
 import { useSearchParams, useRouter } from 'next/navigation';
 
 export default function Page() {
@@ -16,7 +17,7 @@ export default function Page() {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-4">
       <div className="bg-white shadow-md rounded-lg p-6 max-w-lg w-full text-center">
-        <h1 className="text-3xl font-bold text-green-600 mb-4">
+        <h1 className="text-3xl font-bold mb-4">
           Order Confirmed!
         </h1>
         <p className="text-lg mb-6">Thank you for your purchase.</p>
@@ -26,12 +27,8 @@ export default function Page() {
         <p className="text-gray-500">
           You will receive a confirmation email with your order details.
         </p>
-        <button
-          onClick={() => router.push('/')}
-          className="mt-6 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition duration-300"
-        >
-          Back to Home
-        </button>
+        <br />
+        <CustomLink href='/'>Back to home</CustomLink>
       </div>
     </div>
   );

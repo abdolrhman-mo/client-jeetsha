@@ -8,5 +8,13 @@ Pages
 
 
 TODO:
-- delete cartItem from database before deleting it from redux state
 - if item is sold out
+- companyName const in placehoder-data
+
+
+
+Background and Text Colors:
+
+Background:       bg-white or bg-gray-50   for a clean, minimal look.
+Primary Text:     text-gray-900            for readability and contrast.
+Secondary Text:   text-gray-700            for less prominent text.

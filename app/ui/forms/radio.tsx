@@ -15,7 +15,7 @@ export default function Radio({
         let item
         let label = (
             <label
-                    className="p-4 text-sm pl-3 cursor-pointer capitalize"
+                    className="p-4 text-gray-900 text-sm pl-3 cursor-pointer capitalize"
                     htmlFor={option}
                 >
                     {option}
@@ -64,14 +64,14 @@ export default function Radio({
         // Adding the component to the option
         if (i === componentIndex) {
             return (
-                <div key={i} className={`p-4 border first:rounded-t-lg last:rounded-b-lg`}>
+                <div key={i} className={`p-4 border first:rounded-t last:rounded-b`}>
                     {item}
                     {component}
                 </div>
             )
         }
         return (
-            <div key={i} className={`p-4 border first:rounded-t-lg last:rounded-b-lg`}>
+            <div key={i} className={`p-4 border first:rounded-t last:rounded-b`}>
                 {item}
             </div>
         )

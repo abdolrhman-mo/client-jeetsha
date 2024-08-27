@@ -1,47 +1,80 @@
+import { CartItemType } from "../types"
 import { API_URL } from "./api-url"
 import { fetchProductsAPI } from "./productsService"
 
-export const fetchCartItemsAPI = async () => {
-  const token = localStorage.getItem('authToken')
+const fetchSizesAPI = async () => {
   try {
-    const res = await fetch(`${API_URL}/orderItems/`, {
+    const res = await fetch(`${API_URL}/size/`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        // Add any additional headers if required, such as authorization tokens
-        'Authorization': `Token ${token}`,
+        'Authorization': `Token ${localStorage.getItem('authToken')}`,
+      },
+    })
+    if (!res.ok) {
+      console.error(`Error fetching cart items: ${res.statusText}`)
+      return []
+    }
+    const data = await res.json()
+    
+    return data
+  } catch (error) {
+    console.error('Error fetching sizes:', error)
+    return []
+  }
+}
+
+const changeSizes = async (data: CartItemType[]) => {
+  // Replace size id with size text
+  const cartItems = data
+  const sizes = await fetchSizesAPI()
+  const sizesMap = new Map(sizes.map((size: any) => [size.id, size.size_text]))
+
+  let modifiedData: any[] = cartItems.map((cartItem: CartItemType) => {
+    let sizeValue = sizesMap.get(cartItem.size) || ''
+
+    return {
+      id: cartItem.id,
+      product: cartItem.product,
+      quantity: cartItem.quantity,
+      size: sizeValue,
+      totalOrderItemsPrice: cartItem.totalOrderItemsPrice
+    }
+  })
+
+  // console.log('modifiedData',modifiedData)
+
+  return modifiedData
+}
+
+export const fetchCartItemsAPI = async () => {
+  try {
+    const res = await fetch(`${API_URL}/orderItems/cart/`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Token ${localStorage.getItem('authToken')}`,
       },
     })
 
     if (!res.ok) {
-      throw new Error(`Error fetching cart items: ${res.statusText}`)
+      console.error(`Error fetching cart items: ${res.statusText}`)
+      return []
     }
 
-    const data = await res.json()
+    let data = await res.json()
+  
+    data = await changeSizes(data)
 
-    // Replace product id with actual product
-    const cartItems = data
-    const products = await fetchProductsAPI()
-    const productsMap = new Map(products.map((product: any) => [product.id, product]))
-    let modifiedData: any = []
-    cartItems.map((cartItem: any) => {
-        let newCartItem = {
-            id: cartItem.id,
-            product: productsMap.get(cartItem.product) || null,
-            quantity: cartItem.quantity
-        }
-        modifiedData.push(newCartItem)
-    })
-
-    return modifiedData
+    return data
 
   } catch (error) {
     console.error('Error fetching cart items:', error)
-    throw error
+    return []
   }
 }
 
-export const addToCartAPI = async (product: number, quantity: number) => {
+export const addToCartAPI = async (product: number, quantity: number, selectedSize: string) => {
   try {
     const res = await fetch(`${API_URL}/orderItems/`, {
       method: 'POST',
@@ -50,22 +83,24 @@ export const addToCartAPI = async (product: number, quantity: number) => {
         'Authorization': `Token ${localStorage.getItem('authToken')}`
       },
       body: JSON.stringify({
-        product,
+        product_id: product,
         quantity,
+        size_text: selectedSize,
         user: localStorage.getItem('userId'),
       }),
     })
-
     if (!res.ok) {
-      throw new Error(`Error: ${res.status}`)
+      console.error(`Error: ${res.status}`)
+      return []
     }
-
-    const data = await res.json()
-    console.log('data added to cart api', data)
-    return data
+    let data = await res.json()
+    
+    data = await changeSizes([data])
+    
+    return data[0]
   } catch (error) {
     console.error('Error adding item to cart:', error)
-    throw error
+    return []
   }
 }
 
@@ -81,13 +116,14 @@ export const removeCartItemAPI = async (cartItemId: number) => {
     })
 
     if (!res.ok) {
-      throw new Error(`Error removing cart item: ${res.statusText}`)
+      console.error(`Error removing cart item: ${res.statusText}`)
+      return []
     }
 
     // No need to return anything if the delete operation is successful
   } catch (error) {
     console.error('Error removing cart item:', error)
-    throw error
+    return []
   }
 }
 
@@ -112,11 +148,13 @@ export const changeCartItemsQuantityAPI = async (
       })
     })
     if (!res.ok) {
-      throw new Error('Faild to update cart item quantity')
+      console.error('Faild to update cart item quantity')
+      return []
     }
     const data = await res.json()
     return data
   } catch (error) {
     console.error('Error updating quantity: ', error)
+    return []
   }
 }

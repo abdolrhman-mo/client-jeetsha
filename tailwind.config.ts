@@ -1,3 +1,4 @@
+import { transform } from 'next/dist/build/swc';
 import type { Config } from 'tailwindcss';
 
 const config: Config = {
@@ -21,10 +22,12 @@ const config: Config = {
     },
     keyframes: {
       shimmer: {
-        '100%': {
-          transform: 'translateX(100%)',
-        },
+        '0%': { transform: 'translateX(-100%)' },
+        '100%': { transform: 'translateX(100%)' },
       },
+    },
+    animation: {
+      shimmer: 'shimmer 1.5s infinite',
     },
   },
   plugins: [require('@tailwindcss/forms')],

@@ -28,9 +28,10 @@ export default function CustomLink({
     return (
         <Link
             className={clsx(
-                'text-white bg-black rounded w-full block py-2 px-8 capitalize text-center',
+                'rounded w-full block py-2 px-8 capitalize text-center',
                 {
-                    'text-black bg-white border' : theme === 'light'
+                    'text-black bg-white border' : theme === 'light',
+                    'text-white bg-black' : theme === 'dark'
                 }
             ) + ` ${className}`}
             href={href}

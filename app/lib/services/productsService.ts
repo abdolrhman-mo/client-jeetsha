@@ -4,13 +4,12 @@ export async function fetchProductsAPI() {
     const res = await fetch('http://localhost:8000/products', {
         cache: 'no-store',
     })
-    // const data = await res.json()
     if (!res.ok) {
         throw new Error('Faild to fetch data')
     }
-    // console.log(data)
+    const data = await res.json()
 
-    return res.json()
+    return data
 }
 
 export const fetchTagsAPI = async () => {
@@ -20,8 +19,7 @@ export const fetchTagsAPI = async () => {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                // Add any additional headers if required, such as authorization tokens
-                'Authorization': `Token mNK8J7VutTEoGwbrOT0u99bgh3M6g39af3zi6N8GILQuwaz6ZcfzApTxsGB4uKjT`,
+                'Authorization': `Token ${localStorage.getItem('authToken')}`,
             },
         })
     

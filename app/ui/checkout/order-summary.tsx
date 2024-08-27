@@ -8,38 +8,29 @@ import { isAuth } from '@/app/lib/services/auth'
 import { fetchProductsAPI } from '@/app/lib/services/productsService'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@/lib/store'
-import { addItem } from '@/lib/features/cart/cartSlice'
+import { addItem, setCartItems } from '@/lib/features/cart/cartSlice'
 import { fetchCartItemsAPI } from '@/app/lib/services/cartService'
+import { CartItemType } from '@/app/lib/types'
 
 export default function OrderSummary() {
     const dispatch = useDispatch()
-    // const [cartItems, setCartItems] = useState<any[]>([])
     const cartItems = useSelector((state: RootState) => state.cart.items)
-    const [totalPrice, setTotalPrice] = useState(0)
+    const totalPrice = useSelector((state: RootState) => state.cart.totalPrice)
 
     useEffect(() => {
         const fetchData = async () => {
             if (isAuth()) {
                 if (cartItems.length === 0) {
                     const fetchedItems = await fetchCartItemsAPI()
-                    if (fetchedItems.length !== 0) {
-                        fetchedItems.map((item: any) => {
-                            dispatch(addItem(item))
-                        })
-                    }
+                    dispatch(setCartItems(fetchedItems))
                 }
             } else {
                 const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]')
                 
                 cartItems.map((item: any) => {
                     dispatch(addItem(item))
-                })   
+                })
             }
-            let total: number = 0
-            cartItems.map((item: any) => {
-                total += Number(item.price)
-            })
-            setTotalPrice(total)
         }
         fetchData()
     }, [])

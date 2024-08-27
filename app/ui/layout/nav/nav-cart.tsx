@@ -8,14 +8,13 @@ import { motion, Variants } from 'framer-motion'
 import CustomLink from '../../common/custom-link'
 import { selectNavCart, toggleNavCart } from '@/lib/features/nav/navCartSlice'
 import { useDispatch, useSelector } from 'react-redux'
+import { useEffect, useState } from 'react'
+import { RootState } from '@/lib/store'
 
-export default function NavCart({
-    total,
-}: {
-    total: number
-}) {
+export default function NavCart() {
     const dispatch = useDispatch()
     const navCart = useSelector(selectNavCart)
+    const totalPrice = useSelector((state: RootState) => state.cart.totalPrice)
 
     let cart: Variants = {
         show: {
@@ -125,7 +124,7 @@ export default function NavCart({
                             SUBTOTAL
                         </p>
                         <p className="">
-                            {total} EGP
+                            {totalPrice} EGP
                         </p>
                     </div>
                     <p className='text-center text-xs'>

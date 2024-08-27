@@ -1,12 +1,12 @@
+import { useEffect, useState } from "react"
 import ProductCard from "./product-card"
+import { CartItemType } from "@/app/lib/types"
 
 export default function ProductsList({
     cartItems,
 }: {
-    cartItems: any
-}) {
-
-    return (
-            cartItems.map((item: any, i: number) => <ProductCard product={item.product} key={i} />)
+    cartItems: CartItemType[]
+}) {return (
+        cartItems.map((cartItem: any, i: number) => <ProductCard cartItem={cartItem} key={i} />)
     )
 }

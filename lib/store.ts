@@ -5,6 +5,8 @@ import mobileNavReducer from '@/lib/features/nav/mobileNavSlice'
 import userReducer from '@/lib/features/user/userSlice'
 import cartReducer from '@/lib/features/cart/cartSlice'
 import navCartReducer from '@/lib/features/nav/navCartSlice'
+import productsReducer from '@/lib/features/products/productsSlice'
+import productReducer from '@/lib/features/products/productSlice'
 import { useDispatch } from 'react-redux'
 
 export const useAppDispatch = () => useDispatch<AppDispatch>()
@@ -18,6 +20,8 @@ export const makeStore = () => {
             navCart: navCartReducer,
             user: userReducer,
             cart: cartReducer,
+            products: productsReducer,
+            product: productReducer,
         },
         devTools: process.env.NODE_ENV !== 'production',
     })

@@ -1,43 +1,41 @@
+import { CartItemType } from '@/app/lib/types'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-interface Product {
-  id: number
-  name: string
-  price: number
-  image: any
-  description: string
-  tags: any
-  sizes: any
-}
-
-interface CartItem {
-  id: number | null
-  product: Product
-  quantity: number
-}
-
 interface CartState {
-  items: CartItem[]
+  items: CartItemType[]
+  totalPrice: number
 }
 
 const initialState: CartState = {
-  items: []
+  items: [],
+  totalPrice: 0  
 }
 
 const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    addItem: (state, action: PayloadAction<CartItem>) => {
-      const itemExists = state.items.some(item => item.product.id === action.payload.product.id)
+    setCartItems: (state, action: PayloadAction<CartItemType[]>) => {
+      state.items = action.payload
+      let total: number = 0
+      state.items.map(cartItem => {
+        total += Number(cartItem.product.price * cartItem.quantity)
+      })
+      state.totalPrice = total
+    },
+    addItem: (state, action: PayloadAction<CartItemType>) => {
+      const existingItem = state.items.find(item => 
+        item.id === action.payload.id && item.size === action.payload.size
+      )
 
-      if (!itemExists) {
+      if (!existingItem) {
         state.items.push(action.payload)
+        state.totalPrice += Number(action.payload.product.price)
       }
     },
     removeItem: (state, action: PayloadAction<number>) => {
       state.items = state.items.filter(
-        item => item.product.id !== action.payload
+        item => item.id !== action.payload
       )
     },
     clearCart: (state) => {
@@ -45,13 +43,22 @@ const cartSlice = createSlice({
     },
     changeCartItemQuantity: (state, action: PayloadAction<{ cartItemId: number, newQuantity: number }>) => {
       const { cartItemId, newQuantity } = action.payload
-      const itemIndex = state.items.findIndex(item => item.product.id === cartItemId)
+      const itemIndex = state.items.findIndex(item => item.id === cartItemId)
       if (itemIndex >= 0) {
-        state.items[itemIndex].quantity = newQuantity
+        if (newQuantity < 1) {
+          // remove from items
+          // state.items.splice(itemIndex, 1)
+        } else {
+          state.items[itemIndex].quantity = newQuantity
+          state.totalPrice += Number(state.items[itemIndex].product.price)
+        }
       }
     },
+    setTotalPrice: (state, action: PayloadAction<number>) => {
+      state.totalPrice = action.payload
+    }
   },
 })
 
-export const { addItem, removeItem, clearCart, changeCartItemQuantity } = cartSlice.actions
+export const { setCartItems, addItem, removeItem, clearCart, changeCartItemQuantity, setTotalPrice } = cartSlice.actions
 export default cartSlice.reducer

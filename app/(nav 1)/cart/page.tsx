@@ -1,16 +1,10 @@
 'use client'
 
-import { changeCartItemsQuantityAPI, fetchCartItemsAPI } from "@/app/lib/services/cartService"
-import { fetchProductsAPI } from "@/app/lib/services/productsService"
 import CartItems from "@/app/ui/cart/cart-items"
 import CustomLink from "@/app/ui/common/custom-link"
 import Heading from "@/app/ui/common/heading"
 import NavSearchResults from "@/app/ui/layout/nav/nav-search-results"
-import { addItem, changeCartItemQuantity } from "@/lib/features/cart/cartSlice"
-import { RootState } from "@/lib/store"
 import Link from "next/link"
-import { useEffect, useRef, useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
 
 export default function Page({
     searchParams,
@@ -30,10 +24,10 @@ export default function Page({
                 <div className="text-center">
                     <br />
                     <Heading level={2}>cart</Heading>
-                    <Link 
+                    <Link
                         className="underline"
                         href='/collections/all'
-                        >
+                    >
                         Continiue Shopping
                     </Link>
                 </div>

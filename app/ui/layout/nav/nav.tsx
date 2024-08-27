@@ -29,8 +29,6 @@ import { selectNavCart, toggleNavCart } from '@/lib/features/nav/navCartSlice'
 export default function Nav() {
     const dispatch: any = useDispatch()
 
-    const [totalPrice, setTotalPrice] = useState(0)
-
     const [loggedIn, setLoggedIn] = useState(false)
 
     let handleUserIconClick = () => {
@@ -160,7 +158,7 @@ export default function Nav() {
                 <MobileNav loggedIn={loggedIn} />
 
                 {/* CART */}
-                <NavCart total={totalPrice} />
+                <NavCart />
             </div>
 
             {/* Background Shadow */}

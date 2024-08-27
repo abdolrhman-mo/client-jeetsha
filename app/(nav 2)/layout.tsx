@@ -12,7 +12,6 @@ export default function Layout({
     <body className={`${poppins.className} antialiased`}>
         <CheckoutNav />
         {children}
-        <Footer />
     </body>
   )
 }

@@ -1,34 +1,37 @@
-import clsx from 'clsx';
+import clsx from 'clsx'
+import Label from './label'
 
 type InputProps = {
-  value?: string;
-  type?: 'text' | 'password' | 'email' | 'submit' | 'file' | 'textarea' | 'tel' // Add other types as needed
-  placeholder?: string;
-  className?: string;
-  label?: string | false;
+  value?: string | number
+  type?: 'text' | 'password' | 'email' | 'submit' | 'file' | 'textarea' | 'tel' | 'number'
+  name?: string
+  placeholder?: string
+  className?: string
+  label?: string | false
   onChange?: any
-  required?: boolean;
-  rows?: number; // Add rows for textarea
-};
+  required?: boolean
+  rows?: number // Add rows for textarea
+  defaultValue?: string | number
+}
 
 export default function Input({
   value,
   type = 'text',
+  name = '',
   placeholder = '',
   className = '',
   label = false,
   onChange,
   required = false,
   rows,
+  defaultValue,
 }: InputProps) {
-  const isTextarea = type === 'textarea';
+  const isTextarea = type === 'textarea'
 
   return (
     <>
       {label && type !== 'submit' && (
-        <label className="block text-sm font-medium text-gray-700 mb-1 capitalize">
-          {label}
-        </label>
+        <Label>{label}</Label>
       )}
       {isTextarea ? (
         <textarea
@@ -40,6 +43,7 @@ export default function Input({
             className
           )}
           value={value}
+          name={name}
           placeholder={placeholder}
           onChange={onChange}
           rows={rows}
@@ -52,18 +56,21 @@ export default function Input({
             'p-2',
             'text-sm placeholder:text-sm placeholder:capitalize',
             'rounded',
+            'border-1 border-gray-200',
             {
               'cursor-pointer text-white capitalize font-semibold bg-black': type === 'submit',
             },
             className
           )}
           value={value}
+          name={name}
           type={type}
           placeholder={placeholder}
           onChange={onChange}
           required={required}
+          defaultValue={defaultValue}
         />
       )}
     </>
-  );
+  )
 }
