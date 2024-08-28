@@ -4,13 +4,13 @@ import { useEffect, useState } from "react"
 import Order from "./order"
 
 export default function MyOrders() {
-    const [orders, setOrders] = useState([])
+    const [orders, setOrders] = useState<any[]>([])
     const [loading, setLoading] = useState(true)
+
     useEffect(() => {
         const getData = async () => {
             const data = await fetchOrdersAPI()
-            const orders = data.filter((order: OrderType) => order.order_items.length !== 0)
-            setOrders(orders)
+            setOrders(data)
             setLoading(false)
         }
         getData()

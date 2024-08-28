@@ -16,6 +16,7 @@ import { ProductType } from "@/app/lib/types"
 import { initializeProducts } from "@/lib/features/products/productsSlice"
 import { setProduct } from "@/lib/features/products/productSlice"
 import ProductDetailsSkeleton from "@/app/ui/skeletons/product-details-skeleton"
+import { API_URL } from "@/app/lib/services/api-url"
 
 export default function Page({
     params,
@@ -74,7 +75,7 @@ export default function Page({
                         <div className="flex justify-center w-full">
                             <Image
                                 className="max-w-96"
-                                src={product.image}
+                                src={product.image.startsWith('http') ? product.image : `${API_URL + product.image}`}
                                 alt={product.name}
                                 width={500}
                                 height={500}

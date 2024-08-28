@@ -23,7 +23,6 @@ export default function Addresses({
 }) {
     const [addresses, setAddresses] = useState([])
     const [loading, setLoading] = useState(true)
-    const [showEditAddress, setShowEditAddress] = useState(false)
 
     useEffect(() => {
         const getData = async () => {
@@ -32,7 +31,7 @@ export default function Addresses({
             data = data.filter((address: AddressType) =>
                 address.user === userId
             )
-            console.log(data)
+            // console.log(data)
             setAddresses(data)
             setLoading(false)
         }

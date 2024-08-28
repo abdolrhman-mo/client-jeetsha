@@ -2,6 +2,7 @@ import { AddressType } from "@/app/lib/types"
 import { useState } from "react"
 import AddressForm from "../../forms/checkout-form"
 import EditAddressForm from "../../forms/edit-address-form"
+import { removeAddressAPI } from "@/app/lib/services/address"
 
 export default function AddressesList({
     addresses,
@@ -9,8 +10,14 @@ export default function AddressesList({
     addresses: AddressType[]
 }) {
     const [editAddressId, setEditAddressId] = useState<number | null>(null)
-    const handleEditClick = (id: number) => {
+    const handleEditAddress = (id: number) => {
         setEditAddressId(id)
+    }
+
+    const handleRemoveAddress = async (id: number) => {
+        // await removeAddressAPI(id)
+
+        setEditAddressId(null)
     }
     
     const resetAddressId = (id: number) => {
@@ -27,11 +34,17 @@ export default function AddressesList({
                             <p className="text-md text-gray-700 mb-1">{address.city}</p>
                             <p className="text-md text-gray-600">{address.addressText}</p>
                             <p className="text-md text-gray-600">{address.phone_number}</p>
-                            <button onClick={() => {
-                                // setEdit()
-                                // setShowEditAddress(!showEditAddress)
-                                handleEditClick(address.id)
-                            }}>Edit</button> | <button>Delete</button>
+                            <button 
+                                onClick={() => handleEditAddress(address.id)}
+                            >
+                                Edit
+                            </button> 
+                            | 
+                            <button 
+                                onClick={() => handleRemoveAddress(address.id)}
+                            >
+                                Delete
+                            </button>
                         </div>
                         {editAddressId === address.id && (
                             <EditAddressForm address={address} resetAddressId={resetAddressId} />

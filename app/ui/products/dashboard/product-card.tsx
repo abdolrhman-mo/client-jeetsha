@@ -7,6 +7,7 @@ import { motion } from 'framer-motion'
 
 import { useSelector, useDispatch } from 'react-redux'
 import { selectSearchBar, toggleSearchBar } from '@/lib/features/nav/searchBarSlice'
+import { API_URL } from '@/app/lib/services/api-url'
 
 export default function Product({
     product,
@@ -66,7 +67,7 @@ export default function Product({
                                     // Transitions & Animations
                                     'transition-all duration-300 ease-in-out',
                                 )}
-                                src={product.image} 
+                                src={product.image.startsWith('http') ? product.image : `${API_URL + product.image}`} 
                                 alt={product.name}
                                 width={500}
                                 height={500}

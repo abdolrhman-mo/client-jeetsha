@@ -7,8 +7,9 @@ import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "@/lib/store"
 import { toggleLoggedIn } from "@/lib/features/user/userSlice"
 import { redirectHome } from "@/app/lib/actions"
-import { addItem } from "@/lib/features/cart/cartSlice"
+import { addItem, setCartItems } from "@/lib/features/cart/cartSlice"
 import { addToCartAPI } from "@/app/lib/services/cartService"
+import { API_URL } from "@/app/lib/services/api-url"
 
 export default function Page({
     searchParams,
@@ -32,7 +33,7 @@ export default function Page({
             username: username,
             password: password,
         }
-        const res = await fetch('http://127.0.0.1:8000/api-auth/login/', {
+        const res = await fetch(`${API_URL}/api-auth/login/`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(formData),
@@ -42,19 +43,19 @@ export default function Page({
         localStorage.setItem('username', data.user.username)
         localStorage.setItem('userId', data.user.id)
 
+
+        // Add Address Alsooo
+
+
         console.log('token', data.user.token)
         console.log('user', data.user.user)
         if (res.ok) {
             // Add cart items in localStorage to user's cart items on the server
             const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]')
             for (const item of cartItems) {
-                await addToCartAPI(item.product.id, quantity)
-                dispatch(addItem({
-                    id: null,
-                    product: item.product,
-                    quantity,
-                }))
+                await addToCartAPI(item.product.id, quantity, item.size)
             }
+            dispatch(setCartItems(cartItems))
 
             redirectHome()
         } else {

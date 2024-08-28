@@ -1,3 +1,4 @@
+import { API_URL } from "@/app/lib/services/api-url";
 import { CartItemType, OrderType } from "@/app/lib/types";
 import Image from "next/image";
 
@@ -47,13 +48,13 @@ export default function Order({
                     <div>
                         <p className="text-md font-semibold text-gray-800 capitalize">{orderItem.product.name}</p>
                         <p className="text-sm text-gray-600">Quantity: {orderItem.quantity}</p>
-                        <p className="text-sm text-gray-600">Size: {orderItem.size}</p>
+                        <p className="text-sm text-gray-600">Size: <span className="uppercase">{orderItem.size}</span></p>
                         <p className="text-sm text-gray-600">Price: {orderItem.totalOrderItemsPrice} EGP</p>
                     </div>
                     <div className="flex-shrink-0 w-24 h-24 relative">
                         <Image
                             className="object-cover rounded"
-                            src={orderItem.product.image}
+                            src={orderItem.product.image.startsWith('http') ? orderItem.product.image : `${API_URL + orderItem.product.image}`}
                             alt={orderItem.product.name}
                             layout="fill" // Ensures the image covers the container
                         />

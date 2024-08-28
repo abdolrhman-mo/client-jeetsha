@@ -21,15 +21,12 @@ export default function OrderSummary() {
         const fetchData = async () => {
             if (isAuth()) {
                 if (cartItems.length === 0) {
-                    const fetchedItems = await fetchCartItemsAPI()
-                    dispatch(setCartItems(fetchedItems))
+                    const fetchedCartItems = await fetchCartItemsAPI()
+                    dispatch(setCartItems(fetchedCartItems))
                 }
             } else {
-                const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]')
-                
-                cartItems.map((item: any) => {
-                    dispatch(addItem(item))
-                })
+                const fetchedCartItems = JSON.parse(localStorage.getItem('cartItems') || '[]')
+                dispatch(setCartItems(fetchedCartItems))
             }
         }
         fetchData()

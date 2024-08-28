@@ -19,25 +19,11 @@ export default function Page() {
         setShowSummary(value => !value)
     }
 
-    let handleCompleteOrder = async () => {
-        if (isAuth()) {
-            try {
-                const order = await createOrderAPI()
-                abdoRedirect(`/order-confirmation?orderId=${order.id}`)
-            } catch(error) {
-                console.error('Failed to create order:', error)
-            }
-        }
-    }
-
     return (
         <div className='text-sm text-gray-900'>
-            {/* Mobile Order Summary */}
             <MobileOrderSummary showSummary={showSummary} onShowSummary={handleShowSummary} />
 
-            <div className='text-sm w-5/6 mx-auto my-12 grid lg:grid-cols-2 gap-16'>
-                <CheckoutForm />
-            </div>
+            <CheckoutForm />
         </div>
     )
 }

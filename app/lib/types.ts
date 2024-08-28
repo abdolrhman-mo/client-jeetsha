@@ -28,15 +28,6 @@ export interface CartItemType {
     totalOrderItemsPrice: number
 }
 
-export interface OrderType {
-    id: number
-    user: number
-    created_at: string
-    status: string
-    order_items: any[]
-    address: string | null
-}
-
 export interface AddressType {
     id: number
     country: string
@@ -44,4 +35,17 @@ export interface AddressType {
     addressText: string
     phone_number: string
     user: number | null
+}
+
+export interface UserType {
+    id: number 
+}
+
+export interface OrderType {
+    id: number
+    user: number
+    created_at: string
+    status: 'pending' | 'delivered'
+    order_items: any[]
+    address: AddressType | null
 }

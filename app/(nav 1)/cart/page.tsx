@@ -4,7 +4,9 @@ import CartItems from "@/app/ui/cart/cart-items"
 import CustomLink from "@/app/ui/common/custom-link"
 import Heading from "@/app/ui/common/heading"
 import NavSearchResults from "@/app/ui/layout/nav/nav-search-results"
+import { RootState } from "@/lib/store"
 import Link from "next/link"
+import { useSelector } from "react-redux"
 
 export default function Page({
     searchParams,
@@ -16,6 +18,7 @@ export default function Page({
 }) {
     const query = searchParams?.query || ''
     const currentPage = Number(searchParams?.page) || 1
+    const cartItems = useSelector((state: RootState) => state.cart.items)
     
     return (
         <>
@@ -34,9 +37,12 @@ export default function Page({
                 <div className="space-y-8">
                     <CartItems />
                 </div>
-                <div className="text-center w-fit mx-auto">
-                    <CustomLink href="/checkout">check out</CustomLink>
-                </div>
+
+                {cartItems.length > 0 && (
+                    <div className="text-center w-fit mx-auto">
+                        <CustomLink href="/checkout">check out</CustomLink>
+                    </div>
+                )}
             </div>
         </>
     )

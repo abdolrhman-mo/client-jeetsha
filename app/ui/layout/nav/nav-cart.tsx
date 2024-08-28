@@ -15,6 +15,7 @@ export default function NavCart() {
     const dispatch = useDispatch()
     const navCart = useSelector(selectNavCart)
     const totalPrice = useSelector((state: RootState) => state.cart.totalPrice)
+    const cartItems = useSelector((state: RootState) => state.cart.items)
 
     let cart: Variants = {
         show: {
@@ -119,18 +120,22 @@ export default function NavCart() {
                         'px-4 pb-28',
                     )}
                 >
-                    <div className="flex justify-between">
-                        <p className="">
-                            SUBTOTAL
-                        </p>
-                        <p className="">
-                            {totalPrice} EGP
-                        </p>
-                    </div>
-                    <p className='text-center text-xs'>
-                        Shipping, taxes, and discount codes calculated at checkout.
-                    </p>
-                    <CustomLink href='/checkout'>checkout</CustomLink>
+                    {cartItems.length > 0 && (
+                        <>
+                            <div className="flex justify-between">
+                                <p className="">
+                                    SUBTOTAL
+                                </p>
+                                <p className="">
+                                    {totalPrice} EGP
+                                </p>
+                            </div>
+                            <p className='text-center text-xs'>
+                                Shipping, taxes, and discount codes calculated at checkout.
+                            </p>
+                            <CustomLink href='/checkout'>checkout</CustomLink>
+                        </>
+                    )}
                 </motion.div>
             </motion.div>
         </motion.div>

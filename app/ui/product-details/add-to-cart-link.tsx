@@ -7,7 +7,6 @@ import { useAppDispatch } from "@/lib/store"
 import { isAuth } from "@/app/lib/services/auth"
 import { toggleNavCart } from "@/lib/features/nav/navCartSlice"
 import { CartItemType, ProductType } from "@/app/lib/types"
-import { fetchProductsAPI } from "@/app/lib/services/productsService"
 
 export default function AddToCartLink({
     product,
@@ -28,7 +27,7 @@ export default function AddToCartLink({
             const quantity = 1
             try {
                 const cartItems = await fetchCartItemsAPI()
-                // check to see if product w selected size is in the cart
+                // Check to see if product w selected size is in the cart
                 const existingItem = cartItems.find((item: CartItemType) => 
                     item.product.name === product.name && item.size === selectedSize
                 )
@@ -40,7 +39,6 @@ export default function AddToCartLink({
                         if (existingItem.quantity < productSizeQuantity) {
                             // If item in cart and quantity of items in cart < quantity of product
                             const itemAdded = await addToCartAPI(product.id, 1, selectedSize)
-                            console.log('itemAdded', itemAdded)
                             dispatch(changeCartItemQuantity({
                                 cartItemId: itemAdded.id, 
                                 newQuantity: itemAdded.quantity
@@ -49,8 +47,8 @@ export default function AddToCartLink({
                             dispatch(toggleNavCart())
                         }
                     } else {
-                        const itemAdded = await addToCartAPI(product.id, 1, selectedSize)
                         // If item not in cart but product quantity > 0
+                        const itemAdded = await addToCartAPI(product.id, 1, selectedSize)
                         dispatch(addItem({
                             id: itemAdded.id,
                             product,
@@ -66,31 +64,59 @@ export default function AddToCartLink({
                 console.error('Failed to add product to cart:', error)
                 alert('Failed to add product to cart.')
             }
-        }
-        else {
+        } else {
             const quantity = 1
             let string = localStorage.getItem('cartItems') || '[]'
-            let cartItems = JSON.parse(string)
+            let cartItems: CartItemType[] = JSON.parse(string)
             
-            let cartItem = {
-                quantity: quantity,
-                product: product
-            }
-            console.log('cartItems', cartItems)
-            if (cartItems !== null || cartItems.length !== 0) {
-                const isItemInCart = cartItems.some((item: any) => item.product.id === cartItem.product.id)
-                if (!isItemInCart) {
-                    cartItems.push(cartItem)
+            // Check to see if product w selected size is in the cart
+            const existingItem = cartItems.find((item: CartItemType) => 
+                item.product.name === product.name && item.size === selectedSize
+            )
+
+            const productSizeQuantity = product.sizes.find(size => size.size_text === selectedSize)?.quantity || 0
+
+            if (productSizeQuantity > 0) {
+                if (existingItem) {
+                    if (existingItem.quantity < productSizeQuantity) {
+                        // If item in cart and quantity of items in cart < quantity of product
+                        existingItem.quantity += 1
+                        localStorage.setItem('cartItems', JSON.stringify(cartItems))
+                        
+                        dispatch(changeCartItemQuantity({
+                            cartItemId: existingItem.id, 
+                            newQuantity: existingItem.quantity
+                        }))
+                        removeSelectedSize()
+                        dispatch(toggleNavCart())
+                    }
+                } else {
+                    // If item not in cart but product quantity > 0
+                    let id 
+                    if (cartItems.length === 0) id = 0
+                    else id = cartItems[cartItems.length - 1].id + 1
+                    
+                    const itemAdded = {
+                        id: id,
+                        quantity: quantity,
+                        product: product,
+                        size: selectedSize,
+                        totalOrderItemsPrice: 0,
+                    }
+                    cartItems.push(itemAdded)
                     localStorage.setItem('cartItems', JSON.stringify(cartItems))
-                    // dispatch(addItem({ id: null, product, quantity, size: selectedSize }))
+
+                    dispatch(addItem({
+                        id: itemAdded.id,
+                        product,
+                        quantity,
+                        size: selectedSize,
+                        totalOrderItemsPrice: itemAdded.totalOrderItemsPrice
+                    }))
+                    removeSelectedSize()
+                    dispatch(toggleNavCart())
                 }
-            } else {
-                cartItems.push(cartItem)
-                localStorage.setItem('cartItems', JSON.stringify(cartItems))
-                // dispatch(addItem({ id: null, product, quantity, size: selectedSize }))
-            }
-            
-            dispatch(toggleNavCart())
+            } 
         }
     }
     

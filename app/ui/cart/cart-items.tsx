@@ -11,7 +11,6 @@ import { selectNavCart } from "@/lib/features/nav/navCartSlice"
 export default function CartItems() {
     const dispatch = useDispatch()
     const cartItems = useSelector((state: RootState) => state.cart.items)
-    const navCart = useSelector(selectNavCart)
 
     useEffect(() => {
         const fetchData = async () => {
@@ -19,11 +18,19 @@ export default function CartItems() {
                 if (cartItems.length === 0) {
                     try {
                         const fetchedItems = await fetchCartItemsAPI()
-                        if (fetchedItems.length !== 0) {
+                        if (fetchedItems.length > 0) {
                             dispatch(setCartItems(fetchedItems))
                         }
                     } catch (error) {
                         console.error('Faild to fetch cart items:', error)
+                    }
+                }
+            } else {
+                if (cartItems.length === 0) {
+                    const string = localStorage.getItem('cartItems') || '[]'
+                    const fetchedCartItems = JSON.parse(string)
+                    if (fetchedCartItems.length > 0) {
+                        dispatch(setCartItems(fetchedCartItems))
                     }
                 }
             }

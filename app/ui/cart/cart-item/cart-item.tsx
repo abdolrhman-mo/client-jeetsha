@@ -6,6 +6,7 @@ import { removeCartItemAPI } from "@/app/lib/services/cartService"
 import { isAuth } from "@/app/lib/services/auth"
 import QuantityModifier from "./quantity-modifier"
 import { CartItemType } from "@/app/lib/types"
+import { API_URL } from "@/app/lib/services/api-url"
 
 export default function CartItem({
     cartItem,
@@ -30,7 +31,7 @@ export default function CartItem({
         } else {
             const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]')
             const updatedCartItems = cartItems.filter((item: any) => 
-                item.product.id !== cartItemId
+                item.id !== cartItemId
             )
             localStorage.setItem('cartItems', JSON.stringify(updatedCartItems))
         }
@@ -43,7 +44,7 @@ export default function CartItem({
                 <Image
                     className="max-h-56 object-contain"
                     // src={product.image}
-                    src={`http://localhost:8000${product.image}`}
+                    src={product.image.startsWith('http') ? product.image : `${API_URL + product.image}`}
                     width={500}
                     height={500}
                     alt={product.name}

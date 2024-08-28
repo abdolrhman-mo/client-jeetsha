@@ -19,15 +19,15 @@ export default function ChangeQuantityButton({
         if (isAuth()) {
             changeCartItemsQuantityAPI(cartItemId, newQuantity)
         } else {
-            const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]')
-            const updatedCartItems = cartItems.map((item: any) => {
-                if (item.product.id === cartItemId) {
-                    return { ...item, quantity: newQuantity }
-                }
-                return item
-            })
-          
-            localStorage.setItem('cartItems', JSON.stringify(updatedCartItems))
+            const string = localStorage.getItem('cartItems') || '[]'
+            const cartItems = JSON.parse(string)
+
+            const updatedCartItem = cartItems.find((cartItem: CartItemType) => 
+                cartItem.id === cartItemId
+            )
+            updatedCartItem.quantity = newQuantity
+            
+            localStorage.setItem('cartItems', JSON.stringify(cartItems))
         }
         dispatch(changeCartItemQuantity({
             cartItemId: cartItemId, 

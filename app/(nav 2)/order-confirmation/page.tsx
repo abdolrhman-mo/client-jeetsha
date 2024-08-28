@@ -24,9 +24,9 @@ export default function Page() {
         <p className="text-gray-700 mb-2">
           Your order number is: <span className="font-bold">{orderId}</span>
         </p>
-        <p className="text-gray-500">
+        {/* <p className="text-gray-500">
           You will receive a confirmation email with your order details.
-        </p>
+        </p> */}
         <br />
         <CustomLink href='/'>Back to home</CustomLink>
       </div>

@@ -25,7 +25,7 @@ export default function Page() {
         const getData = async () => {
             try {
                 const orders = await fetchOrdersAPI()
-                console.log(orders)
+                // console.log(orders)
             } catch (error) {
                 console.error('Failed to fetch orders:', error)
             }
