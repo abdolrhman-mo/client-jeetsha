@@ -6,7 +6,7 @@ import clsx from 'clsx'
 import { motion } from 'framer-motion'
 
 import { useSelector, useDispatch } from 'react-redux'
-import { selectSearchBar, toggleSearchBar } from '@/lib/features/nav/searchBarSlice'
+import { selectSearchBar, toggleSearchBar } from '@/redux/features/nav/searchBarSlice'
 
 export default function Product({
     product,

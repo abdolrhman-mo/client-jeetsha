@@ -1,6 +1,6 @@
 import ProductsList from "@/app/ui/products/products-list"
 import CustomLink from "../common/custom-link"
-import { fetchProductsAPI } from "@/app/lib/services/productsService"
+import { fetchProductsAPI } from "@/app/lib/services/productService"
 import { ProductsListSkeleton } from "../skeletons/products-skeleton"
 
 export default async function ProductGallery({

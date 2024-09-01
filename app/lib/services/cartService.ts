@@ -1,6 +1,6 @@
 import { CartItemType } from "../types"
-import { API_URL } from "./api-url"
-import { fetchProductsAPI } from "./productsService"
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL
 
 const fetchSizesAPI = async () => {
   try {
@@ -96,7 +96,7 @@ export const fetchCartItemsAPI = async () => {
   }
 }
 
-export const addToCartAPI = async (product: number, quantity: number, selectedSize: string) => {
+export const addToCartAPI = async (product_id: number, size_text: string) => {
   try {
     const res = await fetch(`${API_URL}/orderItems/`, {
       method: 'POST',
@@ -105,9 +105,9 @@ export const addToCartAPI = async (product: number, quantity: number, selectedSi
         'Authorization': `Token ${localStorage.getItem('authToken')}`
       },
       body: JSON.stringify({
-        product_id: product,
-        quantity,
-        size_text: selectedSize,
+        product_id,
+        quantity: 1,
+        size_text,
         user: localStorage.getItem('userId'),
       }),
     })
@@ -132,7 +132,6 @@ export const removeCartItemAPI = async (cartItemId: number) => {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
-        // Add any additional headers if required, such as authorization tokens
         'Authorization': `Token ${localStorage.getItem('authToken')}`,
       },
     })
@@ -178,5 +177,11 @@ export const changeCartItemsQuantityAPI = async (
   } catch (error) {
     console.error('Error updating quantity: ', error)
     return []
+  }
+}
+
+export const syncCartWithServer = async (cartItems: CartItemType[]): Promise<void> => {
+  for (const item of cartItems) {
+    await addToCartAPI(item.product.id, item.size)
   }
 }

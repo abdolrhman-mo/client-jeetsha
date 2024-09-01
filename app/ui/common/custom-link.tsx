@@ -1,6 +1,6 @@
 'use client'
 
-import { toggleSearchBar } from "@/lib/features/nav/searchBarSlice";
+import { toggleSearchBar } from "@/redux/features/nav/searchBarSlice";
 import clsx from "clsx";
 import Link from "next/link";
 import { useDispatch } from "react-redux";

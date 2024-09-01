@@ -1,0 +1,30 @@
+import { configureStore } from '@reduxjs/toolkit'
+import searchBarReducer from '@/redux/features/nav/searchBarSlice'
+import mobileNavReducer from '@/redux/features/nav/mobileNavSlice'
+import userReducer from '@/redux/features/user/userSlice'
+import cartReducer from '@/redux/features/cart/cartSlice'
+import navCartReducer from '@/redux/features/nav/navCartSlice'
+import productsReducer from '@/redux/features/products/productsSlice'
+import productReducer from '@/redux/features/products/productSlice'
+import { useDispatch } from 'react-redux'
+
+export const useAppDispatch = () => useDispatch<AppDispatch>()
+
+export const makeStore = () => {
+    return configureStore({
+        reducer: {
+            searchBar: searchBarReducer,
+            mobileNav: mobileNavReducer,
+            navCart: navCartReducer,
+            user: userReducer,
+            cart: cartReducer,
+            products: productsReducer,
+            product: productReducer,
+        },
+        devTools: process.env.NODE_ENV !== 'production',
+    })
+}
+
+export type AppStore = ReturnType<typeof makeStore>
+export type RootState = ReturnType<AppStore['getState']>
+export type AppDispatch = AppStore['dispatch']

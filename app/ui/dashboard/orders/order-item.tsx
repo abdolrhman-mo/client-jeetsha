@@ -1,4 +1,3 @@
-import { API_URL } from "@/app/lib/services/api-url"
 import Image from "next/image"
 
 export default function OrderItem({
@@ -8,6 +7,8 @@ export default function OrderItem({
   orderItem: any;
   state: "pending" | "delivered";
 }) {
+  const API_URL = process.env.NEXT_PUBLIC_API_URL
+
   return (
     <div className="grid grid-cols-2 gap-3 p-3 bg-white rounded-lg shadow-md border border-gray-200">
       <div className="flex items-center justify-center bg-gray-100 rounded-lg overflow-hidden">

@@ -1,4 +1,4 @@
-import { RootState } from "@/lib/store"
+import { RootState } from "@/redux/store"
 import clsx from "clsx"
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
@@ -12,7 +12,7 @@ export default function SizeRadio({
     selectedSize: string
     addToCartClicked: boolean
 }) {
-    const cartItems = useSelector((state: RootState) => state.cart.items)
+    const cartItems = useSelector((state: RootState) => state.cart.items || [])
     const product = useSelector((state: RootState) => state.product.item)
     const sizes = ['xs', 's', 'm', 'l', 'xl']
     
@@ -22,7 +22,7 @@ export default function SizeRadio({
         if (product) {
             const sizesAvaillable = new Set(
                 product.sizes
-                .filter((productSize: any) => {
+                    .filter((productSize: any) => {
                         const existedCartItem = cartItems.find(item => 
                             item.product.id === product.id && item.size === selectedSize
                         )

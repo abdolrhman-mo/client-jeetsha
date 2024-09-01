@@ -16,15 +16,11 @@ import MobileNav from '@/app/ui/layout/nav/mobile-nav'
 import { motion } from 'framer-motion'
 
 import { useSelector, useDispatch } from 'react-redux'
-import { toggleSearchBar, selectSearchBar } from '@/lib/features/nav/searchBarSlice'
-import { toggleMobileNav, selectMobileNav } from '@/lib/features/nav/mobileNavSlice'
+import { toggleSearchBar, selectSearchBar } from '@/redux/features/nav/searchBarSlice'
+import { toggleMobileNav, selectMobileNav } from '@/redux/features/nav/mobileNavSlice'
 import { useEffect, useState } from 'react'
 import { abdoRedirect } from '@/app/lib/actions'
-import { RootState } from '@/lib/store'
-import { isAuth } from '@/app/lib/services/auth'
-import { fetchCartItemsAPI } from '@/app/lib/services/cartService'
-import { addItem } from '@/lib/features/cart/cartSlice'
-import { selectNavCart, toggleNavCart } from '@/lib/features/nav/navCartSlice'
+import { toggleNavCart } from '@/redux/features/nav/navCartSlice'
 
 export default function Nav() {
     const dispatch: any = useDispatch()
@@ -79,10 +75,12 @@ export default function Nav() {
                 {/* LEFT SIDE */}
 
                 {/* desktop */}
-                <MagnifyingGlassIcon 
-                    className='h-6 hidden md:block cursor-pointer'
-                    onClick={() => dispatch(toggleSearchBar())} 
-                />
+                <Link href={'/search'}>
+                    <MagnifyingGlassIcon 
+                        className='h-6 hidden md:block cursor-pointer'
+                        // onClick={() => dispatch(toggleSearchBar())} 
+                    />
+                </Link>
                 {/* mobile */}
                 <Bars3CenterLeftIcon className='h-6 md:hidden cursor-pointer' onClick={() => {
                     dispatch(toggleMobileNav())
@@ -129,10 +127,12 @@ export default function Nav() {
                 {/* RIGHT SIDE */}
 
                 {/* mobile */}
-                <MagnifyingGlassIcon
-                    className='h-6 cursor-pointer block md:hidden' 
-                    onClick={() => dispatch(toggleSearchBar())}
-                />
+                <Link href={'/search'}>
+                    <MagnifyingGlassIcon
+                        className='h-6 cursor-pointer block md:hidden' 
+                        // onClick={() => dispatch(toggleSearchBar())}
+                    />
+                </Link>
                 {/* desktop */}
                 <ul className='flex'>
                     <li>

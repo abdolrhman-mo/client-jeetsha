@@ -12,7 +12,7 @@ import OrderSummary from '../checkout/order-summary'
 import clsx from 'clsx'
 import * as yup from 'yup'
 import { abdoRedirect } from '@/app/lib/actions'
-import { addAddressToOrderAPI, createOrderAPI } from '@/app/lib/services/ordersService'
+import { addAddressToOrderAPI, createOrderAPI } from '@/app/lib/services/orderService'
 import { isAuth } from '@/app/lib/services/auth'
 
 let governorates_names_en: string[] = []

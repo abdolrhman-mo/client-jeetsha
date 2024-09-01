@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import clsx from 'clsx'
 import Button from '../common/button'
 import { ChevronDownIcon } from '@heroicons/react/24/outline'
-import { fetchTagsAPI } from '@/app/lib/services/productsService'
+import { fetchTagsAPI } from '@/app/lib/services/productService'
 
 export default function Dropdown() {
   const [isOpen, setIsOpen] = useState(false)

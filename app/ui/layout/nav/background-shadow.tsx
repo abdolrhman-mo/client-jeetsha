@@ -2,9 +2,9 @@ import clsx from "clsx"
 import { motion, Variants } from "framer-motion"
 
 import { useSelector, useDispatch } from 'react-redux'
-import { toggleSearchBar, selectSearchBar } from '@/lib/features/nav/searchBarSlice'
-import { selectMobileNav, toggleMobileNav } from "@/lib/features/nav/mobileNavSlice"
-import { selectNavCart, toggleNavCart } from "@/lib/features/nav/navCartSlice"
+import { toggleSearchBar, selectSearchBar } from '@/redux/features/nav/searchBarSlice'
+import { selectMobileNav, toggleMobileNav } from "@/redux/features/nav/mobileNavSlice"
+import { selectNavCart, toggleNavCart } from "@/redux/features/nav/navCartSlice"
 
 export default function BackgroundShadow() {
     const dispatch = useDispatch()

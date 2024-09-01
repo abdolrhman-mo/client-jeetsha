@@ -6,16 +6,17 @@ import clsx from 'clsx'
 import CartItems from '@/app/ui/cart/cart-items'
 import { motion, Variants } from 'framer-motion'
 import CustomLink from '../../common/custom-link'
-import { selectNavCart, toggleNavCart } from '@/lib/features/nav/navCartSlice'
+import { selectNavCart, toggleNavCart } from '@/redux/features/nav/navCartSlice'
 import { useDispatch, useSelector } from 'react-redux'
-import { useEffect, useState } from 'react'
-import { RootState } from '@/lib/store'
+import { RootState } from '@/redux/store'
+import { useAppSelector } from '@/redux/hooks'
 
 export default function NavCart() {
     const dispatch = useDispatch()
     const navCart = useSelector(selectNavCart)
     const totalPrice = useSelector((state: RootState) => state.cart.totalPrice)
-    const cartItems = useSelector((state: RootState) => state.cart.items)
+    // const cartItems = useSelector((state: RootState) => state.cart.items)
+    const cartItems = useAppSelector(state => state.cart.items)
 
     let cart: Variants = {
         show: {
@@ -120,7 +121,7 @@ export default function NavCart() {
                         'px-4 pb-28',
                     )}
                 >
-                    {cartItems.length > 0 && (
+                    {Array.isArray(cartItems) && cartItems.length > 0 && (
                         <>
                             <div className="flex justify-between">
                                 <p className="">

@@ -1,12 +1,13 @@
-import { API_URL } from "@/app/lib/services/api-url";
-import { CartItemType, OrderType } from "@/app/lib/types";
-import Image from "next/image";
+import { CartItemType, OrderType } from "@/app/lib/types"
+import Image from "next/image"
 
 export default function Order({
   order,
 }: {
-  order: OrderType;
+  order: OrderType
 }) {
+  const API_URL = process.env.NEXT_PUBLIC_API_URL
+
   return (
     <li key={order.id} className="border rounded-lg shadow-sm p-6 mb-6 bg-white">
       {/* Order Details */}
@@ -34,7 +35,7 @@ export default function Order({
         </div>
         <div className="flex justify-between mb-2">
           <span className="font-semibold text-gray-600">Address:</span>
-          <span className="text-gray-600">{order.address || "No address provided"}</span>
+          <span className="text-gray-600">{order.address?.addressText || "No address provided"}</span>
         </div>
       </div>
 
@@ -67,5 +68,5 @@ export default function Order({
         )}
       </div>
     </li>
-  );
+  )
 }

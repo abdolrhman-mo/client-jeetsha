@@ -1,18 +1,19 @@
 import clsx from "clsx"
 import Image from "next/image"
 import { useDispatch } from "react-redux"
-import { removeItem } from "@/lib/features/cart/cartSlice"
+import { removeItem } from "@/redux/features/cart/cartSlice"
 import { removeCartItemAPI } from "@/app/lib/services/cartService"
-import { isAuth } from "@/app/lib/services/auth"
+import { isAuth } from "@/app/lib/services/authService"
 import QuantityModifier from "./quantity-modifier"
 import { CartItemType } from "@/app/lib/types"
-import { API_URL } from "@/app/lib/services/api-url"
 
 export default function CartItem({
     cartItem,
 }: {
     cartItem: CartItemType
 }) {
+    const API_URL = process.env.NEXT_PUBLIC_API_URL
+
     const dispatch: any = useDispatch()
 
     const product = cartItem.product

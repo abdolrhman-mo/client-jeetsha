@@ -1,8 +1,8 @@
-import { isAuth } from "@/app/lib/services/auth"
+import { isAuth } from "@/app/lib/services/authService"
 import { changeCartItemsQuantityAPI } from "@/app/lib/services/cartService"
 import { CartItemType } from "@/app/lib/types"
-import { changeCartItemQuantity } from "@/lib/features/cart/cartSlice"
-import { RootState } from "@/lib/store"
+import { changeCartItemQuantity } from "@/redux/features/cart/cartSlice"
+import { RootState } from "@/redux/store"
 import clsx from "clsx"
 import { useDispatch, useSelector } from "react-redux"
 

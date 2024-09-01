@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { motion } from "framer-motion"
 import { useDispatch } from "react-redux"
-import { toggleMobileNav } from "@/lib/features/nav/mobileNavSlice"
+import { toggleMobileNav } from "@/redux/features/nav/mobileNavSlice"
 import { XMarkIcon } from "@heroicons/react/24/outline"
 
 export default function MobileNavItem({

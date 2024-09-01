@@ -1,4 +1,4 @@
-import { API_URL } from "./api-url"
+const API_URL = process.env.NEXT_PUBLIC_API_URL
 
 export const fetchAddressesAPI = async () => {
     try {

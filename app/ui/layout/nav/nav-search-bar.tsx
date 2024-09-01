@@ -4,7 +4,7 @@ import clsx from "clsx"
 import Search from "@/app/ui/search/search"
 
 import { useSelector } from 'react-redux'
-import { selectSearchBar } from '@/lib/features/nav/searchBarSlice'
+import { selectSearchBar } from '@/redux/features/nav/searchBarSlice'
 import { Suspense } from "react"
 
 export default function NavSearchBar() {

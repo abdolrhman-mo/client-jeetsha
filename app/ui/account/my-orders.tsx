@@ -1,4 +1,4 @@
-import { fetchOrdersAPI } from "@/app/lib/services/ordersService"
+import { fetchOrdersAPI } from "@/app/lib/services/orderService"
 import { OrderType } from "@/app/lib/types"
 import { useEffect, useState } from "react"
 import Order from "./order"

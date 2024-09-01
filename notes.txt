@@ -11,6 +11,12 @@ TODO:
 - if item is sold out
 - companyName const in placehoder-data
 
+- address, mohsen => default address & address of order is not connected to database(aashan lw etmasah aw etaamlo edit)
+- sing up, mohsen => add name to api-auth put request. and i add them in checkout form
+                     make signup and login with email and send email to user with a message like the one sent by asili
+- move_to_orders when not loged in, aashan a3ml kda lazem add orders to cart even when not logged in
+
+if token is expired
 
 
 Background and Text Colors:

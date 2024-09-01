@@ -4,7 +4,7 @@ import { useEffect } from "react"
 import Link from "next/link"
 import clsx from "clsx"
 import Button from "../../common/button"
-import { changeOrderStateAPI } from "@/app/lib/services/ordersService"
+import { changeOrderStateAPI } from "@/app/lib/services/orderService"
 
 export default function Order({
     order,

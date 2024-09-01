@@ -1,12 +1,13 @@
-import Image from "next/image";
-import QuantityModifier from "../../cart/cart-item/quantity-modifier";
-import { API_URL } from "@/app/lib/services/api-url";
+import Image from "next/image"
+import QuantityModifier from "../../cart/cart-item/quantity-modifier"
 
 export default function ProductCard({
     cartItem
 }: {
     cartItem: any
 }) {
+    const API_URL = process.env.NEXT_PUBLIC_API_URL
+
     const product = cartItem.product
     const sizes: any = {
         'xs': 'x small',

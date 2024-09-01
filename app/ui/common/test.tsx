@@ -1,7 +1,7 @@
 'use client'
 
 import { createInventoryItemAPI, fetchInventoryItemsAPI } from "@/app/lib/services/inventoryService"
-import { fetchProductsAPI } from "@/app/lib/services/productsService"
+import { fetchProductsAPI } from "@/app/lib/services/productService"
 import Button from "@/app/ui/common/button"
 import Heading from "@/app/ui/common/heading"
 import Input from "@/app/ui/forms/input"

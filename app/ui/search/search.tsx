@@ -7,7 +7,7 @@ import { useSearchParams, usePathname, useRouter } from 'next/navigation'
 import { useDebouncedCallback } from 'use-debounce'
 
 import { useDispatch } from 'react-redux'
-import { toggleSearchBar } from '@/lib/features/nav/searchBarSlice'
+import { toggleSearchBar } from '@/redux/features/nav/searchBarSlice'
 import { Suspense } from 'react';
 import { NavSearchResultsSkeleton } from '@/app/ui/common/skeletons';
 

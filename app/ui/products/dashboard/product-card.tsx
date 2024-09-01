@@ -6,8 +6,7 @@ import clsx from 'clsx'
 import { motion } from 'framer-motion'
 
 import { useSelector, useDispatch } from 'react-redux'
-import { selectSearchBar, toggleSearchBar } from '@/lib/features/nav/searchBarSlice'
-import { API_URL } from '@/app/lib/services/api-url'
+import { selectSearchBar, toggleSearchBar } from '@/redux/features/nav/searchBarSlice'
 
 export default function Product({
     product,
@@ -18,6 +17,8 @@ export default function Product({
     styles?: string
     navSearch?: boolean
 }) {
+    const API_URL = process.env.NEXT_PUBLIC_API_URL
+
     const image = {
         normal: {
             height: '100%',

@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import MobileNavItem from "@/app/ui/layout/nav/mobile-nav-item"
 
 import { useSelector } from "react-redux"
-import { selectMobileNav } from "@/lib/features/nav/mobileNavSlice"
+import { selectMobileNav } from "@/redux/features/nav/mobileNavSlice"
 
 export default function({
     loggedIn,
