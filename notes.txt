@@ -1,22 +1,56 @@
-Pages
+Pages // I WANT TO ADD ACTIONS USED IN EVERY PAGE
 1- Home Page
 2- Product Listing Pages(latest, tees, pants, shorts)
 3- Product Details Page
 4- Cart Page
 5- Checkout Page
-6- Order Confirmation Page(after you already purchased)
+6- Buy It Now Checkout Page
+7- Order Confirmation Page(after you already purchased)
 
+Forms
+- login form
+- signup form
+- address form
 
-TODO:
-- if item is sold out
-- companyName const in placehoder-data
+Admin forms
+- product form
+- inventory form
 
-- address, mohsen => default address & address of order is not connected to database(aashan lw etmasah aw etaamlo edit)
-- sing up, mohsen => add name to api-auth put request. and i add them in checkout form
-                     make signup and login with email and send email to user with a message like the one sent by asili
-- move_to_orders when not loged in, aashan a3ml kda lazem add orders to cart even when not logged in
+USER ACTIONS
+  Auth
+    auth(login, signup)
+    // fetchUserInfo
+  Cart(items, total price)
+    fetchCartItems
+    addItemToCart
+    changeCartItemQuantity
+    removeItemFromCart
+  Orders
+    fetchUserOrders
+    placeUserOrder
+    buyItNowOrder
+    // cancelOrder
+  Addresses
+    fetchAddresses
+    addAddress
+    editAddress
+    removeAddress
+    setDefaultAddress
+  Checkout Form 
+    fetchDefaultUserData(default address & default name)
 
-if token is expired
+COMMON ACTIONS
+  Products
+    fetchProducts
+
+ADMIN ACTIONS
+  Orders
+    fetchAllOrders
+    updateOrderStatus
+  Products
+    createProduct
+  Inventory
+    updateProductStock
 
 
 Background and Text Colors:
@@ -24,3 +58,71 @@ Background and Text Colors:
 Background:       bg-white or bg-gray-50   for a clean, minimal look.
 Primary Text:     text-gray-900            for readability and contrast.
 Secondary Text:   text-gray-700            for less prominent text.
+
+
+
+
+
+Now Todo 
+
+
+
+
+
+
+
+
+
+
+
+
+
+TODO:
+- if item is sold out(opacity: .7, sold out padge)
+- companyName const in placehoder-data or env vars
+and the other links
+
+choose between addresses
+
+- change name in checkout form
+- move_to_orders when not logged in, aashan a3ml kda lazem add orders to cart even when not logged in
+
+add first name and last name to orderrr
+
+buy it now button
+
+maybe play with forms and make them better
+
+cancel order
+
+forgot password
+
+show multiple images in product details page
+
+add tags when adding new product && make shop owner create tags(or categories)
+
+add an api for cities delivery prices
+
+- mohssen => error when accessing orders if the user is not the admin
+
+make orderService and orderThunk more organized and make the code more readable
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+mohsen:
+
+authService.ts, fetchUserData, unautharized ('/api-auth/{id}/')
+authService.ts, updateUserName, unautharized ('/api-auth/{id}/')
+fetch orderItems and most of apis don't work when not admin
+buyItNow not working because it doesn't create a guest order

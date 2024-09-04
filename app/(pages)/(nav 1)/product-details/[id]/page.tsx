@@ -8,14 +8,16 @@ import AddToCartLink from "@/app/ui/product-details/add-to-cart-link"
 import CustomLink from "@/app/ui/common/custom-link"
 import Button from "@/app/ui/common/button"
 import Heading from "@/app/ui/common/heading"
-import { fetchProductsAPI } from "@/app/lib/services/productService"
+import { fetchProductsAPI } from "@/app/lib/services/products/productService"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "@/redux/store"
-import { ProductType } from "@/app/lib/types"
 import { initializeProducts } from "@/redux/features/products/productsSlice"
 import { setProduct } from "@/redux/features/products/productSlice"
 import ProductDetailsSkeleton from "@/app/ui/skeletons/product-details-skeleton"
+import { abdoRedirect } from "@/app/lib/actions"
+import { ProductType } from "@/app/lib/types/productTypes"
+import { ROUTES } from "@/app/lib/constants/routes"
 
 export default function Page({
     params,
@@ -112,7 +114,17 @@ export default function Page({
                                     }
                                 }}
                             />
-                            <Button>buy it now</Button>
+                            <Button
+                                onClick={() => {
+                                    if (!selectedSize) {
+                                      setMessage('You must choose a size!')
+                                    } else {
+                                      abdoRedirect(ROUTES.BUY_IT_NOW(params.id, selectedSize))
+                                    }
+                                }}
+                            >
+                                buy it now
+                            </Button>
                             {/* <ul>
                                 {product.description.map(item => 
                                     <li
@@ -130,7 +142,7 @@ export default function Page({
                         </div>
                         <ProductsList products={products} limit={4} tag='latest' />
                         <div className="w-fit mx-auto">
-                            <CustomLink className="text-xs" href="/collections/all">continue shopping</CustomLink>
+                            <CustomLink className="text-xs" href={ROUTES.COLLECTIONS.ALL}>continue shopping</CustomLink>
                         </div>
                     </div>
                 </>

@@ -1,73 +1,7 @@
-import { CartItemType } from "../types"
+import { CartItemType } from "../types/cartTypes"
+import { changeSizes } from "./products/productUtils"
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL
-
-const fetchSizesAPI = async () => {
-  try {
-    const res = await fetch(`${API_URL}/size/`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Token ${localStorage.getItem('authToken')}`,
-      },
-    })
-    if (!res.ok) {
-      console.error(`Error fetching cart items: ${res.statusText}`)
-      return []
-    }
-    const data = await res.json()
-    
-    return data
-  } catch (error) {
-    console.error('Error fetching sizes:', error)
-    return []
-  }
-}
-
-const changeSizes = async (data: CartItemType[]) => {
-  // Replace size id with size text
-  const cartItems = data
-  const sizes = await fetchSizesAPI()
-  const sizesMap = new Map(sizes.map((size: any) => [size.id, size.size_text]))
-
-  let modifiedData: any[] = cartItems.map((cartItem: CartItemType) => {
-    let sizeValue = sizesMap.get(cartItem.size) || ''
-
-    return {
-      id: cartItem.id,
-      product: cartItem.product,
-      quantity: cartItem.quantity,
-      size: sizeValue,
-      totalOrderItemsPrice: cartItem.totalOrderItemsPrice
-    }
-  })
-
-  // console.log('modifiedData',modifiedData)
-
-  return modifiedData
-}
-
-export const fetchSizeByIdAPI = async (sizeId: number) => {
-  try {
-    const res = await fetch(`${API_URL}/size/${sizeId}/`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Token ${localStorage.getItem('authToken')}`,
-      },
-    })
-    if (!res.ok) {
-      console.error(`Error fetching cart items: ${res.statusText}`)
-      return []
-    }
-    const data = await res.json()
-    
-    return data
-  } catch (error) {
-    console.error('Error fetching sizes:', error)
-    return []
-  }
-}
 
 export const fetchCartItemsAPI = async () => {
   try {
@@ -78,18 +12,13 @@ export const fetchCartItemsAPI = async () => {
         'Authorization': `Token ${localStorage.getItem('authToken')}`,
       },
     })
-
     if (!res.ok) {
       console.error(`Error fetching cart items: ${res.statusText}`)
       return []
     }
-
     let data = await res.json()
-  
     data = await changeSizes(data)
-
     return data
-
   } catch (error) {
     console.error('Error fetching cart items:', error)
     return []
@@ -126,7 +55,7 @@ export const addToCartAPI = async (product_id: number, size_text: string) => {
   }
 }
 
-export const removeCartItemAPI = async (cartItemId: number) => {
+export const removeItemFromCartAPI = async (cartItemId: number) => {
   try {
     const res = await fetch(`${API_URL}/orderItems/${cartItemId}/`, {
       method: 'DELETE',
@@ -135,12 +64,10 @@ export const removeCartItemAPI = async (cartItemId: number) => {
         'Authorization': `Token ${localStorage.getItem('authToken')}`,
       },
     })
-
     if (!res.ok) {
       console.error(`Error removing cart item: ${res.statusText}`)
       return []
     }
-
     // No need to return anything if the delete operation is successful
   } catch (error) {
     console.error('Error removing cart item:', error)
@@ -152,11 +79,6 @@ export const changeCartItemsQuantityAPI = async (
   cartItemId: number,
   newQuantity: number
 ) => {
-  if (newQuantity < 1) {
-    // TODO: remove from cart
-    return
-  }
-  // console.log('new quantity going to server:', newQuantity)
   try {
     const res = await fetch(`${API_URL}/orderItems/${cartItemId}/`, {
       method: 'PATCH',
@@ -180,7 +102,7 @@ export const changeCartItemsQuantityAPI = async (
   }
 }
 
-export const syncCartWithServer = async (cartItems: CartItemType[]): Promise<void> => {
+export const syncCartWithServerAPI = async (cartItems: CartItemType[]): Promise<void> => {
   for (const item of cartItems) {
     await addToCartAPI(item.product.id, item.size)
   }

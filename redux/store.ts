@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit'
 import searchBarReducer from '@/redux/features/nav/searchBarSlice'
 import mobileNavReducer from '@/redux/features/nav/mobileNavSlice'
-import userReducer from '@/redux/features/user/userSlice'
 import cartReducer from '@/redux/features/cart/cartSlice'
 import navCartReducer from '@/redux/features/nav/navCartSlice'
 import productsReducer from '@/redux/features/products/productsSlice'
 import productReducer from '@/redux/features/products/productSlice'
+import addressReducer from '@/redux/features/address/addressSlice'
+import orderReducer from '@/redux/features/orders/orderUserSlice'
+import checkoutReducer from '@/redux/features/checkout/checkoutSlice'
 import { useDispatch } from 'react-redux'
 
 export const useAppDispatch = () => useDispatch<AppDispatch>()
@@ -16,10 +18,12 @@ export const makeStore = () => {
             searchBar: searchBarReducer,
             mobileNav: mobileNavReducer,
             navCart: navCartReducer,
-            user: userReducer,
             cart: cartReducer,
             products: productsReducer,
             product: productReducer,
+            address: addressReducer,
+            order: orderReducer,
+            checkout: checkoutReducer,
         },
         devTools: process.env.NODE_ENV !== 'production',
     })

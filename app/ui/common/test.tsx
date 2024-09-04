@@ -1,11 +1,11 @@
 'use client'
 
 import { createInventoryItemAPI, fetchInventoryItemsAPI } from "@/app/lib/services/inventoryService"
-import { fetchProductsAPI } from "@/app/lib/services/productService"
+import { fetchProductsAPI } from "@/app/lib/services/products/productService"
 import Button from "@/app/ui/common/button"
 import Heading from "@/app/ui/common/heading"
-import Input from "@/app/ui/forms/input"
-import Select from "@/app/ui/forms/select"
+import Input from "@/app/ui/forms/components/input"
+import Select from "@/app/ui/forms/components/select"
 import { CalendarIcon, ChevronUpIcon, ClipboardDocumentListIcon, CubeIcon, TagIcon } from "@heroicons/react/24/outline"
 import { useEffect, useState } from "react"
 

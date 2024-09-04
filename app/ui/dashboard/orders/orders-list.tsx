@@ -1,4 +1,4 @@
-import { OrderType } from "@/app/lib/types"
+import { OrderType } from "@/app/lib/types/types"
 import OrderItem from "./order-item"
 import { useEffect } from "react"
 import Order from "./order"

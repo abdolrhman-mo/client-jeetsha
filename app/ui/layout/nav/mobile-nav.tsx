@@ -4,6 +4,7 @@ import MobileNavItem from "@/app/ui/layout/nav/mobile-nav-item"
 
 import { useSelector } from "react-redux"
 import { selectMobileNav } from "@/redux/features/nav/mobileNavSlice"
+import { ROUTES } from "@/app/lib/constants/routes"
 
 export default function({
     loggedIn,
@@ -58,11 +59,15 @@ export default function({
                 )}
             >
                 <MobileNavItem xMark={true} />
-                <MobileNavItem href='/collections/latest' text="new" />
-                <MobileNavItem href='/collections/tees' text="tees" />
-                <MobileNavItem href='/collections/pants' text="pants" />
-                <MobileNavItem href='/collections/shorst' text="shorts" />
-                {loggedIn ? <MobileNavItem href='/account' text="profile" /> : <MobileNavItem href='/login' text="login" />}
+                <MobileNavItem href={ROUTES.COLLECTIONS.LATEST} text="new" />
+                <MobileNavItem href={ROUTES.COLLECTIONS.TEES} text="tees" />
+                <MobileNavItem href={ROUTES.COLLECTIONS.PANTS} text="pants" />
+                <MobileNavItem href={ROUTES.COLLECTIONS.SHORTS} text="shorts" />
+                {loggedIn ? (
+                  <MobileNavItem href={ROUTES.ACCOUNT} text="profile" /> 
+                ) : (
+                  <MobileNavItem href={ROUTES.LOGIN} text="login" />
+                )}
                 <MobileNavItem social={true} />
             </div>
         </motion.div>

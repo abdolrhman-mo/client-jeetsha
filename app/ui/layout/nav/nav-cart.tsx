@@ -10,12 +10,13 @@ import { selectNavCart, toggleNavCart } from '@/redux/features/nav/navCartSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@/redux/store'
 import { useAppSelector } from '@/redux/hooks'
+import { ROUTES } from '@/app/lib/constants/routes'
 
 export default function NavCart() {
     const dispatch = useDispatch()
     const navCart = useSelector(selectNavCart)
-    const totalPrice = useSelector((state: RootState) => state.cart.totalPrice)
-    // const cartItems = useSelector((state: RootState) => state.cart.items)
+    // const totalPrice = useSelector((state: RootState) => state.cart.totalPrice)
+    const totalPrice = useAppSelector(state => state.cart.totalPrice)
     const cartItems = useAppSelector(state => state.cart.items)
 
     let cart: Variants = {
@@ -98,7 +99,7 @@ export default function NavCart() {
                         'py-4 px-4',
                     )}
                 >
-                    <Link href={'/cart'} onClick={() => dispatch(toggleNavCart())}>
+                    <Link href={ROUTES.CART} onClick={() => dispatch(toggleNavCart())}>
                         <h2 className='text-3xl'>CART</h2>
                     </Link>
                     <XMarkIcon className='h-6 cursor-pointer' onClick={() => dispatch(toggleNavCart())} />
@@ -134,7 +135,7 @@ export default function NavCart() {
                             <p className='text-center text-xs'>
                                 Shipping, taxes, and discount codes calculated at checkout.
                             </p>
-                            <CustomLink href='/checkout'>checkout</CustomLink>
+                            <CustomLink href={ROUTES.CHECKOUT}>checkout</CustomLink>
                         </>
                     )}
                 </motion.div>

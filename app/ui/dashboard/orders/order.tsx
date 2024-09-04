@@ -1,10 +1,10 @@
-import { OrderType } from "@/app/lib/types"
 import OrderItem from "./order-item"
-import { useEffect } from "react"
 import Link from "next/link"
 import clsx from "clsx"
 import Button from "../../common/button"
-import { changeOrderStateAPI } from "@/app/lib/services/orderService"
+import { changeOrderStatusAPI } from "@/app/lib/services/orders/orderAdminService"
+import { OrderType } from "@/app/lib/types/orderTypes"
+import { ROUTES } from "@/app/lib/constants/routes"
 
 export default function Order({
     order,
@@ -25,11 +25,11 @@ export default function Order({
     }
 
     const handleChangeState = async () => {
-        const newOrder = await changeOrderStateAPI(order.id, state === 'pending' ? 'delivered' : 'pending')
+        const newOrder = await changeOrderStatusAPI(order.id, state === 'pending' ? 'delivered' : 'pending')
     }
 
     return (
-        <div className="p-6 border rounded-lg shadow-md bg-white">
+        <div className="p-6 rounded-lg shadow-md bg-white">
             <div className="mb-4">
                 <p className="text-base font-semibold">Order Date:</p>
                 <p className="text-sm text-gray-600">
@@ -39,13 +39,13 @@ export default function Order({
             <div className="mb-4">
                 <p className="text-base font-semibold">Shipping Address:</p>
                 <p className="text-sm text-gray-600">
-                    {order.address ? order.address.addressText : 'No address available'}
+                    {order.addressText ? order.addressText : 'No address available'}
                 </p>
             </div>
             <div className="mb-4">
                 <p className="text-base font-semibold">Phone No:</p>
                 <p className="text-sm text-gray-600">
-                    {order.address ? order.address.addressText : 'No address available'}
+                    {order.phone_number ? order.phone_number : 'No phone number available'}
                 </p>
             </div>
             <div className="mb-4">
@@ -69,7 +69,7 @@ export default function Order({
                 {state === "pending" ? "Move to Delivered" : "Move Back to Pending"}
             </Button>
             <br />
-            <Link href={`/dashboard/orders/order-details/${order.id}`}>View Details</Link>
+            <Link href={ROUTES.DASHBOARD.ORDER_DETAILS(order.id)}>View Details</Link>
         </div>
     )
 }

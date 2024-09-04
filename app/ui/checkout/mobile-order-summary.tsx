@@ -6,9 +6,13 @@ import { motion } from "framer-motion"
 export default function MobileOrderSummary({
     showSummary,
     onShowSummary,
+    buyItNowId,
+    buyItNowSize,
 }: {
     showSummary?: any
     onShowSummary?: any
+    buyItNowId?: number
+    buyItNowSize?: string
 }) {
     const chevron = {
         normal: {
@@ -65,7 +69,7 @@ export default function MobileOrderSummary({
                         'transition-all duration-700 ease-in-out',
                     )}
                 >
-                    <OrderSummary />
+                    <OrderSummary buyItNowId={buyItNowId} buyItNowSize={buyItNowSize} />
                 </motion.div>
             </div>
         </>

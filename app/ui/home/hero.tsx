@@ -1,6 +1,7 @@
 import clsx from "clsx"
 import CustomLink from "../common/custom-link"
 import Heading from "../common/heading"
+import { ROUTES } from "@/app/lib/constants/routes"
 
 export default function Hero() {
     return (
@@ -28,7 +29,7 @@ export default function Hero() {
                 <div className="z-20 absolute top-3/4 left-1/2 -translate-x-1/2">
                     <Heading level={2} className="text-white text-center">new collection</Heading>
                     <div className="w-fit mx-auto">
-                        <CustomLink theme='light' href='/collections/latest'>view all</CustomLink>
+                        <CustomLink theme='light' href={ROUTES.COLLECTIONS.ALL}>view all</CustomLink>
                     </div>
                 </div>
             </div>

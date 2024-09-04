@@ -14,13 +14,13 @@ import NavSearchBar from '@/app/ui/layout/nav/nav-search-bar'
 import BackgroundShadow from '@/app/ui/layout/nav/background-shadow'
 import MobileNav from '@/app/ui/layout/nav/mobile-nav'
 import { motion } from 'framer-motion'
-
 import { useSelector, useDispatch } from 'react-redux'
-import { toggleSearchBar, selectSearchBar } from '@/redux/features/nav/searchBarSlice'
-import { toggleMobileNav, selectMobileNav } from '@/redux/features/nav/mobileNavSlice'
-import { useEffect, useState } from 'react'
+import { selectSearchBar } from '@/redux/features/nav/searchBarSlice'
+import { toggleMobileNav } from '@/redux/features/nav/mobileNavSlice'
+import { useState } from 'react'
 import { abdoRedirect } from '@/app/lib/actions'
 import { toggleNavCart } from '@/redux/features/nav/navCartSlice'
+import { ROUTES } from '@/app/lib/constants/routes'
 
 export default function Nav() {
     const dispatch: any = useDispatch()
@@ -29,13 +29,13 @@ export default function Nav() {
 
     let handleUserIconClick = () => {
         if (localStorage.getItem('authToken')) {
-            if (localStorage.getItem('username') === 'admin') {
-                abdoRedirect('/dashboard')
+            if (localStorage.getItem('email') === 'admin@admin.admin') {
+                abdoRedirect(ROUTES.DASHBOARD.MAIN)
             } else {
-                abdoRedirect('/account')
+                abdoRedirect(ROUTES.ACCOUNT)
             }
         } else {
-            abdoRedirect('/login')
+            abdoRedirect(ROUTES.LOGIN)
         }
     }
 
@@ -75,7 +75,7 @@ export default function Nav() {
                 {/* LEFT SIDE */}
 
                 {/* desktop */}
-                <Link href={'/search'}>
+                <Link href={ROUTES.SEARCH}>
                     <MagnifyingGlassIcon 
                         className='h-6 hidden md:block cursor-pointer'
                         // onClick={() => dispatch(toggleSearchBar())} 
@@ -100,10 +100,10 @@ export default function Nav() {
                         )}
                     >
                         <motion.li whileHover='hover' variants={navItem}>
-                            <Link href='/collections/latest'>LATEST</Link>
+                            <Link href={ROUTES.COLLECTIONS.LATEST}>LATEST</Link>
                         </motion.li>
                         <motion.li whileHover='hover' variants={navItem}>
-                            <Link href='/collections/tees'>TEES</Link>
+                            <Link href={ROUTES.COLLECTIONS.TEES}>TEES</Link>
                         </motion.li>
                     </ul>
                     <Logo text_size='text-4xl' />
@@ -116,10 +116,10 @@ export default function Nav() {
                         )}
                     >
                         <motion.li whileHover='hover' variants={navItem}>
-                            <Link href='/collections/pants'>PANTS</Link>
+                            <Link href={ROUTES.COLLECTIONS.PANTS}>PANTS</Link>
                         </motion.li>
                         <motion.li whileHover='hover' variants={navItem}>
-                            <Link href='/collections/shorts'>SHORTS</Link>
+                            <Link href={ROUTES.COLLECTIONS.SHORTS}>SHORTS</Link>
                         </motion.li>
                     </ul>
                 </div>
@@ -127,7 +127,7 @@ export default function Nav() {
                 {/* RIGHT SIDE */}
 
                 {/* mobile */}
-                <Link href={'/search'}>
+                <Link href={ROUTES.SEARCH}>
                     <MagnifyingGlassIcon
                         className='h-6 cursor-pointer block md:hidden' 
                         // onClick={() => dispatch(toggleSearchBar())}
@@ -141,7 +141,7 @@ export default function Nav() {
                         </button>
                     </li>
                     <li>
-                        <Link href={''}>
+                        <Link href={ROUTES.HOME}>
                             <ShoppingBagIcon 
                                 className='h-6 px-2 cursor-pointer' 
                                 onClick={() => {

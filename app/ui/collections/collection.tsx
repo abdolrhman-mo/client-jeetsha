@@ -1,6 +1,6 @@
 import ProductsList from "@/app/ui/products/products-list"
 import Heading from "../common/heading"
-import { fetchProductsAPI } from "@/app/lib/services/productService"
+import { fetchProductsAPI } from "@/app/lib/services/products/productService"
 
 export default async function Collection({
     title,

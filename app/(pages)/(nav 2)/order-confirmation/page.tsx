@@ -1,5 +1,6 @@
 'use client'
 
+import { ROUTES } from '@/app/lib/constants/routes';
 import CustomLink from '@/app/ui/common/custom-link';
 import { useSearchParams, useRouter } from 'next/navigation';
 
@@ -22,13 +23,13 @@ export default function Page() {
         </h1>
         <p className="text-lg mb-6">Thank you for your purchase.</p>
         <p className="text-gray-700 mb-2">
-          Your order number is: <span className="font-bold">{orderId}</span>
+          Your order id is: <span className="font-bold">{orderId}</span>
         </p>
         {/* <p className="text-gray-500">
           You will receive a confirmation email with your order details.
         </p> */}
         <br />
-        <CustomLink href='/'>Back to home</CustomLink>
+        <CustomLink href={ROUTES.HOME}>Back to home</CustomLink>
       </div>
     </div>
   );

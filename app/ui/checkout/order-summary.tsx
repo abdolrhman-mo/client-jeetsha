@@ -1,39 +1,47 @@
 'use client'
 
-import Input from '@/app/ui/forms/input'
+import Input from '@/app/ui/forms/components/input'
 import ProductsList from '../products/checkout/products-list'
-import { useEffect, useState } from 'react'
 import Heading from '../common/heading'
-import { isAuth } from '@/app/lib/services/authService'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from '@/redux/store'
-import { addItem, setCartItems } from '@/redux/features/cart/cartSlice'
-import { fetchCartItemsAPI } from '@/app/lib/services/cartService'
-import { CartItemType } from '@/app/lib/types'
+import { useEffect } from 'react'
+import { useAppDispatch } from '@/redux/store'
+import { useAppSelector } from '@/redux/hooks'
+import { fetchBuyItNowItem, fetchCartItems } from '@/redux/features/cart/cartThunk'
 
-export default function OrderSummary() {
-    const dispatch = useDispatch()
-    const cartItems = useSelector((state: RootState) => state.cart.items)
-    const totalPrice = useSelector((state: RootState) => state.cart.totalPrice)
+export default function OrderSummary({
+    buyItNowId,
+    buyItNowSize,
+}: {
+    buyItNowId?: number
+    buyItNowSize?: string
+}) {
+
+    const dispatch = useAppDispatch()
+    const cartItems = useAppSelector(state => state.cart.items)
+    const totalPrice = useAppSelector(state => state.cart.totalPrice)
+    const status = useAppSelector(state => state.cart.status)
+    const error = useAppSelector(state => state.cart.error)
+
+    const buyItNowItem = useAppSelector(state => state.cart.buyItNowItem)
 
     useEffect(() => {
-        const fetchData = async () => {
-            if (isAuth()) {
-                if (cartItems.length === 0) {
-                    const fetchedCartItems = await fetchCartItemsAPI()
-                    dispatch(setCartItems(fetchedCartItems))
-                }
-            } else {
-                const fetchedCartItems = JSON.parse(localStorage.getItem('cartItems') || '[]')
-                dispatch(setCartItems(fetchedCartItems))
-            }
-        }
-        fetchData()
+      if (buyItNowId && buyItNowSize) {
+        dispatch(fetchBuyItNowItem({ buyItNowId, buyItNowSize }))
+      } else {
+        dispatch(fetchCartItems())
+      }
     }, [])
 
     return (
+      status === 'loading' ? (
+        <p>Loading...</p> 
+      ) : (
         <div className='grid grid-cols-6 gap-y-4 gap-x-2'>
-            <ProductsList cartItems={cartItems} />
+            {buyItNowId && buyItNowSize && buyItNowItem ? (
+                <ProductsList cartItems={[buyItNowItem]} buyItNow={true} />
+            ) : (
+                <ProductsList cartItems={cartItems} />
+            )}
 
             <Input placeholder='discount code' className='col-span-5' />
             <Input type='submit' value='Apply' className='col-span-1' />
@@ -53,5 +61,6 @@ export default function OrderSummary() {
                 </div> 
             </div>
         </div>
+      )
     )
 }

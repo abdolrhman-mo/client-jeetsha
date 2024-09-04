@@ -2,7 +2,6 @@ import { poppins } from '@/app/ui/fonts'
 import Hero from '@/app/ui/home/hero'
 import ProductGallery from '@/app/ui/home/product-gallery'
 import ShopByCategory from '@/app/ui/home/shop-by-category'
-import { Suspense } from 'react'
 
 export default async function Page({
   searchParams,

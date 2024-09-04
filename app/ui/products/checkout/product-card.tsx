@@ -2,9 +2,11 @@ import Image from "next/image"
 import QuantityModifier from "../../cart/cart-item/quantity-modifier"
 
 export default function ProductCard({
-    cartItem
+    cartItem,
+    buyItNow = false,
 }: {
     cartItem: any
+    buyItNow?: boolean
 }) {
     const API_URL = process.env.NEXT_PUBLIC_API_URL
 
@@ -24,26 +26,32 @@ export default function ProductCard({
                     className="col-span-2 bg-slate-200 border rounded-md overflow-hidden flex justify-center"
                 >
                     <Image
-                        src={product.image.startsWith('http') ? product.image : `${API_URL + product.image}`}
-                        alt={product.name}
+                        src={product?.image?.startsWith('http') ? product?.image : `${API_URL + product?.image}`}
+                        alt={product?.name}
                         width={50}
                         height={50}
                     />
                 </div>
                 <div className="col-span-4 flex justify-center flex-col space-y-1">
                     <div className="flex justify-between">
-                        <p className='capitalize text-sm w-fit'>{product.name}</p>
+                        <p className='capitalize text-sm w-fit'>{product?.name}</p>
                         <div className="w-fit text-sm">
-                            {product.price} EGP
+                            {product?.price} EGP
                         </div>
                     </div>
                     <div className="flex justify-between">
                         <p className='text-gray-500 text-xs'>
-                            <span className="capitalize text-xs"> {sizes[cartItem.size]} </span>
+                            <span className="capitalize text-xs"> {sizes[cartItem?.size]} </span>
                         </p>
-                        <p className="text-sm">
-                            <QuantityModifier cartItem={cartItem} />
-                        </p>
+                        {buyItNow ? (
+                            <p className="text-sm">
+                                1
+                            </p>
+                        ) : (
+                            <p className="text-sm">
+                                <QuantityModifier cartItem={cartItem} />
+                            </p>
+                        )}
                     </div>
                 </div>
             </div>

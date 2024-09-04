@@ -1,6 +1,5 @@
 import '@/app/ui/global.css'
 import { poppins } from '@/app/ui/fonts'
-import Link from 'next/link'
 import Nav from '@/app/ui/dashboard/nav'
 import SideBar from '@/app/ui/dashboard/sidebar'
 

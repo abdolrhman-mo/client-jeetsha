@@ -24,7 +24,6 @@ export async function createInventoryItemAPI(data: InventoryData) {
         }
 
         const result = await res.json()
-        console.log('created inventory item', result)
         return result
     } catch (error) {
         console.error('Error creating inventory item:', error)
@@ -47,7 +46,6 @@ export async function fetchInventoryItemsAPI() {
     }
 
     const result = await res.json()
-    console.log('fetched inventory items:', result)
     return result
     } catch (error) {
     console.error('Error fetching inventory items:', error)

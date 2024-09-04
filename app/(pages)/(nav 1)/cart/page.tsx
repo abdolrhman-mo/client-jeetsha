@@ -1,5 +1,6 @@
 'use client'
 
+import { ROUTES } from "@/app/lib/constants/routes"
 import CartItems from "@/app/ui/cart/cart-items"
 import CustomLink from "@/app/ui/common/custom-link"
 import Heading from "@/app/ui/common/heading"
@@ -17,22 +18,22 @@ export default function Page({
         page?: string
     }
 }) {
-    const query = searchParams?.query || ''
-    const currentPage = Number(searchParams?.page) || 1
-    // const cartItems = useSelector((state: RootState) => state.cart.items)
+    // const query = searchParams?.query || ''
+    // const currentPage = Number(searchParams?.page) || 1
+    
     const cartItems = useAppSelector(state => state.cart.items)
     const totalPrice = useAppSelector(state => state.cart.totalPrice)
     
     return (
         <>
-            <NavSearchResults query={query} currentPage={currentPage} />
+            {/* <NavSearchResults query={query} currentPage={currentPage} /> */}
             <div className="w-5/6 mx-auto space-y-12">
                 <div className="text-center">
                     <br />
                     <Heading level={2}>cart</Heading>
                     <Link
                         className="underline"
-                        href='/collections/all'
+                        href={ROUTES.COLLECTIONS.ALL}
                     >
                         Continiue Shopping
                     </Link>
@@ -47,7 +48,7 @@ export default function Page({
 
                 {Array.isArray(cartItems) && cartItems.length > 0 && (
                     <div className="text-center w-fit mx-auto">
-                        <CustomLink href="/checkout">check out</CustomLink>
+                        <CustomLink href={ROUTES.CHECKOUT}>check out</CustomLink>
                     </div>
                 )}
             </div>

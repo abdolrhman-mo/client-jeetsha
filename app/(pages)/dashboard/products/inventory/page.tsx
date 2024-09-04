@@ -1,13 +1,11 @@
 'use client'
 
 import { createInventoryItemAPI, fetchInventoryItemsAPI } from "@/app/lib/services/inventoryService"
-import { fetchProductsAPI } from "@/app/lib/services/productService"
-import Button from "@/app/ui/common/button"
+import { fetchProductsAPI } from "@/app/lib/services/products/productService"
 import Heading from "@/app/ui/common/heading"
-import Test from "@/app/ui/common/test"
 import InventoryItems from "@/app/ui/dashboard/inventory/inventory-items"
-import Input from "@/app/ui/forms/input"
-import Select from "@/app/ui/forms/select"
+import Input from "@/app/ui/forms/components/input"
+import Select from "@/app/ui/forms/components/select"
 import { useEffect, useState } from "react"
 
 interface InventoryFormProps {
@@ -54,7 +52,7 @@ export default function Page() {
         size_text: 'xs',
         type: 'add',
         quantity: 1,
-        // size: null,
+      // size: null,
         description: 'restok',
     })
       
@@ -70,6 +68,7 @@ export default function Page() {
         e.preventDefault()
         console.log(formData)
         await createInventoryItemAPI(formData)
+
     }
 
     return (

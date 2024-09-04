@@ -1,7 +1,8 @@
 'use client'
 
-import { changeOrderStateAPI, fetchOrderByIdAPI } from "@/app/lib/services/orderService"
-import { OrderType } from "@/app/lib/types"
+import { ROUTES } from "@/app/lib/constants/routes"
+import { changeOrderStatusAPI, fetchAdminOrderByIdAPI } from "@/app/lib/services/orders/orderAdminService"
+import { OrderType } from "@/app/lib/types/orderTypes"
 import Button from "@/app/ui/common/button"
 import OrderItem from "@/app/ui/dashboard/orders/order-item"
 import clsx from "clsx"
@@ -14,9 +15,10 @@ export default function Page({ params }: { params: { id: number } }) {
   useEffect(() => {
     const getData = async () => {
       try {
-        const data = await fetchOrderByIdAPI(params.id)
+        const data = await fetchAdminOrderByIdAPI(params.id)
         console.log(data)
         setOrder(data)
+
       } catch (error) {
         console.error(error)
       }
@@ -35,7 +37,7 @@ export default function Page({ params }: { params: { id: number } }) {
 
   const handleChangeState = async () => {
     if (order) {
-      const newOrder = await changeOrderStateAPI(
+      const newOrder = await changeOrderStatusAPI(
         order.id,
         order.status === 'pending' ? 'delivered' : 'pending'
       )
@@ -46,7 +48,10 @@ export default function Page({ params }: { params: { id: number } }) {
   return (
     <div className="max-w-4xl mx-auto p-8">
       <div className="mb-6">
-        <Link href="/dashboard/orders" className="text-sm text-gray-500 hover:text-gray-700">
+        <Link 
+          href={ROUTES.DASHBOARD.ORDERS} 
+          className="text-sm text-gray-500 hover:text-gray-700"
+        >
           &larr; Back to Orders
         </Link>
       </div>
@@ -67,9 +72,9 @@ export default function Page({ params }: { params: { id: number } }) {
           <div className="border-t border-gray-200 pt-4">
             <h2 className="text-xl font-bold text-gray-800 mb-4">User Information</h2>
             <div className="text-sm text-gray-600">
-              {/* <p><strong>User Name:</strong> {order.user ? order.user.name : 'No user information available'}</p>
-              <p><strong>Email:</strong> {order.user ? order.user.email : 'No email available'}</p>
-              <p><strong>Phone Number:</strong> {order.user ? order.user.phoneNumber : 'No phone number available'}</p> */}
+              {/* <p><strong>User Name:</strong> {order.first_name ? order.user.name : 'No user information available'}</p> */}
+              {/* <p><strong>Email:</strong> {order.user ? order.email : 'No email available'}</p> */}
+              {/* <p><strong>Phone Number:</strong> {order.user ? order.user.phoneNumber : 'No phone number available'}</p> */}
             </div>
           </div>
 
@@ -77,9 +82,9 @@ export default function Page({ params }: { params: { id: number } }) {
           <div className="border-t border-gray-200 pt-4">
             <h2 className="text-xl font-bold text-gray-800 mb-4">Shipping Address</h2>
             <div className="text-sm text-gray-600">
-              <p>{order.address ? order.address.country : 'No address available'}</p>
-              <p>{order.address ? order.address.city : 'No address available'}</p>
-              <p>{order.address ? order.address.addressText : 'No address available'}</p>
+              <p>{order.country ? order.country : 'No country available'}</p>
+              <p>{order.city ? order.city : 'No city available'}</p>
+              <p>{order.addressText ? order.addressText : 'No address available'}</p>
             </div>
           </div>
 

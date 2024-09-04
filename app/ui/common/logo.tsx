@@ -1,3 +1,5 @@
+import { APP_NAME } from "@/app/lib/constants/appConfig"
+import { ROUTES } from "@/app/lib/constants/routes"
 import Link from "next/link"
 
 export default function Logo({
@@ -7,10 +9,10 @@ export default function Logo({
 }) {
     return (
         <Link 
-            href="/"
+            href={ROUTES.HOME}
             className={`${text_size} font-black`}
         >
-            Leopard
+          {APP_NAME}
         </Link>
     )
 }

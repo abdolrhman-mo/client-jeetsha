@@ -1,10 +1,7 @@
-import { isAuth } from "@/app/lib/services/authService"
-import { changeCartItemsQuantityAPI } from "@/app/lib/services/cartService"
-import { CartItemType } from "@/app/lib/types"
-import { changeCartItemQuantity } from "@/redux/features/cart/cartSlice"
-import { RootState } from "@/redux/store"
+import { CartItemType } from "@/app/lib/types/cartTypes"
+import { changeCartItemQuantity } from "@/redux/features/cart/cartThunk"
+import { useAppDispatch } from "@/redux/store"
 import clsx from "clsx"
-import { useDispatch, useSelector } from "react-redux"
 
 export default function ChangeQuantityButton({
     cartItem,
@@ -13,26 +10,10 @@ export default function ChangeQuantityButton({
     cartItem: CartItemType
     type: 'increment' | 'decrement'
 }) {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     const handleQuantityChange = (cartItemId: number, newQuantity: number) => {
-        if (isAuth()) {
-            changeCartItemsQuantityAPI(cartItemId, newQuantity)
-        } else {
-            const string = localStorage.getItem('cartItems') || '[]'
-            const cartItems = JSON.parse(string)
-
-            const updatedCartItem = cartItems.find((cartItem: CartItemType) => 
-                cartItem.id === cartItemId
-            )
-            updatedCartItem.quantity = newQuantity
-            
-            localStorage.setItem('cartItems', JSON.stringify(cartItems))
-        }
-        dispatch(changeCartItemQuantity({
-            cartItemId: cartItemId, 
-            newQuantity
-        }))
+        dispatch(changeCartItemQuantity({ cartItemId, newQuantity }))
     }
 
     return (

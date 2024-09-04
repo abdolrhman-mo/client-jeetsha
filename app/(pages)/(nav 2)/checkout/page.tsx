@@ -1,16 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import Radio from '@/app/ui/forms/radio'
-import AddressForm from '@/app/ui/forms/checkout-form'
-import OrderSummary from '@/app/ui/checkout/order-summary'
-import Note from '@/app/ui/checkout/note'
 import MobileOrderSummary from '@/app/ui/checkout/mobile-order-summary'
-import clsx from 'clsx'
-import { abdoRedirect } from '@/app/lib/actions'
-import Heading from '@/app/ui/common/heading'
-import { createOrderAPI } from '@/app/lib/services/orderService'
-import { isAuth } from '@/app/lib/services/auth'
 import CheckoutForm from '@/app/ui/forms/checkout-form'
 
 export default function Page() {

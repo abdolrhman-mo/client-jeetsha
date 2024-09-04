@@ -1,7 +1,9 @@
 import ProductsList from "@/app/ui/products/products-list"
 import CustomLink from "../common/custom-link"
-import { fetchProductsAPI } from "@/app/lib/services/productService"
+import { fetchProductsAPI } from "@/app/lib/services/products/productService"
 import { ProductsListSkeleton } from "../skeletons/products-skeleton"
+import Heading from "../common/heading"
+import { ROUTES } from "@/app/lib/constants/routes"
 
 export default async function ProductGallery({
     title,
@@ -14,14 +16,14 @@ export default async function ProductGallery({
 
     return (
         <div className="my-36">
-            <h2 className='text-3xl text-center my-12 uppercase'>{title}</h2>
+            <Heading level={2} className="text-center">{title}</Heading>
             <ProductsList products={products} tag={tag} limit={100} />
             {/* <ProductsListSkeleton count={4} /> */}
             <div className="text-center w-5/6 mx-auto">
                 <div className="w-fit mx-auto">
                     <CustomLink
                         className="text-lg"
-                        href={`/collections/${tag}`} 
+                        href={ROUTES.COLLECTION_FUNCTION(tag)} 
                         theme="light" 
                     >
                         view all

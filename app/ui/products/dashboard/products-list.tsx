@@ -2,6 +2,7 @@ import { hasTag } from '@/app/lib/utils'
 import clsx from 'clsx'
 import Product from '@/app/ui/products/dashboard/product-card'
 import CustomLink from '@/app/ui/common/custom-link'
+import { ROUTES } from '@/app/lib/constants/routes'
 
 export default function ProductsList({
     products = [],
@@ -86,7 +87,13 @@ export default function ProductsList({
                         <div className="text-center pt-28">
                             {
                                 filteredProducts.length > 0 ? (
-                                    <CustomLink navSearch={true} className='max-w-fit block' href={`/search/?query=${query}`}>view more</CustomLink>
+                                    <CustomLink 
+                                      href={`${ROUTES.SEARCH}/?query=${query}`}
+                                      navSearch={true} 
+                                      className='max-w-fit block' 
+                                    >
+                                      view more
+                                    </CustomLink>
                                 ) : (
                                     <p>Try searching for something.</p>
                                 )

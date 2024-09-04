@@ -1,6 +1,6 @@
 'use client'
 
-import { fetchProductsAPI } from "@/app/lib/services/productService"
+import { fetchProductsAPI } from "@/app/lib/services/products/productService"
 import ProductsList from "@/app/ui/products/products-list"
 import Search from "@/app/ui/search/search"
 

@@ -7,6 +7,7 @@ import { motion } from 'framer-motion'
 
 import { useSelector, useDispatch } from 'react-redux'
 import { selectSearchBar, toggleSearchBar } from '@/redux/features/nav/searchBarSlice'
+import { ROUTES } from '@/app/lib/constants/routes'
 
 export default function Product({
     product,
@@ -44,7 +45,7 @@ export default function Product({
         >
             <Link
                 className='group' 
-                href={`/product-details/${product.id}`}
+                href={ROUTES.PRODUCT_DETAILS(product.id)}
                 key={product.id}
                 onClick={handleClick}
             >

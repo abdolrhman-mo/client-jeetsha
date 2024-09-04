@@ -1,4 +1,4 @@
-import { CartItemType } from "@/app/lib/types"
+import { CartItemType } from "@/app/lib/types/cartTypes"
 import ChangeQuantityButton from "./change-quantity-button"
 import clsx from "clsx"
 

@@ -1,15 +1,13 @@
 'use client'
 
 import Heading from "@/app/ui/common/heading"
-import Input from "@/app/ui/forms/input"
+import Input from "@/app/ui/forms/components/input"
 import ProductsList from "@/app/ui/products/dashboard/products-list"
 import { useEffect, useState } from "react"
-import { fetchProductsAPI } from "@/app/lib/services/productService"
+import { fetchProductsAPI } from "@/app/lib/services/products/productService"
 
 export default function Page() {
   const API_URL = process.env.NEXT_PUBLIC_API_URL
-  // const token = useSelector((state: RootState) => state.user.token)
-  // const token = localStorage.getItem('authToken')
 
   const [name, setName] = useState('')
   const [price, setPrice] = useState('')
@@ -60,6 +58,13 @@ export default function Page() {
         const data = await response.json()
         setMessage('Product uploaded successfully!')
         console.log('Success:', data)
+
+        // Reset inputs to blank
+        setName('')
+        setPrice('')
+        setDescription('')
+        setImage(null)
+        setMessage('')
       } else {
         const errorData = await response.json()
         setMessage('Upload failed.')

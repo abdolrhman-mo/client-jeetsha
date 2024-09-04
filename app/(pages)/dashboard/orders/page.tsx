@@ -1,10 +1,10 @@
 'use client'
 
 import Heading from "@/app/ui/common/heading"
-import { fetchOrdersAPI } from "@/app/lib/services/orderService"
 import { useEffect, useState } from "react"
-import { OrderType } from "@/app/lib/types"
 import OrdersList from "@/app/ui/dashboard/orders/orders-list"
+import { fetchAllOrdersAPI } from "@/app/lib/services/orders/orderAdminService"
+import { OrderType } from "@/app/lib/types/orderTypes"
 
 export default function Page() {
     const [orders, setOrders] = useState<OrderType[]>([])
@@ -12,7 +12,7 @@ export default function Page() {
     useEffect(() => {
         const getData = async () => {
             try {
-                const fetchedOrders = await fetchOrdersAPI()
+                const fetchedOrders = await fetchAllOrdersAPI()
                 const sortedOrders = (fetchedOrders || []).sort((a, b) => 
                     new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
                 )
