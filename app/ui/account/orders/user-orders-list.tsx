@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { fetchUserOrdersAPI } from "@/app/lib/services/orders/orderUserService"
-import { OrderType } from "@/app/lib/types/orderTypes"
+import { OrderResponse, OrderType } from "@/app/lib/types/orderTypes"
 import UserOrder from "./user-order"
 import { useAppDispatch } from "@/redux/store"
 import { useAppSelector } from "@/redux/hooks"
@@ -22,7 +22,7 @@ export default function UserOrdersList() {
               <p>Loading...</p>
           ) : (
               orders ? (
-                  orders.slice().reverse().map((order: OrderType) => 
+                  orders.slice().reverse().map((order: OrderResponse) => 
                       <ul className="divide-y divide-gray-300">
                           <UserOrder order={order} />
                       </ul>

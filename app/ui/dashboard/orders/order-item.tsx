@@ -30,7 +30,7 @@ export default function OrderItem({
             {orderItem.product.name}
           </p>
           <p className="text-xs text-gray-600">
-            <span className="font-semibold">Size:</span> Medium {/* Adjust this dynamically */}
+            <span className="font-semibold">Size: </span> <span className="uppercase">{orderItem?.size?.size_text}</span> {/* Adjust this dynamically from l to large */}
           </p>
         </div>
         <div className="flex justify-between items-center pb-1">

@@ -18,7 +18,7 @@ export default function UserOrderItemsList({
                     <div>
                         <p className="text-md font-semibold text-gray-800 capitalize">{orderItem.product.name}</p>
                         <p className="text-sm text-gray-600">Quantity: {orderItem.quantity}</p>
-                        <p className="text-sm text-gray-600">Size: <span className="uppercase">{orderItem.size}</span></p>
+                        <p className="text-sm text-gray-600">Size: <span className="uppercase">{orderItem.size.size_text}</span></p>
                         <p className="text-sm text-gray-600">Price: {orderItem.product.price * orderItem.quantity} EGP</p>
                     </div>
                     <div className="flex-shrink-0 w-24 h-24 relative">

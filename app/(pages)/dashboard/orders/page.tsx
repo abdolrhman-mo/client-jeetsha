@@ -4,41 +4,34 @@ import Heading from "@/app/ui/common/heading"
 import { useEffect, useState } from "react"
 import OrdersList from "@/app/ui/dashboard/orders/orders-list"
 import { fetchAllOrdersAPI } from "@/app/lib/services/orders/orderAdminService"
-import { OrderType } from "@/app/lib/types/orderTypes"
+import { OrderResponse, OrderType } from "@/app/lib/types/orderTypes"
+import { useAppDispatch } from "@/redux/store"
+import { useSelector } from "react-redux"
+import { useAppSelector } from "@/redux/hooks"
+import { distance } from "framer-motion"
+import { fetchAllOrders } from "@/redux/features/orders/orderAdminThunk"
 
 export default function Page() {
-    const [orders, setOrders] = useState<OrderType[]>([])
-    const [loading, setLoading] = useState<boolean>(true)
+    // const [orders, setOrders] = useState<OrderResponse[]>([])
+    const dispatch = useAppDispatch()
+    const orders = useAppSelector(state => state.orderAdmin.items)
+    const status = useAppSelector(state => state.orderAdmin.status)
+    
     useEffect(() => {
-        const getData = async () => {
-            try {
-                const fetchedOrders = await fetchAllOrdersAPI()
-                const sortedOrders = (fetchedOrders || []).sort((a, b) => 
-                    new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-                )
-                setOrders(sortedOrders)
-                // console.log('fetchedOrders', fetchedOrders)
-                // const t = fetchedOrders?.filter(order => order.status === 'pending')
-                // console.log('pending fetchedOrders', t)
-                setLoading(false)
-            } catch (error) {
-                console.error('Failed to fetch orders', error)
-            }
-        }
-        getData()
+      dispatch(fetchAllOrders())
     }, [])
 
     return (
         <>
             <div className="flex justify-between min-h-4 items-center">
-                <Heading level={2}>orders</Heading>
+              <Heading level={2}>orders</Heading>
             </div>
             <br />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                     <Heading level={4}>pending</Heading>
                     <div>
-                        {loading ? (
+                        {status === 'loading' ? (
                             <p>Loading...</p>
                         ) : (
                             <OrdersList orders={orders?.filter(order => order.status === 'pending')} state={'pending'} />
@@ -48,7 +41,7 @@ export default function Page() {
                 <div>
                     <Heading level={4}>delivered</Heading>
                     <div>
-                        {loading ? (
+                        {status === 'loading' ? (
                             <p>Loading...</p>
                         ) : (
                             <OrdersList orders={orders?.filter(order => order.status === 'delivered')} state={'delivered'} />

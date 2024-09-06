@@ -1,6 +1,6 @@
 import { CartItemType } from "../../types/cartTypes"
-import { OrderRequest, OrderType } from "../../types/orderTypes"
-import { addDetailsToOrders, transformOrderData } from "./orderUtility"
+import { OrderRequest, OrderResponse, OrderType } from "../../types/orderTypes"
+import { transformOrderData, transformOrdersList } from "./orderUtility"
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL
 
@@ -24,10 +24,12 @@ export const fetchUserOrdersAPI = async () => {
     // Remove empty orders(orders with no order items)
     const filteredOrders = data.filter((order: OrderType) => order.order_items.length > 0)
   
+    const transformedOrder = await transformOrdersList(filteredOrders)
+
     // Add sizing details(size text instead of size id)
-    const ordersWithDetails = await addDetailsToOrders(filteredOrders)
+    // const ordersWithDetails = await addDetailsToOrders(filteredOrders)
     
-    return ordersWithDetails
+    return transformedOrder
 
   } catch (error) {
     console.error('Failed to fetch orders:', error)
@@ -51,7 +53,7 @@ export const placeUserOrderAPI = async () => {
 
     const order = await res.json()
 
-    console.log('order placed before transformation', order)
+    console.log('order placed')
 
     const transformedOrder = transformOrderData(order.order_items)
     
@@ -91,11 +93,13 @@ export const addOrderDataAPI = async (
       
       const order = await res.json()
 
-      console.log('add order data before transformation', order)
+      console.log('added data to order')
+
+      // console.log('add order data before transformation', order)
       
       const transformedOrder = await transformOrderData(order)
 
-      console.log('add order data after transformation', transformedOrder)
+      // console.log('add order data after transformation', transformedOrder)
       
       return transformedOrder
     } catch (error) {
@@ -107,26 +111,25 @@ export const addOrderDataAPI = async (
 export const createBuyItNowOrderAPI = async (
   product_id: number,
   size_text: string,
-  user: null | number,
-  order: number,
 ) => {
   try {
-    const body: any = {
-      product_id,
-      size_text,
-      order,
+    let headers: any = {
+      'Content-Type': 'application/json',
     }
 
-    if (user !== null) {
-      body.user = user
+    let token = localStorage.getItem('authToken')
+    if (token) {
+      headers['Authorization'] = `Token ${token}`
     }
     
-    const res = await fetch(`${API_URL}/orderItems/buy-it-now/`, {
+    // const res = await fetch(`${API_URL}/orderItems/buy-it-now/`, {
+    const res = await fetch(`${API_URL}/order/`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(body)
+      headers: headers,
+      body: JSON.stringify({
+        product_id,
+        size_text,
+      })
     })
 
 
@@ -135,9 +138,101 @@ export const createBuyItNowOrderAPI = async (
     }
     
     const data = await res.json()
-    const transformedOrder = await transformOrderData(data.order_items)
+
+    console.log('data', data)
+
+    const transformedOrder = await transformOrderData(data.order_item)
     
     return transformedOrder
+  } catch (error) {
+    console.error('Error making order:', error)
+    throw error
+  }
+}
+
+export const createOrderAPI = async (
+  orderData: OrderRequest
+) => {
+  try {
+    console.log('aslkdfjla;sd')
+    let headers: any = {
+      'Content-Type': 'application/json',
+    }
+
+    let token = localStorage.getItem('authToken')
+    if (token) {
+      headers['Authorization'] = `Token ${token}`
+    }
+    
+    // const res = await fetch(`${API_URL}/orderItems/buy-it-now/`, {
+    const res = await fetch(`${API_URL}/orders/users-view/`, {
+      method: 'POST',
+      headers: headers,
+      body: JSON.stringify({
+        order_first_name: orderData.user.first_name,
+        order_last_name: orderData.user.last_name,
+        addressText: orderData.address.address_text,
+        city: orderData.address.city,
+        country: 'Egypt',
+        phone_number: orderData.user.phone_number,
+      })
+    })
+
+
+    if (!res.ok) {
+      console.error(`Error: ${res.status}`)
+    }
+    
+    const data = await res.json()
+
+    const transformedOrder = await transformOrderData(data)
+    
+    console.log('transformed data', transformedOrder)
+    
+    return transformedOrder
+  } catch (error) {
+    console.error('Error making order:', error)
+    throw error
+  }
+}
+
+export const createOrderItemAPI = async (
+  order: number,
+  product_id: number,
+  size_text: string
+) => {
+  console.log('creaeraldfkajslfdsk;j')
+  try {
+    let headers: any = {
+      'Content-Type': 'application/json',
+    }
+
+    let token = localStorage.getItem('authToken')
+    if (token) {
+      headers['Authorization'] = `Token ${token}`
+    }
+    
+    // const res = await fetch(`${API_URL}/orderItems/buy-it-now/`, {
+    const res = await fetch(`${API_URL}/orderItems/`, {
+      method: 'POST',
+      headers: headers,
+      body: JSON.stringify({
+        product_id,
+        size_text,
+        order,
+      })
+    })
+
+
+    if (!res.ok) {
+      console.error(`Error: ${res.status}`)
+    }
+    
+    const data = await res.json()
+
+    console.log('order itemmmmm', data)
+    
+    return data
   } catch (error) {
     console.error('Error making order:', error)
     throw error
@@ -156,33 +251,13 @@ export const createGuestOrderAPI = async (
       headers: {
         'Content-Type': 'application/json',
       },
-      // body: JSON.stringify({
-      //   country: orderData.address.country,
-      //   city: orderData.address.city,
-      //   addressText: orderData.address.address_text,
-      //   phone_number: orderData.user.phone_number,
-      //   // user: {
-      //   //   email: localStorage.getItem('email'),
-      //   //   password: localStorage.getItem('password'),
-      //   // }
-      // }),
       body: JSON.stringify({
-        "status": "pending",
-        "addressText": "new",
-        "city": "new",
-        "country": "new",
-        "phone_number": "new",
-        "user": {
-          "first_name": "new",
-          "last_name": "new"
-        },
-        "order_items": [
-          {
-            "product_id": 1,
-            "quantity": 2,
-            "size_text": "xl"
-          }
-        ]
+        addressText: orderData.address.address_text,
+        city: orderData.address.city,
+        country: orderData.address.country,
+        phone_number: orderData.user.phone_number,
+        order_first_name: orderData.user.first_name,
+        order_last_name: orderData.user.last_name,
       })
     })
 
@@ -192,7 +267,9 @@ export const createGuestOrderAPI = async (
     
     const data = await res.json()
 
-    return data
+    const transformedData = await transformOrderData(data)
+
+    return transformedData
   } catch (error) {
     console.error('Error making order:', error)
     throw error

@@ -1,9 +1,9 @@
-import { OrderType } from "@/app/lib/types/orderTypes"
+import { OrderResponse, OrderType } from "@/app/lib/types/orderTypes"
 import { createSlice } from "@reduxjs/toolkit"
 import { fetchUserOrders } from "./orderUserThunk"
 
 interface OrderState {
-  items: OrderType[]
+  items: OrderResponse[]
   status: 'idle' | 'loading' | 'failed'
   error: string | null
 }

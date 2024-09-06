@@ -55,13 +55,13 @@ export default function CheckoutForm({
     onSubmit: async (values) => {
       try {
         if (buyItNowId && buyItNowSize) {
-          await dispatch(placeBuyItNowOrder({
+          dispatch(placeBuyItNowOrder({
             orderData: values,
             productId: buyItNowId,
             size_text: buyItNowSize,
           }))
         } else {
-          await dispatch(placeUserOrder({ orderData: values }))
+          dispatch(placeUserOrder({ orderData: values }))
         }
       } catch (error) {
         console.error('Error creating order:', error)

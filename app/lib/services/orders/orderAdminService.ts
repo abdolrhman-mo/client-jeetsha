@@ -1,12 +1,12 @@
-import { OrderType } from "@/app/lib/types/orderTypes"
-import { addDetailsToOrders } from "./orderUtility"
+import { OrderRequest, OrderResponse } from "@/app/lib/types/orderTypes"
+import { transformOrderData, transformOrdersList } from "./orderUtility"
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL
 
 // Fetch all orders for the admin
 export const fetchAllOrdersAPI = async () => {
     try {
-        const res = await fetch(`${API_URL}/orders/users-view/`, {
+        const res = await fetch(`${API_URL}/orders/admin-view/`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -18,15 +18,21 @@ export const fetchAllOrdersAPI = async () => {
           console.error(`Error fetching orders: ${res.statusText}`)
         }
     
-        const data = await res.json() || []
+        const data = await res.json()
+
+        // console.log('data', data[0])
+        
+        const transformedOrdersList: any = await transformOrdersList(data)
+        
+        // console.log('transformed data', transformedOrdersList)
     
         // Remove empty orders(orders with no order items)
-        const filteredOrders = data.filter((order: OrderType) => order.order_items.length > 0)
+        const filteredOrders = transformedOrdersList.filter((order: OrderResponse) => order.order_items.length > 0)
     
-        // Add sizing details(size text instead of size id)
-        const ordersWithDetails = await addDetailsToOrders(filteredOrders)
+        // console.log('filteredOrders', filteredOrders)
         
-        return ordersWithDetails
+        // return ordersWithDetails
+        return filteredOrders
     
       } catch (error) {
         console.error('Failed to fetch orders:', error)
@@ -49,13 +55,11 @@ export const fetchAdminOrderByIdAPI = async (orderId: number) => {
       console.error(`Error fetching orders: ${res.statusText}`)
     }
 
-    const order: OrderType = await res.json()
+    const order: OrderResponse = await res.json()
 
-    // Add sizing details(size text instead of size id)
-    const ordersWithDetails = await addDetailsToOrders([order])
-    const orderWithDetails = ordersWithDetails[0]
+    const transformedOrder = await transformOrderData(order)
 
-    return orderWithDetails
+    return transformedOrder
   } catch (error) {
     console.error('Failed to fetch orders:', error)
     throw error // Rethrow the error after logging it
@@ -65,7 +69,8 @@ export const fetchAdminOrderByIdAPI = async (orderId: number) => {
 // Change status between pending and delivered
 export const changeOrderStatusAPI = async (
   orderId: number,
-  state: string
+  state: string,
+  orderData: OrderResponse
 ) => {
     try {
       const res = await fetch(`${API_URL}/orders/admin-view/${orderId}/`, {
@@ -75,8 +80,10 @@ export const changeOrderStatusAPI = async (
           'Authorization': `Token ${localStorage.getItem('authToken')}`
         },
         body: JSON.stringify({
-          id: orderId,
-          status: state
+          status: state,
+          addressText: orderData.address.address_text || 'blank',
+          order_first_name: orderData.user.first_name || 'blank',
+          order_last_name: orderData.user.last_name || 'blank',  
         })
       })
   
@@ -85,6 +92,7 @@ export const changeOrderStatusAPI = async (
       }
       
       const data = await res.json()
+      console.log('edited order', data)
       return data
     } catch (error) {
       console.error('Error making order:', error)

@@ -4,7 +4,7 @@ export interface OrderItemType {
   id: number
   product: ProductType
   quantity: number
-  size: string
+  size: any
 }
 
 export interface OrderType {

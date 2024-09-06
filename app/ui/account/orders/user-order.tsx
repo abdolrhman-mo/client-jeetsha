@@ -1,11 +1,11 @@
-import { OrderItemType, OrderType } from "@/app/lib/types/orderTypes"
+import { OrderItemType, OrderResponse, OrderType } from "@/app/lib/types/orderTypes"
 import Image from "next/image"
 import UserOrderItemsList from "./order-items/user-order-items-list"
 
 export default function UserOrder({
   order,
 }: {
-  order: OrderType
+  order: OrderResponse
 }) {
   return (
     <li key={order.id} className="border rounded-lg shadow-sm p-6 mb-6 bg-white">
@@ -36,7 +36,7 @@ export default function UserOrder({
         </div>
         <div className="flex justify-between mb-2">
           <span className="font-semibold text-gray-600">Address:</span>
-          <span className="text-gray-600">{order.addressText || "No address provided"}</span>
+          <span className="text-gray-600">{order.address?.address_text || "No address provided"}</span>
         </div>
       </div>
 

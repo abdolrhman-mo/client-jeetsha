@@ -48,7 +48,7 @@ ADMIN ACTIONS
     fetchAllOrders
     updateOrderStatus
   Products
-    createProduct
+    // createProduct
   Inventory
     updateProductStock
 
@@ -184,3 +184,4 @@ Edits I made
 
 3- GET http://localhost:8000/api-auth/1/ 401 (Unauthorized)
     i solved this error by making TokenAuthentication the default authentication class for user viewset
+

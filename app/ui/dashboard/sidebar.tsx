@@ -8,7 +8,6 @@ import { dashboradRoutes } from '@/app/lib/constants/appConfig'
 import { ROUTES } from '@/app/lib/constants/routes'
 
 export default function SideBar() {
-    // const [pathname, setPathname] = useState('/dashboard')
     const [pathname, setPathname] = useState('/dashboard')
     const [nestedPathname, setNestedPathname] = useState('')
 
@@ -36,7 +35,7 @@ export default function SideBar() {
                                 localStorage.setItem('nestedPathname', '')
                             }} 
                             key={link.path} 
-                            href={`dashboard/${link.path}`}
+                            href={`/dashboard${link.path}`}
                         >
                             <p
                                 className={clsx(

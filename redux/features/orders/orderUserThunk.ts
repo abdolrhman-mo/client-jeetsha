@@ -5,6 +5,8 @@ import {
     addOrderItemToGuestOrderAPI, 
     createBuyItNowOrderAPI, 
     createGuestOrderAPI,
+    createOrderAPI,
+    createOrderItemAPI,
     fetchUserOrdersAPI,
     placeUserOrderAPI, 
 } from "@/app/lib/services/orders/orderUserService"
@@ -45,18 +47,18 @@ export const placeUserOrder = createAsyncThunk('order/placeUserOrder', async (
     orderId = order.id
     
     // AddING orderItems to order
-    // const orderItems = JSON.parse(localStorage.getItem('cartItems') || '[]')
-    // orderItems.forEach(async (orderItem: CartItemType) => 
-    //   await addOrderItemToGuestOrderAPI(orderId, orderItem)
-    // )
-    // localStorage.removeItem('cartItems')
+    const orderItems = JSON.parse(localStorage.getItem('cartItems') || '[]')
+    orderItems.forEach(async (orderItem: CartItemType) => 
+      await addOrderItemToGuestOrderAPI(orderId, orderItem)
+    )
+    localStorage.removeItem('cartItems')
   }
 
   // POST ORDER UPDATES
 
   await updateUserData(orderData)
 
-  // abdoRedirect(ROUTES.ORDER_CONFIRMATION(orderId))
+  abdoRedirect(ROUTES.ORDER_CONFIRMATION(orderId))
 
   return order
 })
@@ -73,24 +75,33 @@ export const placeBuyItNowOrder = createAsyncThunk('order/placeBuyItNowOrder', a
   },
   { dispatch }
 ) => {
-  const isAuthVar = isAuth()
-
-  // TODOOOOOO
+  // Create buy it now order
+  // let order = await createBuyItNowOrderAPI(
+  //   productId,
+  //   size_text,
+  // )
+  // console.log('buy it now order', order)
+  // const orderId = order.id
   
   // Create order
-  let order
-  order = await createGuestOrderAPI(orderData)
 
-  // Add order items to created order
+  const order = await createOrderAPI(orderData)
   const orderId = order.id
-  order = await createBuyItNowOrderAPI(
-    productId,
-    size_text,
-    isAuthVar ? Number(localStorage.getItem('userId')) : null, 
-    orderId
-  )
-  console.log('buy it now order', order)
 
+  console.log('my created order', order)
+
+  // Create order item with order id
+
+  const orderItem = await createOrderItemAPI(orderId, productId, size_text)
+  
+  console.log('created aslo order item', orderItem)
+  
+  
+  // // Add data to order
+
+  // await addOrderDataAPI(orderId, orderData)
+
+  
   // POST ORDER UPDATES
   
   await updateUserData(orderData)

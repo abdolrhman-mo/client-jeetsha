@@ -3,16 +3,20 @@ import Link from "next/link"
 import clsx from "clsx"
 import Button from "../../common/button"
 import { changeOrderStatusAPI } from "@/app/lib/services/orders/orderAdminService"
-import { OrderType } from "@/app/lib/types/orderTypes"
+import { OrderResponse, OrderType } from "@/app/lib/types/orderTypes"
 import { ROUTES } from "@/app/lib/constants/routes"
+import { useAppDispatch } from "@/redux/store"
+import { changeOrderStatus } from "@/redux/features/orders/orderAdminThunk"
 
 export default function Order({
     order,
     state,
 }: {
-    order: OrderType
-    state: string
+    order: OrderResponse
+    state: 'pending' | 'delivered'
 }) {
+    const dispatch = useAppDispatch()
+
     const formatDate = (dateString: string) => {
         const date = new Date(dateString)
         return new Intl.DateTimeFormat('en-US', { 
@@ -25,11 +29,18 @@ export default function Order({
     }
 
     const handleChangeState = async () => {
-        const newOrder = await changeOrderStatusAPI(order.id, state === 'pending' ? 'delivered' : 'pending')
+      console.log('changing state from', state)
+      dispatch(changeOrderStatus({ orderId: order.id, state, orderData: order }))
     }
 
     return (
         <div className="p-6 rounded-lg shadow-md bg-white">
+            <div className="mb-4">
+                <p className="text-base font-semibold">Order Id:</p>
+                <p className="text-sm text-gray-600">
+                    {order.id ? order.id : 'No order id available'}
+                </p>
+            </div>
             <div className="mb-4">
                 <p className="text-base font-semibold">Order Date:</p>
                 <p className="text-sm text-gray-600">
@@ -39,13 +50,13 @@ export default function Order({
             <div className="mb-4">
                 <p className="text-base font-semibold">Shipping Address:</p>
                 <p className="text-sm text-gray-600">
-                    {order.addressText ? order.addressText : 'No address available'}
+                    {order.address?.address_text ? order.address?.address_text : 'No address available'}
                 </p>
             </div>
             <div className="mb-4">
                 <p className="text-base font-semibold">Phone No:</p>
                 <p className="text-sm text-gray-600">
-                    {order.phone_number ? order.phone_number : 'No phone number available'}
+                    {order.user.phone_number ? order.user.phone_number : 'No phone number available'}
                 </p>
             </div>
             <div className="mb-4">
