@@ -126,3 +126,61 @@ authService.ts, fetchUserData, unautharized ('/api-auth/{id}/')
 authService.ts, updateUserName, unautharized ('/api-auth/{id}/')
 fetch orderItems and most of apis don't work when not admin
 buyItNow not working because it doesn't create a guest order
+
+
+
+if not admin
+GET http://localhost:8000/orders/users-view/ 403 (Forbidden)
+solu: bec. of verification. the email must be activated
+0.
+
+
+
+errors
+
+GET http://localhost:8000/api-auth/1/ 401 (Unauthorized) 
+(it works in swagger but it doesn't work in fetch)
+
+POST http://localhost:8000/orders/users-view/ 500 (Internal Server Error)
+server => Field 'id' expected a number but got <django.contrib.auth.models.AnonymousUser object at 0x0000023C134D8F80>.
+
+when creating an order:
+  guest order
+    - u shouldn't need token nor user id
+    - it sends res w order data 
+  normal order 
+    - u can use token
+    - then the order res comes including user id
+
+
+
+Test baad mohamed
+
+buy-it-now
+
+
+
+
+
+Mohsen todo list 
+- remove varification
+
+
+
+
+Edits I made 
+
+1- if (request.user.authenticated) user = request.user : user = None
+    to allow non authenticated users to create orders
+    but now it still needs order_items to create order 
+    and the unauthenticated user doesn't have order_items assotaited with him
+
+2- /orders/users-view/{id}/ gives 200 but it doesn't edit anything
+    i did this using partial_update function in OrderViewSet
+    then i updated orderSerializer to accept nested data to be able to send user: { first_name: 'abdo' }
+    and i did this by creating update function in orderSerializer
+    and inside the servializer i removed adderss object and replaced it with address fields(addressText: 'test', country: 'egypt')
+    because in models the it was address fields not address object(address: {addressText: 'test'})
+
+3- GET http://localhost:8000/api-auth/1/ 401 (Unauthorized)
+    i solved this error by making TokenAuthentication the default authentication class for user viewset

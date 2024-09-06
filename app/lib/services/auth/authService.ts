@@ -92,6 +92,8 @@ export const fetchUserDataAPI = async () => {
 
     const data = await res.json()
 
+    console.log('user data', data)
+
     if (!res.ok) {
       const errorData = await res.json();
       throw new Error(`Failed to fetch user data: ${res.status} ${res.statusText} - ${JSON.stringify(errorData)}`);

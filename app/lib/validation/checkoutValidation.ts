@@ -3,7 +3,8 @@ import * as yup from 'yup'
 export const checkoutSchema = yup.object().shape({
   address: yup.object().shape({
     country: yup.string()
-      .required("Country is required."),
+      .notRequired(),
+      // .required("Country is required."),
     city: yup.string()
       .required("City is required."),
     address_text: yup.string()

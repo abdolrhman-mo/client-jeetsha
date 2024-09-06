@@ -51,7 +51,9 @@ export const placeUserOrderAPI = async () => {
 
     const order = await res.json()
 
-    const transformedOrder = transformOrderData(order)
+    console.log('order placed before transformation', order)
+
+    const transformedOrder = transformOrderData(order.order_items)
     
     return transformedOrder
   } catch (error) {
@@ -72,11 +74,14 @@ export const addOrderDataAPI = async (
           'Authorization': `Token ${localStorage.getItem('authToken')}`
         },
         body: JSON.stringify({
-          country: orderData.address.country,
-          city: orderData.address.city,
+          user: {
+            first_name: orderData.user.first_name,
+            last_name: orderData.user.last_name
+          },
           addressText: orderData.address.address_text,
+          city: orderData.address.city,
+          country: 'Egypt',
           phone_number: orderData.user.phone_number,
-          // TODO: Add first name and last name
         })
       })
   
@@ -86,7 +91,11 @@ export const addOrderDataAPI = async (
       
       const order = await res.json()
 
-      const transformedOrder = transformOrderData(order)
+      console.log('add order data before transformation', order)
+      
+      const transformedOrder = await transformOrderData(order)
+
+      console.log('add order data after transformation', transformedOrder)
       
       return transformedOrder
     } catch (error) {
@@ -126,7 +135,9 @@ export const createBuyItNowOrderAPI = async (
     }
     
     const data = await res.json()
-    return data
+    const transformedOrder = await transformOrderData(data.order_items)
+    
+    return transformedOrder
   } catch (error) {
     console.error('Error making order:', error)
     throw error
@@ -145,12 +156,33 @@ export const createGuestOrderAPI = async (
       headers: {
         'Content-Type': 'application/json',
       },
+      // body: JSON.stringify({
+      //   country: orderData.address.country,
+      //   city: orderData.address.city,
+      //   addressText: orderData.address.address_text,
+      //   phone_number: orderData.user.phone_number,
+      //   // user: {
+      //   //   email: localStorage.getItem('email'),
+      //   //   password: localStorage.getItem('password'),
+      //   // }
+      // }),
       body: JSON.stringify({
-        country: orderData.address.country,
-        city: orderData.address.city,
-        addressText: orderData.address.address_text,
-        phone_number: orderData.user.phone_number,
-        // TODO: Add first name and last name
+        "status": "pending",
+        "addressText": "new",
+        "city": "new",
+        "country": "new",
+        "phone_number": "new",
+        "user": {
+          "first_name": "new",
+          "last_name": "new"
+        },
+        "order_items": [
+          {
+            "product_id": 1,
+            "quantity": 2,
+            "size_text": "xl"
+          }
+        ]
       })
     })
 
@@ -159,6 +191,7 @@ export const createGuestOrderAPI = async (
     }
     
     const data = await res.json()
+
     return data
   } catch (error) {
     console.error('Error making order:', error)

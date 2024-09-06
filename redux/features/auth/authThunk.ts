@@ -45,8 +45,11 @@ export const auth = createAsyncThunk('auth/auth', async (
 })
 
 export const logout = createAsyncThunk('auth/logout', async () => {
-  localStorage.removeItem('authToken')
-  localStorage.removeItem('email')
+
+  if (typeof window !== 'undefined') {
+    localStorage.removeItem('authToken')
+    localStorage.removeItem('email')
+  }
 
   redirectHome()
 })

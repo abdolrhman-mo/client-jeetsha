@@ -39,7 +39,9 @@ export const addDetailsToOrders = async (orders: OrderType[]): Promise<OrderType
 // A utility function which takes order data and transform it to orderData typescript
 // interface i want
 export const transformOrderData = async (data: any) => {
-  data = data.order_items
+  
+  // console.log('data before transformation', data)
+
   const transformedData: OrderResponse = {
     id: data.id,
     created_at: data.created_at,
@@ -51,12 +53,14 @@ export const transformOrderData = async (data: any) => {
       address_text: data.addressText
     },
     user: {
-      id: data.user,
-      first_name: data.first_name || '',
-      last_name: data.last_name || '',
-      phone_number: data.phone_number
+      id: data.user.id,
+      first_name: data.user.first_name || '',
+      last_name: data.user.last_name || '',
+      phone_number: data.phone_number,
     }
   }
+
+  // console.log('data after transformation', transformedData)
 
   return transformedData
 }

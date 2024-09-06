@@ -30,7 +30,7 @@ export const placeUserOrder = createAsyncThunk('order/placeUserOrder', async (
     // CREATING ORDER
 
     order = await placeUserOrderAPI()
-    console.log('order placed', order)
+    console.log('order placed after transformation', order)
     orderId = order.id
     
     // Add new address data and user data to order using patch request
@@ -45,18 +45,18 @@ export const placeUserOrder = createAsyncThunk('order/placeUserOrder', async (
     orderId = order.id
     
     // AddING orderItems to order
-    const orderItems = JSON.parse(localStorage.getItem('cartItems') || '[]')
-    orderItems.forEach(async (orderItem: CartItemType) => 
-      await addOrderItemToGuestOrderAPI(orderId, orderItem)
-    )
-    localStorage.removeItem('cartItems')
+    // const orderItems = JSON.parse(localStorage.getItem('cartItems') || '[]')
+    // orderItems.forEach(async (orderItem: CartItemType) => 
+    //   await addOrderItemToGuestOrderAPI(orderId, orderItem)
+    // )
+    // localStorage.removeItem('cartItems')
   }
 
   // POST ORDER UPDATES
 
   await updateUserData(orderData)
 
-  abdoRedirect(ROUTES.ORDER_CONFIRMATION(orderId))
+  // abdoRedirect(ROUTES.ORDER_CONFIRMATION(orderId))
 
   return order
 })
@@ -74,12 +74,14 @@ export const placeBuyItNowOrder = createAsyncThunk('order/placeBuyItNowOrder', a
   { dispatch }
 ) => {
   const isAuthVar = isAuth()
+
+  // TODOOOOOO
   
   // Create order
   let order
   order = await createGuestOrderAPI(orderData)
 
-  // Add order item to created order
+  // Add order items to created order
   const orderId = order.id
   order = await createBuyItNowOrderAPI(
     productId,
