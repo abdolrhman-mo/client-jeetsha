@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@/redux/store'
 import { useAppSelector } from '@/redux/hooks'
 import { ROUTES } from '@/app/lib/constants/routes'
+import { MAIN_COLOR } from '@/app/lib/constants/appConfig'
 
 export default function NavCart() {
     const dispatch = useDispatch()
@@ -80,15 +81,9 @@ export default function NavCart() {
                     'h-screen',
                     // Flex
                     'flex flex-col',
-                    // Backgrounds 
-                    'bg-white',
                     // Borders
                     'divide-y',
-                    // {
-                    //     'scale-x-0': showCart === false,
-                    //     'scale-x-100': showCart
-                    // }
-                )}
+                ) + ` bg-${MAIN_COLOR}`}
             >
                 <motion.div
                     variants={cartItem} 

@@ -5,6 +5,7 @@ import MobileNavItem from "@/app/ui/layout/nav/mobile-nav-item"
 import { useSelector } from "react-redux"
 import { selectMobileNav } from "@/redux/features/nav/mobileNavSlice"
 import { ROUTES } from "@/app/lib/constants/routes"
+import { MAIN_COLOR } from "@/app/lib/constants/appConfig"
 
 export default function({
     loggedIn,
@@ -43,11 +44,9 @@ export default function({
                 'h-screen 0 sm:w-96',
                 // Spacing
                 'space-y-4 py-12',
-                // Background
-                'bg-white',
                 // Typography
                 'text-2xl',
-            )}
+            ) + ` bg-${MAIN_COLOR}`}
         >
             <div className={clsx(
                     // Layout & Sizing
@@ -59,10 +58,8 @@ export default function({
                 )}
             >
                 <MobileNavItem xMark={true} />
-                <MobileNavItem href={ROUTES.COLLECTIONS.LATEST} text="new" />
-                <MobileNavItem href={ROUTES.COLLECTIONS.TEES} text="tees" />
-                <MobileNavItem href={ROUTES.COLLECTIONS.PANTS} text="pants" />
-                <MobileNavItem href={ROUTES.COLLECTIONS.SHORTS} text="shorts" />
+                <MobileNavItem href={ROUTES.SEARCH} text="search" />
+                <MobileNavItem href={ROUTES.CART} text="cart" />
                 {loggedIn ? (
                   <MobileNavItem href={ROUTES.ACCOUNT} text="profile" /> 
                 ) : (

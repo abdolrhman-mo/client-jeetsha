@@ -20,11 +20,13 @@ export default function AddToCartLink({
     const dispatch = useAppDispatch()
 
     const handleAddToCart = async () => {
-        onClick()
+      onClick()
+      if (selectedSize) {
         
         dispatch(addItemToCart({ product, size_text: selectedSize }))
         removeSelectedSize()
         dispatch(toggleNavCart())
+      }
     }
     
     return <Button theme="light" onClick={handleAddToCart}>add to cart</Button>

@@ -11,8 +11,8 @@ export default async function Page({
     page?: string
   },
 }) {
-  const query = searchParams?.query || ''
-  const currentPage = Number(searchParams?.page) || 1
+  // const query = searchParams?.query || ''
+  // const currentPage = Number(searchParams?.page) || 1
 
   // const products = await fetchProductsAPI()
 
@@ -24,13 +24,10 @@ export default async function Page({
       <div className="z-10">
         <Hero />
 
-        <ProductGallery title='latest drop' tag='latest' />
-        <ProductGallery title='tees' tag='tee' />
-        <ProductGallery title='pants' tag='pants' />
-        <ProductGallery title='shorts' tag='shorts' />
-        {/* <ProductGallery title='shorts' tag='all' /> */}
-
-        <ShopByCategory />
+        <div id="new-collection">
+          <ProductGallery title='new collection' tag='new' />
+        </div>
+        
       </div>
     </main>
   );

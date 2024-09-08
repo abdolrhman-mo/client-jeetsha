@@ -140,7 +140,7 @@ export default function Page({
                         <div className="text-center">
                             <Heading level={2}>you may also like</Heading>
                         </div>
-                        <ProductsList products={products} limit={4} tag='latest' />
+                        <ProductsList products={products} limit={2} tag='new' exceptProduct={product.id} />
                         <div className="w-fit mx-auto">
                             <CustomLink className="text-xs" href={ROUTES.COLLECTIONS.ALL}>continue shopping</CustomLink>
                         </div>

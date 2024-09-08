@@ -13,6 +13,7 @@ export default function ProductsList({
     search = false,
     navSearch = false,
     query,
+    exceptProduct,
 }: {
   products?: any[]
   styles?: string
@@ -22,19 +23,24 @@ export default function ProductsList({
   search?: boolean
   navSearch?: boolean
   query?: string
+  exceptProduct?: number
 }) {
     // Search
     let searchedProducts: any = []
     if (search) {
-        if (query) {
-            products.map((product: any) => {
-                if (product.name.toLowerCase().search(query) != -1) {
-                    searchedProducts.push(product)
-                }
-            })
-        }
+      if (query) {
+          products.map((product: any) => {
+              if (product.name.toLowerCase().search(query) != -1) {
+                  searchedProducts.push(product)
+              }
+          })
+      }
+    } else if (exceptProduct) {
+      searchedProducts = products.filter(product =>
+        product.id !== exceptProduct
+      )
     } else {
-        searchedProducts = products
+      searchedProducts = products
     }
 
     // Limt Number & Tags
@@ -60,11 +66,11 @@ export default function ProductsList({
             <div 
                 className={clsx(
                     // Sizing
-                    'w-11/12',
+                    'w-1/2',
                     // Spacing
                     'mx-auto',
                     // Grid
-                    'grid grid-cols-2 lg:grid-cols-4 gap-x-3 md:gap-x-8 gap-y-4',
+                    'grid grid-cols-1 md:grid-cols-2 md:gap-x-12 gap-y-4',
                     // Effects
                     'opacity-100',
                 ) + ` ${styles}`}

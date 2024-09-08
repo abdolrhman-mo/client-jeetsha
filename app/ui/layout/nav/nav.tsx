@@ -58,7 +58,7 @@ export default function Nav() {
     const searchBar = useSelector(selectSearchBar)
 
     return (
-        <nav className='shadow-sm fixed w-full z-30 bg-white'>
+        <nav className='shadow-sm fixed w-full z-30 bg-[#EBD9D5]'>
             <div 
                 className={clsx(
                     // Layout & Sizing
@@ -87,10 +87,10 @@ export default function Nav() {
                     handleBarsIconClick()
                 }} />
 
-                <div 
-                    className='w-1/2 mx-auto flex justify-center md:justify-between'
+                <div
+                    className='mx-auto flex justify-center'
                 >    
-                    <ul 
+                    {/* <ul 
                         className={clsx(
                             // Layout & Sizing
                             'hidden w-full',
@@ -105,9 +105,9 @@ export default function Nav() {
                         <motion.li whileHover='hover' variants={navItem}>
                             <Link href={ROUTES.COLLECTIONS.TEES}>TEES</Link>
                         </motion.li>
-                    </ul>
-                    <Logo text_size='text-4xl' />
-                    <ul className={clsx(
+                    </ul> */}
+                    <Logo />
+                    {/* <ul className={clsx(
                             // Layout & Sizing
                             'hidden w-full',
                             // Flex
@@ -121,18 +121,18 @@ export default function Nav() {
                         <motion.li whileHover='hover' variants={navItem}>
                             <Link href={ROUTES.COLLECTIONS.SHORTS}>SHORTS</Link>
                         </motion.li>
-                    </ul>
+                    </ul> */}
                 </div>
 
                 {/* RIGHT SIDE */}
 
                 {/* mobile */}
-                <Link href={ROUTES.SEARCH}>
+                {/* <Link href={ROUTES.SEARCH}>
                     <MagnifyingGlassIcon
                         className='h-6 cursor-pointer block md:hidden' 
                         // onClick={() => dispatch(toggleSearchBar())}
                     />
-                </Link>
+                </Link> */}
                 {/* desktop */}
                 <ul className='flex'>
                     <li>

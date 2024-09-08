@@ -15,21 +15,9 @@ export default async function ProductGallery({
   const products = await fetchProductsAPI()
 
     return (
-        <div className="my-36">
-            <Heading level={2} className="text-center">{title}</Heading>
+        <div className="mt-20">
+            <Heading level={2} className="text-center text-[#5D2A1E]">{title}</Heading>
             <ProductsList products={products} tag={tag} limit={100} />
-            {/* <ProductsListSkeleton count={4} /> */}
-            <div className="text-center w-5/6 mx-auto">
-                <div className="w-fit mx-auto">
-                    <CustomLink
-                        className="text-lg"
-                        href={ROUTES.COLLECTION_FUNCTION(tag)} 
-                        theme="light" 
-                    >
-                        view all
-                    </CustomLink>
-                </div>
-            </div>
         </div>
     )
 }

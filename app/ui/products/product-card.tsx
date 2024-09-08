@@ -27,7 +27,7 @@ export default function Product({
         }
     }
     
-    const searchBar = useSelector(selectSearchBar)
+    // const searchBar = useSelector(selectSearchBar)
     const dispatch = useDispatch()
     let handleClick = () => {
         if (navSearch) {

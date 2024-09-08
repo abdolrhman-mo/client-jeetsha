@@ -8,6 +8,8 @@ import { useSelector } from 'react-redux'
 import { selectSearchBar } from '@/redux/features/nav/searchBarSlice'
 import { selectMobileNav } from '@/redux/features/nav/mobileNavSlice'
 import { selectNavCart } from '@/redux/features/nav/navCartSlice'
+import clsx from 'clsx'
+import { MAIN_COLOR } from '@/app/lib/constants/appConfig'
 
 export default function RootLayout({
   children,
@@ -19,9 +21,9 @@ export default function RootLayout({
   const navCart = useSelector(selectNavCart)
 
   return (
-      <body className={
-        (navCart || searchBar || mobileNav) ? 'overflow-hidden' : ''
-      }>
+      <body className={clsx(
+        (navCart || searchBar || mobileNav) ? 'overflow-hidden' : '',
+      ) + `bg-${MAIN_COLOR}`}>
         <Nav />
         <div className="pt-20">
           {children}
