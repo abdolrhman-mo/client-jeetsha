@@ -1,40 +1,5 @@
 import { OrderItemType, OrderResponse, OrderType } from "../../types/orderTypes"
-import { fetchSizeByIdAPI } from "../products/sizeService"
 
-
-// // A utility function to replace size id with actual
-// // size text in order items (order.order_items)
-// export const addDetailsToOrders = async (orders: OrderType[]): Promise<OrderType[]> => {
-//     return await Promise.all(orders.map(async (order: OrderType) => {
-//         if (order.order_items.length > 0) {
-//             try {
-//                 const itemsWithDetails = await Promise.all(order.order_items.map(async (item: OrderItemType) => {
-//                     const product = item.product
-//                     let size = null
-
-//                     // Fetch size details if available
-//                     if (item.size) {
-//                         try {
-//                             size = await fetchSizeByIdAPI(Number(item.size))
-//                         } catch (error) {
-//                             console.error(`Failed to fetch size details for item ${item.id}:`, error)
-//                         }
-//                     }
-
-//                     return {
-//                         ...item,
-//                         product,
-//                         size: size ? size.size_text : null,
-//                     }
-//                 }))
-//                 order.order_items = itemsWithDetails
-//             } catch (error) {
-//                 console.error(`Failed to fetch item details for order ${order.id}:`, error)
-//             }
-//         }
-//         return order
-//     }))
-// }
 
 // A utility function which takes order data and transform it to orderData typescript
 // interface i want
@@ -42,6 +7,13 @@ export const transformOrderData = async (data: any) => {
   
   // console.log('order before transformation', data)
 
+  // Get total order price
+  let totalPrice: number = 0
+  data.order_items.forEach((orderItem: OrderItemType) => {
+    totalPrice += orderItem.product.price * orderItem.quantity
+  })
+
+  // Transform data
   const transformedData: OrderResponse = {
     id: data.id,
     created_at: data.created_at,
@@ -57,7 +29,8 @@ export const transformOrderData = async (data: any) => {
       first_name: data.order_first_name || '',
       last_name: data.order_last_name || '',
       phone_number: data.phone_number,
-    }
+    },
+    totalOrderPrice: totalPrice
   }
 
   // console.log('order after transformation', transformedData)

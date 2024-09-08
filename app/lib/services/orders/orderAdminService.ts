@@ -20,7 +20,7 @@ export const fetchAllOrdersAPI = async () => {
     
         const data = await res.json()
 
-        // console.log('data', data[0])
+        console.log('data', data[0])
         
         const transformedOrdersList: any = await transformOrdersList(data)
         
@@ -92,7 +92,7 @@ export const changeOrderStatusAPI = async (
       }
       
       const data = await res.json()
-      console.log('edited order', data)
+      // console.log('edited order', data)
       return data
     } catch (error) {
       console.error('Error making order:', error)

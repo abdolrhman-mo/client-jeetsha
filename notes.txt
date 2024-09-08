@@ -63,9 +63,43 @@ Secondary Text:   text-gray-700            for less prominent text.
 
 
 
-Now Todo 
+All Orders Page Features:
+responsive ✅
+pagination ✅
+search     ✅
+batch actions for orders      ✅
+get a specific date           ✅
+maybe make today & yesterday  ✅
+order detail styling          ✅
+add shipping address to table ✅
+filter by high value
+sort by (oldest, latest, high value)
 
 
+Situation #1:
+when a customer want to return a product 
+=> he either contact brand, or searches for a cancel order button on website if he's logged in
+
+a: if he contacted the brand for a return product the brand owner should minus product quantity manualy 
+   from inventory
+b: but if the user returned from website it should minus automaticly but the user also has to fill a form 
+   and choose between the possible reasons he might want to return 
+   and we have to handle if he returned a destoyed product we shouldn't take the product from him
+   and the return request should be declined
+
+
+Situation #2:
+what if the customer contacted the shop saying the order hasn't got delivered
+but we look at the order data and we find that the order marked as delivered
+we then have to know the date it marked delivered and who marked it as delivered from our employees
+
+  Possible Solution
+    each time an order gets marked as delivered or pending
+    => the action gets stored and the date it happened and the vendor who did it
+    so each order should return a list of actions and the dates each action fired(occured)
+
+    and we would need to create for example 4 vendor accounts with their usernames and passwords
+    and give them to store owner
 
 
 

@@ -24,6 +24,7 @@ export default function SideBar() {
 
     return (
         <div className="col-span-1 shadow pt-8">
+            <br />
             <div className="flex flex-col w-5/6 mx-auto">
                 {dashboradRoutes.map((link) => (
                     <div className='font-semibold'>
@@ -66,6 +67,7 @@ export default function SideBar() {
                     </div>
                 ))}
             </div>
+            <br />
         </div>
     )
 }

@@ -1,11 +1,13 @@
 export default function Label({
-    children
+  children,
+  className,
 }: {
-    children: React.ReactNode
+  children: React.ReactNode
+  className?: string
 }) {
     return (
         <label 
-            className="block text-sm font-medium text-gray-700 mb-1 capitalize pt-3 pb-1"
+            className={`flex text-sm font-medium text-gray-700 mb-1 capitalize p-1 items-center ${className}`}
         >
             {children}
         </label>

@@ -30,9 +30,10 @@ export default function Select({
                 <Label>{label}</Label>
             )}
             <select
-                className={`text-gray-900 border-1 border-gray-200 text-sm rounded capitalize ${className}`}
+                className={
+                  `text-gray-900 border-1 border-gray-200 text-sm rounded capitalize ${className}`
+                }
                 name={name}
-                value={value}
                 onChange={onChange}
                 onBlur={onBlur}
                 required={required}

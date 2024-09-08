@@ -36,7 +36,7 @@ export interface OrderRequest {
 export interface OrderResponse {
   id: number
   created_at: string 
-  status: 'pending' | 'delivered' | 'cancelesd'
+  status: 'pending' | 'delivered' | 'canceled'
   order_items: OrderItemType[]
   address: {
     country: string
@@ -49,4 +49,5 @@ export interface OrderResponse {
     last_name: string
     phone_number: string
   }
+  totalOrderPrice: number
 }

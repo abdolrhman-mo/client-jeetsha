@@ -7,10 +7,10 @@ export default function Nav() {
             <div className="w-5/6 flex justify-between mx-auto py-4 font-semibold">
                 <Link href={ROUTES.DASHBOARD.MAIN}>Makady Solutions</Link>
                 <ul className="flex space-x-8">
-                    <li>
+                    <li className="flex items-center">
                         <Link href={ROUTES.ACCOUNT}>Profile</Link>
                     </li>
-                    <li>
+                    <li className="flex items-center">
                         <Link href={ROUTES.HOME}>My Website</Link>
                     </li>
                 </ul>
