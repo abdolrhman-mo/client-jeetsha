@@ -58,7 +58,7 @@ export default function Nav() {
     const searchBar = useSelector(selectSearchBar)
 
     return (
-        <nav className='shadow-sm fixed w-full z-30 bg-[#EBD9D5]'>
+        <nav className='shadow-sm fixed w-full z-30 bg-white'>
             <div 
                 className={clsx(
                     // Layout & Sizing

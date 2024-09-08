@@ -1,8 +1,19 @@
-import { APP_NAME, EXTERNAL_LINKS, INSTAGRAM_LINK } from "@/app/lib/constants/appConfig";
+'use client'
+
+import { APP_NAME, EXTERNAL_LINKS } from "@/app/lib/constants/appConfig";
 import { ROUTES } from "@/app/lib/constants/routes";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export default function Footer() {
+    const [isAuth, setIsAuth] = useState<boolean>(false)
+
+    useEffect(() => {
+      if (localStorage.getItem('authToken')) {
+        setIsAuth(true)
+      }
+    })
+
     return (
         <div className="mb-20">
             <hr className="w-24 mx-auto mt-6 mb-12" />
@@ -12,7 +23,7 @@ export default function Footer() {
                         <Link href={ROUTES.SEARCH}>Search</Link>
                     </li>
                     {
-                      localStorage.getItem('authToken') ?
+                      isAuth ?
                       <li>
                           <Link href={ROUTES.ACCOUNT}>Profile</Link>
                       </li> :

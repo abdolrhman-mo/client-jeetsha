@@ -1,9 +1,8 @@
-export const APP_NAME = 'Sou Beads'
-export const INSTAGRAM_LINK = 'https://www.instagram.com/'
-export const MAIN_COLOR = '[#F7EAE8]'
+export const APP_NAME = 'Jeetsha'
+export const MAIN_COLOR = 'white'
 
 export const EXTERNAL_LINKS = {
-  INSTAGRAM: 'https://www.instagram.com/sou_beadss/',
+  INSTAGRAM: 'https://www.instagram.com/jeetsha.eg/',
 }
 
 // Define the links and their paths

@@ -70,7 +70,7 @@ export default function ProductsList({
                     // Spacing
                     'mx-auto',
                     // Grid
-                    'grid grid-cols-1 md:grid-cols-2 md:gap-x-12 gap-y-4',
+                    'grid grid-cols-1 md:grid-cols-3 md:gap-x-12 md:gap-y-10',
                     // Effects
                     'opacity-100',
                 ) + ` ${styles}`}

@@ -9,16 +9,16 @@ export default function Hero() {
             <div className="overflow-hidden h-full bg-black">
                 <div className={clsx(
                         // Layout & Sizing
-                        'w-full h-[90vh] md:h-screen opacity-70 relative',
+                        'w-full h-[90vh] md:h-screen relative',
                         // Background
-                        "bg-[url('/hero-mobile.png')] md:bg-[url('/hero.jpg')] bg-cover bg-center",
+                        "bg-[url('/hero-mobile.png')] md:bg-[url('/hero.png')] bg-cover bg-center",
                     )}
                 ></div>
                 <div className="z-20 absolute top-1/2 left-1/2 -translate-x-1/2">
-                    <Heading level={2} className="text-white text-center my-6">new collection</Heading>
+                    {/* <Heading level={2} className="text-white text-center my-6">new collection</Heading>
                     <div className="w-fit mx-auto">
                         <CustomLink theme='light' href={'#new-collection'}>view all</CustomLink>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>
