@@ -1,6 +1,6 @@
 'use client'
 
-import { fetchProductsAPI } from "@/app/lib/services/products/productService"
+import productsData from "@/app/lib/data/products.json"
 import Heading from "@/app/ui/common/heading"
 import ProductsList from "@/app/ui/products/products-list"
 import Search from "@/app/ui/search/search"
@@ -20,7 +20,8 @@ export default function Page({
 
     useEffect(() => {
       const getData = async () => {
-        const data = await fetchProductsAPI()
+        // const data = await fetchProductsAPI()
+        const data = productsData
         if (data) {
           setProducts(data)
         }

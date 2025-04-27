@@ -8,7 +8,7 @@ export default function ProductCard({
     cartItem: any
     buyItNow?: boolean
 }) {
-    const API_URL = process.env.NEXT_PUBLIC_API_URL
+    // const API_URL = process.env.NEXT_PUBLIC_API_URL
 
     const product = cartItem.product
     const sizes: any = {
@@ -26,7 +26,8 @@ export default function ProductCard({
                     className="col-span-2 bg-slate-200 border rounded-md overflow-hidden flex justify-center"
                 >
                     <Image
-                        src={product?.image?.startsWith('http') ? product?.image : `${API_URL + product?.image}`}
+                        // src={product?.image?.startsWith('http') ? product?.image : `${API_URL + product?.image}`}
+                        src={product?.image}
                         alt={product?.name}
                         width={50}
                         height={50}

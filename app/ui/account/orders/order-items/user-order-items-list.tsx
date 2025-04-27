@@ -6,7 +6,7 @@ export default function UserOrderItemsList({
 }: {
   orderItems: OrderItemType[]
 }) {
-  const API_URL = process.env.NEXT_PUBLIC_API_URL
+  // const API_URL = process.env.NEXT_PUBLIC_API_URL
   
   return (
     <div>
@@ -24,7 +24,8 @@ export default function UserOrderItemsList({
                     <div className="flex-shrink-0 w-24 h-24 relative">
                         <Image
                             className="object-cover rounded"
-                            src={orderItem.product.image.startsWith('http') ? orderItem.product.image : `${API_URL + orderItem.product.image}`}
+                            // src={orderItem.product.image.startsWith('http') ? orderItem.product.image : `${API_URL + orderItem.product.image}`}
+                            src={orderItem.product.image}
                             alt={orderItem.product.name}
                             layout="fill" // Ensures the image covers the container
                         />

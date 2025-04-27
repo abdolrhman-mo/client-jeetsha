@@ -7,7 +7,7 @@ import InventoryItems from "@/app/ui/dashboard/inventory/inventory-items"
 import Input from "@/app/ui/forms/components/input"
 import Select from "@/app/ui/forms/components/select"
 import { useEffect, useState } from "react"
-
+import productsData from "@/app/lib/data/products.json"
 interface InventoryFormProps {
     onSubmit: (data: InventoryData) => void
 }
@@ -28,7 +28,8 @@ export default function Page() {
     useEffect(() => {
       const getData1 = async () => {
         try {
-          const data = await fetchProductsAPI()
+        //   const data = await fetchProductsAPI()
+          const data = productsData
           setProducts(data)
         } catch (error) {
           console.error('Failed to fetch products:', error)

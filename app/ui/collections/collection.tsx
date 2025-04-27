@@ -1,6 +1,6 @@
 import ProductsList from "@/app/ui/products/products-list"
 import Heading from "../common/heading"
-import { fetchProductsAPI } from "@/app/lib/services/products/productService"
+import productsData from "@/app/lib/data/products.json"
 
 export default async function Collection({
     title,
@@ -9,7 +9,8 @@ export default async function Collection({
     title: string
     tag: string
 }) {
-    const products = await fetchProductsAPI()
+    // const products = await fetchProductsAPI()
+    const products = productsData
 
     return (
         <div className="pt-12">

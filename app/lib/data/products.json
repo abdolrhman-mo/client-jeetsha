@@ -1,0 +1,117 @@
+[
+    {
+      "id": 1,
+      "name": "Classic White T-Shirt",
+      "price": 299,
+      "image": "/imgs/tshirts/white1.jpg",
+      "description": "A timeless classic white t-shirt, perfect for any outfit.",
+      "tags": [
+        { "id": 1, "name": "white" },
+        { "id": 2, "name": "classic" },
+        { "id": 3, "name": "casual" },
+        { "id": 4, "name": "new" }
+      ],
+      "sizes": [
+        { "id": 1, "size_text": "s", "quantity": 10, "product": 1 },
+        { "id": 2, "size_text": "m", "quantity": 10, "product": 1 },
+        { "id": 3, "size_text": "l", "quantity": 10, "product": 1 },
+        { "id": 4, "size_text": "xl", "quantity": 10, "product": 1 }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Vintage Black T-Shirt",
+      "price": 349,
+      "image": "/imgs/tshirts/black1.jpg",
+      "description": "A vintage black t-shirt, perfect for any outfit.",
+      "tags": [
+        { "id": 1, "name": "black" },
+        { "id": 2, "name": "vintage" },
+        { "id": 3, "name": "casual" },
+        { "id": 4, "name": "new" }
+      ],
+      "sizes": [
+        { "id": 1, "size_text": "s", "quantity": 10, "product": 2 },
+        { "id": 2, "size_text": "m", "quantity": 10, "product": 2 },
+        { "id": 3, "size_text": "l", "quantity": 10, "product": 2 },
+        { "id": 4, "size_text": "xl", "quantity": 10, "product": 2 }
+      ] 
+    },
+    {
+      "id": 3,
+      "name": "Graphic White T-Shirt",
+      "price": 399,
+      "image": "/imgs/tshirts/white2.jpg",
+      "description": "A graphic white t-shirt, perfect for any outfit.",
+      "tags": [
+        { "id": 1, "name": "white" },
+        { "id": 2, "name": "graphic" },
+        { "id": 3, "name": "casual" },
+        { "id": 4, "name": "new" }
+      ],
+      "sizes": [
+        { "id": 1, "size_text": "s", "quantity": 10, "product": 3 },
+        { "id": 2, "size_text": "m", "quantity": 10, "product": 3 },
+        { "id": 3, "size_text": "l", "quantity": 10, "product": 3 },
+        { "id": 4, "size_text": "xl", "quantity": 10, "product": 3 }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Oversized Black T-Shirt",
+      "price": 379,
+      "image": "/imgs/tshirts/black2.jpg",
+      "description": "An oversized black t-shirt, perfect for any outfit.",
+      "tags": [
+        { "id": 1, "name": "black" },
+        { "id": 2, "name": "oversized" },
+        { "id": 3, "name": "casual" },
+        { "id": 4, "name": "new" }
+      ],
+      "sizes": [
+        { "id": 1, "size_text": "s", "quantity": 10, "product": 4 },
+        { "id": 2, "size_text": "m", "quantity": 10, "product": 4 },
+        { "id": 3,  "size_text": "l", "quantity": 10, "product": 4 },
+        { "id": 4, "size_text": "xl", "quantity": 10, "product": 4 }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Oversized White T-Shirt",
+      "price": 379,
+      "image": "/imgs/tshirts/white3.jpg",
+      "description": "An oversized white t-shirt, perfect for any outfit.",
+      "tags": [
+        { "id": 1, "name": "white" },
+        { "id": 2, "name": "oversized" },
+        { "id": 3, "name": "casual" },
+        { "id": 4, "name": "new" }
+      ],
+      "sizes": [
+        { "id": 1, "size_text": "s", "quantity": 10, "product": 5 },
+        { "id": 2, "size_text": "m", "quantity": 10, "product": 5 },
+        { "id": 3, "size_text": "l", "quantity": 10, "product": 5 },
+        { "id": 4, "size_text": "xl", "quantity": 10, "product": 5 }
+      ] 
+    },
+    {
+      "id": 6,
+      "name": "Oversized Black T-Shirt",
+      "price": 379,
+      "image": "/imgs/tshirts/black3.jpg",
+      "description": "An oversized black t-shirt, perfect for any outfit.",
+      "tags": [
+        { "id": 1, "name": "black" },
+        { "id": 2, "name": "oversized" },
+        { "id": 3, "name": "casual" },
+        { "id": 4, "name": "new" }
+      ],
+      "sizes": [
+        { "id": 1, "size_text": "s", "quantity": 10, "product": 6 },
+        { "id": 2, "size_text": "m", "quantity": 10, "product": 6 },
+        { "id": 3, "size_text": "l", "quantity": 10, "product": 6 },
+        { "id": 4, "size_text": "xl", "quantity": 10, "product": 6 }
+      ]
+    }
+  ]
+  

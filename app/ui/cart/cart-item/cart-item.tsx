@@ -11,7 +11,7 @@ export default function CartItem({
 }: {
     cartItem: CartItemType
 }) {
-    const API_URL = process.env.NEXT_PUBLIC_API_URL
+    // const API_URL = process.env.NEXT_PUBLIC_API_URL
 
     const dispatch: any = useAppDispatch()
 
@@ -35,8 +35,8 @@ export default function CartItem({
                 <div className="flex items-center">
                     <Image
                         className="max-h-56 object-contain"
-                        // src={product.image}
-                        src={product.image.startsWith('http') ? product.image : `${API_URL + product.image}`}
+                        src={product.image}
+                        // src={product.image.startsWith('http') ? product.image : `${API_URL + product.image}`}
                         width={500}
                         height={500}
                         alt={product.name}

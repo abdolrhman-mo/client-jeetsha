@@ -5,7 +5,7 @@ export default function OrderItem({
 }: {
   orderItem: any
 }) {
-  const API_URL = process.env.NEXT_PUBLIC_API_URL
+  // const API_URL = process.env.NEXT_PUBLIC_API_URL
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-3 p-3 bg-white rounded-lg shadow-md">
@@ -15,7 +15,7 @@ export default function OrderItem({
           src={
             orderItem.product.image.startsWith("http")
               ? orderItem.product.image
-              : `${API_URL + orderItem.product.image}`
+              : orderItem.product.image
           }
           width={100}  // Reduced width
           height={100} // Reduced height
