@@ -19,6 +19,9 @@ const config: Config = {
           600: '#2F6FEB',
         },
       },
+      fontFamily: {
+        poppins: ['var(--font-poppins)'],
+      },
     },
     keyframes: {
       shimmer: {

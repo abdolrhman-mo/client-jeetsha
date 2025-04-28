@@ -34,7 +34,11 @@ export const changeOrderStatus = createAsyncThunk('orderAdmin/changeOrderStatus'
 export const fetchOrderInDetailPage = createAsyncThunk('orderAdmin/fetchOrderInDetailPage', async (
   { orderId }: { orderId: number }
 ) => {
-  const order: OrderResponse = await fetchAdminOrderByIdAPI(orderId)
+  const order = await fetchAdminOrderByIdAPI(orderId)
+
+  if (!order) {
+    throw new Error('Order not found')
+  }
 
   return order
 })

@@ -32,8 +32,10 @@ export default function SideBar() {
                             onClick={() => {
                                 setPathname(link.path) 
                                 setNestedPathname('')
-                                localStorage.setItem('pathname', link.path)
-                                localStorage.setItem('nestedPathname', '')
+                                if (typeof window !== 'undefined') {
+                                    localStorage.setItem('pathname', link.path)
+                                    localStorage.setItem('nestedPathname', '')
+                                }
                             }} 
                             key={link.path} 
                             href={`/dashboard${link.path}`}

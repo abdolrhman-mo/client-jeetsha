@@ -10,7 +10,8 @@ const nextConfig = {
               pathname: '/media/products/**', // Adjust the path to match your image URLs
             },
         ],
-    }
+    },
+    optimizeFonts: false,  // <- disable font optimization
 };
 
 export default nextConfig;

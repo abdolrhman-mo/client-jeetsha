@@ -12,7 +12,7 @@ export default function Dropdown() {
     setIsOpen(prev => !prev)
   }
 
-  const [tags, setTags] = useState([])
+  const [tags, setTags] = useState<any[]>([])
   useEffect(() => {
     const getTags = async () => {
         const tags = await fetchTagsAPI()

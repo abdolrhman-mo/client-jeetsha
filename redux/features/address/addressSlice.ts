@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { addAddress, editAddress, fetchAddresses, removeAddress } from './addressThunk'
-import { AddressResponse, AddressType } from '@/app/lib/types/addressTypes'
+import { AddressResponse } from '@/app/lib/types/addressTypes'
 
 interface AddressState {
   items: AddressResponse[]
@@ -32,12 +32,16 @@ const addressSlice = createSlice({
         state.error = action.error.message || 'Failed to fetch cart items'
       })
       .addCase(addAddress.fulfilled, (state, action) => {
-        state.items.push(action.payload)
+        const newAddress: AddressResponse = {
+          ...action.payload,
+          user_id: action.payload.user // Convert user to user_id
+        }
+        state.items.push(newAddress)
 
         // Unset other default addresses
-        if (action.payload.is_default) {
+        if (newAddress.is_default) {
           state.items.forEach(address => {
-            if (address.is_default && address.id !== action.payload.id) {
+            if (address.is_default && address.id !== newAddress.id) {
               address.is_default = false              
             }
           })
@@ -45,7 +49,12 @@ const addressSlice = createSlice({
       })
       .addCase(editAddress.fulfilled, (state, action) => {
         const index = state.items.findIndex(item => item.id === action.payload.id)
-        if (index !== -1) state.items[index] = action.payload
+        if (index !== -1) {
+          state.items[index] = {
+            ...action.payload,
+            user_id: action.payload.user // Convert user to user_id
+          }
+        }
 
         // Unset other default addresses
         if (action.payload.is_default) {
@@ -57,8 +66,8 @@ const addressSlice = createSlice({
         }
       })
       .addCase(removeAddress.fulfilled, (state, action) => {
-        state.items.filter(address =>
-          address.id != action.payload.id
+        state.items = state.items.filter(address =>
+          address.id !== action.meta.arg.id
         )
       })
   }

@@ -107,7 +107,9 @@ const cartSlice = createSlice({
         state.status = 'loading'
       })
       .addCase(fetchBuyItNowItem.fulfilled, (state, action) => {
-        state.buyItNowItem = action.payload
+        if (action.payload) {
+          state.buyItNowItem = action.payload
+        }
         state.status = 'idle'
       })
       .addCase(fetchBuyItNowItem.rejected, (state, action) => {

@@ -24,7 +24,7 @@ export default function Page() {
                   </div>
                   <div className="col-span-1">
                       <Heading level={4}>account details</Heading>
-                      <p>{localStorage.getItem('email')}</p>
+                      <p>{typeof window !== 'undefined' ? localStorage.getItem('email') : ''}</p>
                       <Link 
                           className="text-[#A56600] hover:text-black transition-all ease-in-out duration-300" 
                           href={ROUTES.ACCOUNT_ADDRESSES}

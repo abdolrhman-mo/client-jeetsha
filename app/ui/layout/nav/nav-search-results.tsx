@@ -37,7 +37,6 @@ export default function NavSearchResults({
                     search={true}
                     navSearch={true}
                     query={query}
-                    currentPage={currentPage}
                     products={products}
                 />
                 <br />

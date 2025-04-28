@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import { addAddressAPI, editAddressAPI, fetchAddressesAPI, removeAddressAPI } from "@/app/lib/services/address/addressService"
-import { AddressRequest, AddressResponse, AddressType } from "@/app/lib/types/addressTypes"
+import { AddressRequest, AddressResponse } from "@/app/lib/types/addressTypes"
 import { unsetOtherDefaultAddresses } from "./addressUtility"
 
 export const fetchAddresses = createAsyncThunk('address/fetchAddresses', async () => {
@@ -27,15 +27,14 @@ export const addAddress = createAsyncThunk('address/addAddress', async (
   const addedAddress = await addAddressAPI(addressData)
   
   // Make the rest of addresses not default
-  if (isDefault) { // Only if the new address is marked as default
-    
-    // console.log('new address is default')
-    // console.log('ur default address', addedAddress)
-
-    await unsetOtherDefaultAddresses(addresses, addedAddress)
+  if (isDefault) {
+    const addressResponse: AddressResponse = {
+      ...addedAddress,
+      user_id: addedAddress.user // Convert user to user_id
+    }
+    await unsetOtherDefaultAddresses(addresses, addressResponse)
   }
 
-  // dispatch(fetchAddresses())
   return addedAddress
 })
 
@@ -55,10 +54,13 @@ export const editAddress = createAsyncThunk('address/editAddress', async (
   
   // Make the rest of items not default
   const addresses = await fetchAddressesAPI()
-  if (addressData.is_default) { // Only if the new address is set as default
-    await unsetOtherDefaultAddresses(addresses, editedAddress)
+  if (addressData.is_default) {
+    const addressResponse: AddressResponse = {
+      ...editedAddress,
+      user_id: editedAddress.user // Convert user to user_id
+    }
+    await unsetOtherDefaultAddresses(addresses, addressResponse)
   }
   
-  // dispatch(fetchAddresses())
   return editedAddress
 })

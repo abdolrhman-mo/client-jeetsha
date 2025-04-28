@@ -28,7 +28,7 @@ export default function Nav() {
     const [loggedIn, setLoggedIn] = useState(false)
 
     let handleUserIconClick = () => {
-        if (localStorage.getItem('authToken')) {
+        if (typeof window !== 'undefined' && localStorage.getItem('authToken')) {
             if (localStorage.getItem('email') === 'admin@admin.admin') {
                 abdoRedirect(ROUTES.DASHBOARD.MAIN)
             } else {
@@ -40,7 +40,7 @@ export default function Nav() {
     }
 
     let handleBarsIconClick = () => {
-        if (localStorage.getItem('authToken')) {
+        if (typeof window !== 'undefined' && localStorage.getItem('authToken')) {
             setLoggedIn(true)
         } else {
             setLoggedIn(false)

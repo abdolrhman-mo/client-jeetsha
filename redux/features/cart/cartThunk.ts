@@ -5,6 +5,7 @@ import { ProductType } from "@/app/lib/types/productTypes"
 import { CartItemType } from "@/app/lib/types/cartTypes"
 import { fetchProductsAPI } from "@/app/lib/services/products/productService"
 import productsData from "@/app/lib/data/products.json"
+
 export const fetchCartItems = createAsyncThunk('cart/fetchCartItems', async () => {
     let data
     if (isAuth()) {
@@ -22,17 +23,21 @@ export const fetchBuyItNowItem = createAsyncThunk('cart/fetchBuyItNowItem', asyn
   buyItNowId: number
   buyItNowSize: string
 }) => {
-//   const products = await fetchProductsAPI()
-  const products = productsData
+  const products = await fetchProductsAPI()
   const product = products.find((item: ProductType) =>
       Number(item.id) === Number(buyItNowId)
   )
-  const buyItNowItem = {
+
+  if (!product) {
+    throw new Error('Product not found')
+  }
+
+  const buyItNowItem: CartItemType = {
       id: 0,
       product: product,
       quantity: 1,
       size: buyItNowSize,
-      totalOrderItemsPrice: 0,
+      totalOrderItemsPrice: Number(product.price),
   }
   
   return buyItNowItem
